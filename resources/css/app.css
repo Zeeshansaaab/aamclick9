@@ -1,0 +1,21 @@
+.nk-header-fixed + .nk-content {
+    margin-top: 30px!important;
+}
+.nk-block-head{
+    padding-bottom: 5px!important;
+}
+
+@media only screen and (min-width: 1200px){
+    .nk-sidebar {
+        width: 300px!important;
+    }
+    .nk-wrap{
+        padding-left: 300px!important;
+    }
+    .nk-sidebar .nk-sidebar-head{
+        width: 300px!important;
+    }
+    .nk-sidebar + .nk-wrap > .nk-header-fixed {
+        left: 300px;
+    }
+}

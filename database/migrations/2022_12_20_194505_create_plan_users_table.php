@@ -1,0 +1,44 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('plan_users', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('plan_id')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->decimal('daily_limit', 18,8)->default(0);
+            $table->decimal('balance', 28, 8)->default(0);
+            $table->decimal('profit_bonus', 28, 8)->default(0);
+            $table->decimal('user_profit_bonus', 28, 8)->default(0);
+            $table->decimal('deposit_commission', 28, 8)->default(0);
+            $table->decimal('current_profit', 28, 8)->default(0);
+            $table->date('last_withdraw')->nullable();
+            $table->dateTime('expire_date')->nullable();
+            $table->timestamps();
+
+            $table->foreign('plan_id')->on('plans')->references('id');
+            $table->foreign('user_id')->on('users')->references('id');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('plan_users');
+    }
+};
