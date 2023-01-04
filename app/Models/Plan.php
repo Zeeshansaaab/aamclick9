@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Plan extends Model
 {
     use HasFactory;
+    protected $guarded = [];
+    public function scopeDefault($query)
+    {
+        $query->whereType('default');
+    }
+    public function scopeCommittee($query)
+    {
+        $query->whereType('committee');
+    }
 }

@@ -3,7 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
+use App\Enums\Status;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,11 +18,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        User::create([
+            'name' => "User",
+            'email' => 'user@aamclick.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('12345678'), // password
+            'remember_token' => Str::random(10),
+            'country_code'   => '0300',
+            'mobile'   => '8090100',
+            'status'   => Status::Active,
+        ]);
+        
+        $this->call([
+            SettingSeeder::class,
+            PlanSeeder::class,
+        ]);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        User::factory(50)->create();
     }
 }

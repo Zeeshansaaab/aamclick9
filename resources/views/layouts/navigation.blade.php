@@ -31,12 +31,12 @@
                         </li>
                         <x-nav-link 
                             title="Plans" 
-                            link="" 
+                            link="{{ route('plans.index') }}" 
                             icon="icon ni ni-dashboard" 
                         />
                         <x-nav-link 
                             title="Committee Plans" 
-                            link="" 
+                            link="{{ route('committee.plans.index') }}" 
                             icon="icon ni ni-dashboard" 
                         />
                         <li class="nk-menu-heading mt-2">
@@ -44,7 +44,7 @@
                         </li>
                         <x-nav-link 
                             title="Your Refferrals" 
-                            link="" 
+                            link="referral.index" 
                             icon="icon ni ni-dashboard" 
                         />
                         <li class="nk-menu-heading mt-2">
@@ -52,35 +52,37 @@
                         </li>
                         <x-nav-link 
                             title="Deposit Now" 
-                            link="" 
+                            link="deposit.index" 
                             icon="icon ni ni-dashboard" 
                         />
                         <x-nav-link 
                             title="Withdraw" 
-                            link="" 
+                            link="withdraw.index" 
                             icon="icon ni ni-dashboard" 
                         />
                         <li class="nk-menu-heading mt-2">
                             <h6 class="overline-title">Installments</h6>
                         </li>
+                        
                         <x-nav-link 
                             title="Apply for installments" 
-                            link="" 
+                            link="installments.index" 
                             icon="icon ni ni-dashboard" 
                         />
 
                         <li class="nk-menu-heading mt-2">
                             <h6 class="overline-title">Reports</h6>
                         </li>
+
                         <x-dropdown 
                             title="Reports" 
                             :links="[
-                                'Deposit History'      => '', 
-                                'Withdraw History'     => '', 
-                                'Committee History'    => '',
-                                'Installment History'  => '',
-                                'Transactions'         => '',
-                                'Commission'           => '',
+                                'Deposit History'      => 'deposit.report', 
+                                'Withdraw History'     => 'withdraw.report', 
+                                'Committee History'    => 'committee.report',
+                                'Installment History'  => 'installment.report',
+                                'Transactions'         => 'transaction.report',
+                                'Commission'           => 'commission.report',
                             ]" 
                         />
                         

@@ -17,13 +17,13 @@
             </div>
             <div class="form-control-wrap">
                 <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                <x-input-error :messages="$errors->get('email')" class="mt-2" tabindex="0"/>
             </div>
         </div>
         <!-- Password -->
         <div class="form-group">
             <div class="form-label-group">
-                <x-input-label for="password" :value="__('Password')" />
+                <x-input-label for="password" :value="__('Password')" tabindex="1"/>
                 @if (Route::has('password.request'))
                     <a href="{{ route('password.request') }}" class="link link-primary link-sm">{{ __('Forgot your password?') }}</a>    
                 @endif

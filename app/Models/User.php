@@ -3,11 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use App\Enums\Status;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -24,10 +25,10 @@ class User extends Authenticatable
          * @return void
          */
         static::creating(function (User $user) {
-            $user->uuid = 'AAM ' . (User::count() + 1);
+            $user->uuid = getUserId();
         });
 
-        static::creating(function (User $user) {
+        static::created(function (User $user) {
             $user->planUser()->create([
                 'balance' => 0
             ]);
@@ -45,7 +46,8 @@ class User extends Authenticatable
         'email',
         'password',
         'country_code',
-        'mobile'
+        'mobile',
+        'status',
     ];
 
     /**
@@ -65,10 +67,21 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'status' => Status::class
     ];
 
     public function planUser()
     {
         return $this->hasOne(PlanUser::class);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function referrals()
+    {
+        return $this->hasMany(User::class, 'ref_by');
     }
 }

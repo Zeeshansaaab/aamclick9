@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('mobile', 7);
             $table->text('address')->nullable()->comment('contains full address');
             //Enum COlumns
-            $table->tinyInteger('status')->default(1)->comment('0: banned, 1: active');
+            $table->string('status')->default('active');
             $table->tinyInteger('sv')->default(0)->comment('0: mobile unverified, 1: mobile verified');
             //Enum Columns End
             $table->timestamp('email_verified_at')->nullable();

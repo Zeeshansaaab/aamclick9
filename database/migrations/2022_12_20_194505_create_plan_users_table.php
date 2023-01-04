@@ -18,10 +18,10 @@ return new class extends Migration
             $table->unsignedBigInteger('plan_id')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->decimal('daily_limit', 18,8)->default(0);
-            $table->decimal('balance', 28, 8)->default(0);
+            $table->decimal('balance', 28, 8)->default(0)->comment('Deposit');
+            $table->decimal('referral_income', 28, 8)->default(0)->comment('Profit_Bonus');
             $table->decimal('profit_bonus', 28, 8)->default(0);
-            $table->decimal('user_profit_bonus', 28, 8)->default(0);
-            $table->decimal('deposit_commission', 28, 8)->default(0);
+            $table->decimal('referral_deposit', 28, 8)->default(0)->comment('deposit_commission');
             $table->decimal('current_profit', 28, 8)->default(0);
             $table->date('last_withdraw')->nullable();
             $table->dateTime('expire_date')->nullable();
