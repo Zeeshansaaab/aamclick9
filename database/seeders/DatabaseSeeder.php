@@ -55,7 +55,6 @@ class DatabaseSeeder extends Seeder
                 'remark'        => $type == 'credit' ? 'Money Deposited' : 'Money Withdarawned',
                 'trx'           => getTrx(),
                 'trx_type'      => $type == 'credit' ? '+' : '-',
-                'post_balance'  => $balance,
                 'type'          => $type,
                 'created_at'    => $date,
                 'updated_at'    => $date
