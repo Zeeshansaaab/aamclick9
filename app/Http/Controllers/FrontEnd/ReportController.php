@@ -19,7 +19,7 @@ class ReportController extends Controller
             $query->where('trx', 'LIKE', '%' . request()->keyword . '%')
             ->orWhere('remark', 'LIKE', '%' . request()->keyword . '%')
             ->orWhere('details', 'LIKE', '%' . request()->keyword . '%');
-        })->latest()->paginate($limit);
+        })->orderByDesc('id')->paginate($limit);
 
         return Blade::render('<x-transaction-list :transactions="$transactions"/>', ['transactions' => $transactions]);
     }

@@ -18,7 +18,7 @@ class UserController extends Controller
         $limit = \config()->get('settings.pagination_limit');
         $users = auth()->user()->referrals()->when(request()->keyword, function ($query) {
             $query->where('name', 'LIKE', '%' . request()->keyword . '%');
-        })->latest()->paginate($limit);
+        })->orderByDesc('id')->paginate($limit);
 
         return Blade::render('<x-users-list :users="$users"/>', ['users' => $users]);
     }
