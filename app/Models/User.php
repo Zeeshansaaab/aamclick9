@@ -68,7 +68,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'status' => Status::class
+        // 'status' => Status::class
     ];
 
     public function planUser()

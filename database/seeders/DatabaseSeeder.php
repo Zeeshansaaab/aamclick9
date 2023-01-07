@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $user->load('planUser');
-        $balance = $user->planUser->balance;
+        $balance = 1000;
         for ($i = 0; $i < 2000; $i++){
             $amount = mt_rand(10, 100);
             $type = Arr::random(['credit', 'debit']);
