@@ -35,5 +35,8 @@
         </div>
         <script src="{{ mix('js/app.js') }}" ></script>
         <script src="{{ mix('js/theme.js') }}" ></script>
+        <script src="{{ asset('js/helper.js') }}" ></script>
+        <script src="{{ asset('js/main.js') }}" ></script>
+        {{ isset($scripts) ? $scripts : ''}}
     </body>
 </html>

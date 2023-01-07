@@ -30,7 +30,8 @@ class User extends Authenticatable
 
         static::created(function (User $user) {
             $user->planUser()->create([
-                'balance' => 0
+                'balance' => 0,
+                'plan_id' => 1,
             ]);
         });
     }

@@ -10,15 +10,15 @@ enum Status : string {
     {
         return match($this){
             self::Active => 'Active',
-            self::InActive => 'In Active'
+            self::InActive => 'Banned'
         };
     }
 
     public function cssClass()
     {
         return match($this){
-            self::Active => 'success',
-            self::InActive => 'danger'
+            self::Active => 'success text-success',
+            self::InActive => 'danger text-danger'
         };
     }
 

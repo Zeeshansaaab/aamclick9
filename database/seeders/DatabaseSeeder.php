@@ -18,7 +18,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
+        
+
+        $this->call([
+            SettingSeeder::class,
+            PlanSeeder::class,
+        ]);
+
+        $user = User::create([
             'name' => "User",
             'email' => 'user@aamclick.com',
             'email_verified_at' => now(),
@@ -28,12 +35,16 @@ class DatabaseSeeder extends Seeder
             'mobile'   => '8090100',
             'status'   => Status::Active,
         ]);
-        
-        $this->call([
-            SettingSeeder::class,
-            PlanSeeder::class,
+
+        $user->transactions()->create([
+            'amount' => 10,
+            'post_balance' => 10,
+            'remark' => 'Deposit Money',
         ]);
 
-        User::factory(50)->create();
+        $user->planUser()->update([
+            'balance' => 10
+        ]);
+        User::factory(10)->create();
     }
 }

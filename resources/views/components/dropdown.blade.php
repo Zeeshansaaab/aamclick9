@@ -9,7 +9,7 @@
     <ul class="nk-menu-sub">
         @foreach ($links as $key => $value)
             <li class="nk-menu-item">
-                <a href="{{ $value }}" class="nk-menu-link">
+                <a href="{{ $value ? route($value) : '' }}" class="nk-menu-link">
                     <span class="nk-menu-text">{{ $key }}</span>
                 </a>
             </li>

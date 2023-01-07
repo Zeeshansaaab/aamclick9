@@ -44,7 +44,7 @@
                         </li>
                         <x-nav-link 
                             title="Your Refferrals" 
-                            link="referral.index" 
+                            link="{{ route('referrals') }}" 
                             icon="icon ni ni-dashboard" 
                         />
                         <li class="nk-menu-heading mt-2">
@@ -77,12 +77,12 @@
                         <x-dropdown 
                             title="Reports" 
                             :links="[
-                                'Deposit History'      => 'deposit.report', 
-                                'Withdraw History'     => 'withdraw.report', 
-                                'Committee History'    => 'committee.report',
-                                'Installment History'  => 'installment.report',
-                                'Transactions'         => 'transaction.report',
-                                'Commission'           => 'commission.report',
+                                'Deposit History'      => null, 
+                                'Withdraw History'     => null, 
+                                'Committee History'    => null,
+                                'Installment History'  => null,
+                                'Transactions'         => 'transactions',
+                                'Commission'           => null,
                             ]" 
                         />
                         
