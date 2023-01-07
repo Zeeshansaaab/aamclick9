@@ -13,7 +13,7 @@
             <div class="nk-tb-item">
                 <div class="nk-tb-col">
                     <div class="nk-tnx-type">
-                        <div class="nk-tnx-type-icon @if($transaction->trx_type == 'credit')bg-success-dim text-success @elseif($transaction->trx_type == '-') bg-danger-dim text-danger @endif">
+                        <div class="nk-tnx-type-icon @if($transaction->type == 'credit') bg-success-dim text-success @elseif($transaction->trx_type == '-') bg-danger-dim text-danger @endif">
                             <em class="icon ni ni-arrow-up-right"></em>
                         </div>
                         <div class="nk-tnx-type-text">
