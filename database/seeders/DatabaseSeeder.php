@@ -40,16 +40,18 @@ class DatabaseSeeder extends Seeder
 
         $user->load('planUser');
         $balance = $user->planUser->balance;
-        for ($i = 0; $i < 5000; $i++){
+        for ($i = 0; $i < 2000; $i++){
             $amount = mt_rand(10, 100);
             $balance += $amount;
+            $type = Arr::random(['credit', 'debit']);
             $user->transactions()->create([
                 'amount'        => $amount,
-                'post_balance'  => 10,
-                'remark'        => 'Deposit Money',
+                'post_balance'  => $balance,
+                'remark'        => $type == 'credit' ? 'Money Deposited' : 'Money Withdarawned',
                 'trx'           => getTrx(),
-                'trx_type'      => Arr::random(['+', '-']),
-                'post_balance'  => $balance
+                'trx_type'      => $type == 'credit' ? '+' : '-',
+                'post_balance'  => $balance,
+                'type'          => $type
             ]);
 
             $user->planUser()->update([
@@ -57,6 +59,6 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        User::factory(10)->create();
+        User::factory(1000)->create();
     }
 }

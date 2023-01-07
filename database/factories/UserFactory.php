@@ -29,6 +29,7 @@ class UserFactory extends Factory
             'country_code'   => '0' . mt_rand(300, 349),
             'mobile'   => mt_rand(1000000, 9999999),
             'status'   => 'active',
+            'ref_by'   => 1,
         ];
     }
 
