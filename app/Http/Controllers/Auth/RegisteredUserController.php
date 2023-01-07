@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -33,29 +34,37 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name'                  => ['required', 'string', 'max:255'],
-            'email'                 => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'password'              => ['required', 'confirmed', Rules\Password::defaults()],
-            'country_code'   => ['required', 'regex:/[0-9]{4}/'],
-            'mobile'         => ['required', 'regex:/[0-9]{7}/'],
-            'terms'          => ['required'],
-        ], [
-            'terms.required' => 'You must accpet the terms and conditions'
-        ]);
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'country_code' => $request->country_code,
-            'mobile' => $request->mobile
-        ]);
-
-        event(new Registered($user));
-
-        Auth::login($user);
-
-        return redirect(RouteServiceProvider::HOME);
+        try{
+            $request->validate([
+                'name'                  => ['required', 'string', 'max:255'],
+                'email'                 => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+                'password'              => ['required', 'confirmed', Rules\Password::defaults()],
+                'country_code'   => ['required', 'regex:/[0-9]{4}/'],
+                'mobile'         => ['required', 'regex:/[0-9]{7}/'],
+                'terms'          => ['required'],
+            ], [
+                'terms.required' => 'You must accpet the terms and conditions'
+            ]);
+    
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'country_code' => $request->country_code,
+                'mobile' => $request->mobile,
+                'ref_by' => request()->ref ? User::select('id')->whereUuid(request()->ref)->firstOrFail()->id : null,
+            ]);
+    
+            event(new Registered($user));
+    
+            Auth::login($user);
+    
+            return redirect(RouteServiceProvider::HOME);
+        } catch(ModelNotFoundException $e){
+            return redirect()->back()->withErrors([
+                'message' => 'Referral User not found'
+            ]);
+        }
+        
     }
 }

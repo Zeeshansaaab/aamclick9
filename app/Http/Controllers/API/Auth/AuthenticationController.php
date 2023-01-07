@@ -37,7 +37,8 @@ class AuthenticationController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'country_code' => $request->country_code,
-                'mobile' => $request->mobile
+                'mobile' => $request->mobile,
+                'ref_by' => request()->ref ? User::select('id')->whereUuid(request()->ref)->firstOrFail()->id : null,
             ]);
             
             event(new Registered($user));
@@ -114,7 +115,7 @@ class AuthenticationController extends Controller
     public function logout()
     {
         try {
-            
+
             auth()->user()->currentAccessToken()->delete();
             return response()->json([
                 'status' => JsonResponse::HTTP_OK,
