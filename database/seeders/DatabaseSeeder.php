@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
             'country_code'   => '0300',
             'mobile'   => '8090100',
-            'status'   => Status::Active,
+            'status'   => 'active',
         ]);
 
         $user->transactions()->create([
