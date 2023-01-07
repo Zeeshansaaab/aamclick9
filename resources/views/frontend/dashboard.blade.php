@@ -365,6 +365,7 @@
     
     {{-- Dashboard cards end --}}
 {{-- Transactions and chart --}}
+@if(count($transactions) > 0)
 <div class="nk-block nk-block-lg">
     <div class="row gy-gs">
         
@@ -454,6 +455,7 @@
         </div>
     </div>
 </div>
+@endif
 {{-- Transactions and charts end --}}
 {{-- Referrals card --}}
 <div class="nk-block">

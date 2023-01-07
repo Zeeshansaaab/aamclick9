@@ -28,7 +28,7 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'country_code'   => '0' . mt_rand(300, 349),
             'mobile'   => mt_rand(1000000, 9999999),
-            'status'   => Arr::random(Status::cases()),
+            'status'   => 'active',
         ];
     }
 
