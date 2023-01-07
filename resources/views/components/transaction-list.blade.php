@@ -13,7 +13,7 @@
             <div class="nk-tb-item">
                 <div class="nk-tb-col">
                     <div class="nk-tnx-type">
-                        <div class="nk-tnx-type-icon @if($transaction->trx_type == '+')bg-success-dim text-success @elseif($transaction->trx_type == '-') bg-danger-dim text-danger @endif">
+                        <div class="nk-tnx-type-icon @if($transaction->trx_type == 'credit')bg-success-dim text-success @elseif($transaction->trx_type == '-') bg-danger-dim text-danger @endif">
                             <em class="icon ni ni-arrow-up-right"></em>
                         </div>
                         <div class="nk-tnx-type-text">
@@ -24,7 +24,7 @@
                 </div>
                 <div class="nk-tb-col tb-col-lg">
                     <span class="tb-lead-sub">{{ $transaction->trx }}</span>
-                    <span class="badge badge-dot @if($transaction->type == 'deposit') badge-success @else badge-danger  @endif text-capitalize">{{ $transaction->type }}</span>
+                    <span class="badge badge-dot @if($transaction->type == 'credit') badge-success @else badge-danger  @endif text-capitalize">{{ $transaction->type }}</span>
                 </div>
                 <div class="nk-tb-col text-right">
                     <span class="tb-amount">{{ $transaction->trx_type }} {{ currency($transaction->amount, true) }} <span>{{ cur_text() }}</span></span>
