@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
             $type = Arr::random(['credit', 'debit']);
             
             $randomNum = mt_rand(strtotime('2022-1-1'), strtotime('2023-1-1'));
-            $date = date("Y-m-d H:i:s", $randomNum);
+            $date = date("Y-m-d", $randomNum);
 
             $user->transactions()->create([
                 'amount'        => $amount,
