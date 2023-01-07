@@ -24,6 +24,9 @@ class DatabaseSeeder extends Seeder
             PlanSeeder::class,
         ]);
 
+        
+        User::factory(10)->create();
+
         $user = User::create([
             'name' => "User",
             'email' => 'user@aamclick.com',
@@ -44,6 +47,5 @@ class DatabaseSeeder extends Seeder
         $user->planUser()->update([
             'balance' => 10
         ]);
-        User::factory(10)->create();
     }
 }
