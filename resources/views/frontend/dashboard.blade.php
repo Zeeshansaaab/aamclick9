@@ -401,7 +401,7 @@
                                     <span class="currency currency-btc">{{ $cur_text }}</span>
                                 </div>
                                 <div class="number-sm">
-                                    {{ currency($transaction->post_balance) }}
+                                    {{ currency($transaction->post_balance, true) }}
                                     <span class="currency currency-usd">{{ $cur_text }}</span>
                                 </div>
                             </div>
