@@ -42,9 +42,10 @@ class DatabaseSeeder extends Seeder
         $balance = $user->planUser->balance;
         for ($i = 0; $i < 2000; $i++){
             $amount = mt_rand(10, 100);
-            $balance += $amount;
             $type = Arr::random(['credit', 'debit']);
-            
+
+            $balance = $type == 'credit' ? $balance + $amount : $balance - $amount ;
+    
             $randomNum = mt_rand(strtotime('2022-1-1'), strtotime('2023-1-1'));
             $date = date("Y-m-d", $randomNum);
 
