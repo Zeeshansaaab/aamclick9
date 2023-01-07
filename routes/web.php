@@ -17,7 +17,8 @@ use App\Http\Controllers\ProfileController;
 */
 
 Route::get('/', function () {
-    return view('frontend.welcome');
+    return redirect()->route('dashboard');
+    // return view('frontend.welcome');
 });
 
 
