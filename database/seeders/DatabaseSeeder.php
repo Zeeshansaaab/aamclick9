@@ -44,6 +44,10 @@ class DatabaseSeeder extends Seeder
             $amount = mt_rand(10, 100);
             $balance += $amount;
             $type = Arr::random(['credit', 'debit']);
+            
+            $randomNum = mt_rand(strtotime('2022-1-1'), strtotime('2023-1-1'));
+            $date = date("Y-m-d H:i:s", $randomNum);
+
             $user->transactions()->create([
                 'amount'        => $amount,
                 'post_balance'  => $balance,
@@ -51,11 +55,13 @@ class DatabaseSeeder extends Seeder
                 'trx'           => getTrx(),
                 'trx_type'      => $type == 'credit' ? '+' : '-',
                 'post_balance'  => $balance,
-                'type'          => $type
+                'type'          => $type,
+                'created_at'    => $date,
+                'updated_at'    => $date
             ]);
 
             $user->planUser()->update([
-                'balance' => $balance
+                'balance'    => $balance
             ]);
         }
 

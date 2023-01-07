@@ -30,6 +30,7 @@ class UserFactory extends Factory
             'mobile'   => mt_rand(1000000, 9999999),
             'status'   => 'active',
             'ref_by'   => 1,
+            'created_at' => '2022-' . mt_rand(1,12) . '-07 12:48:34'
         ];
     }
 

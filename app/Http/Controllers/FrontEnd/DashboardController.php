@@ -18,7 +18,8 @@ class DashboardController extends Controller
     public function charts()
     {
         $users = auth()->user()->referrals()->select(DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(created_at) as month_name"))
-        ->whereYear('created_at', date('Y'))
+        // ->whereYear('created_at', date('Y'))
+        ->whereYear('created_at', '2022')
         ->groupBy(DB::raw("Month(created_at)"))
         ->pluck('count', 'month_name');
         
@@ -26,7 +27,7 @@ class DashboardController extends Controller
         ->select([ 
             DB::raw("SUM(amount) as amount"), 
             DB::raw("MONTHNAME(created_at) as month_name"),
-        ])->whereYear('created_at', date('Y'))
+        ])->whereYear('created_at', '2022')
         ->groupBy(DB::raw("Month(created_at)"))
         ->pluck('amount', 'month_name');
 
