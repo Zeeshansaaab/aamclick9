@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\User;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -25,8 +26,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         
-        User::factory(10)->create();
-
+        
         $user = User::create([
             'name' => "User",
             'email' => 'user@aamclick.com',
@@ -38,14 +38,25 @@ class DatabaseSeeder extends Seeder
             'status'   => 'active',
         ]);
 
-        $user->transactions()->create([
-            'amount' => 10,
-            'post_balance' => 10,
-            'remark' => 'Deposit Money',
-        ]);
+        $user->load('planUser');
+        $balance = $user->planUser->balance;
+        for ($i = 0; $i < 5000; $i++){
+            $amount = mt_rand(10, 100);
+            $balance += $amount;
+            $user->transactions()->create([
+                'amount'        => $amount,
+                'post_balance'  => 10,
+                'remark'        => 'Deposit Money',
+                'trx'           => getTrx(),
+                'trx_type'      => Arr::random(['+', '-']),
+                'post_balance'  => $balance
+            ]);
 
-        $user->planUser()->update([
-            'balance' => 10
-        ]);
+            $user->planUser()->update([
+                'balance' => $balance
+            ]);
+        }
+
+        User::factory(10)->create();
     }
 }
