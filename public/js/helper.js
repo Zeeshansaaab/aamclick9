@@ -1,3 +1,4 @@
+var loading = false;
 function ajaxForm(formItems) {
     var form = new FormData();
     formItems.forEach(formItem => {
@@ -26,10 +27,13 @@ function ajax(url, method, functionsOnSuccess, form = {}, isFormData=false) {
         async: true,
         data: form,
         error: function(xhr, textStatus, error) {
-            console.log(xhr.responseText);
-            console.log(xhr.statusText);
-            console.log(textStatus);
-            console.log(error);
+          try{
+            error = JSON.parse(xhr.responseText)
+            const messages = error.message.split('.');
+          } catch(e){
+            console.log(e)
+          }
+          NioApp.Toast(messages[0], 'error');
         },
         success: functionsOnSuccess
     }
@@ -42,19 +46,29 @@ function ajax(url, method, functionsOnSuccess, form = {}, isFormData=false) {
     if (isFormData) {
         ajaxParams.processData = false,
         ajaxParams.contentType = false,
-        ajaxParams.data = new FormData;
+        ajaxParams.data = new FormData(form);
     }
-
     $.ajax(ajaxParams);
 }
 
-function searchKeyword($button){
+function searchKeyword(button){
   let keyword = $('#search-input').val()
-  let url = $($button).data('url')
-  ajax(url, 'GET', function(response){
-      $('#table').html(response)
-  }, {
-      keyword: keyword
-  })
+  let url = $(button).data('url')
+  $(button).html('<div class="spinner-border text-gray" style="width: 20px; height: 20px" role="status">'
+    +'<span class="sr-only">Loading...</span>'
+    +'</div>'
+  )
+
+  loading = !loading;
+  if(loading){
+    ajax(url, 'GET', function(response){
+      loading = false;
+      $(button).html('<em class="icon ni ni-search"></em>')
+        $('#table').html(response)
+    }, {
+        keyword: keyword
+    })
+  }
+ 
 }
   

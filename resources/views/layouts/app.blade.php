@@ -30,6 +30,21 @@
                             </div>
                         </div>
                     </div>
+                    <div class="nk-footer nk-footer-fluid">
+                        <div class="container-fluid">
+                            <div class="nk-footer-wrap">
+                                <div class="nk-footer-copyright"> © 2023 AAM Express. All Rights Reserved <a href="https://aamexpress.com">AAMEXPRESS</a>
+                                </div>
+                                <div class="nk-footer-links">
+                                    <ul class="nav nav-sm">
+                                        <li class="nav-item"><a class="nav-link" href="https://aamclick.com/policy/privacy-and-policy/72">Terms</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="https://aamclick.com/policy/payment-policy/73">Privacy</a></li>
+                                        {{-- <li class="nav-item"><a class="nav-link" href="#">Help</a></li> --}}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -38,5 +53,30 @@
         <script src="{{ asset('js/helper.js') }}" ></script>
         <script src="{{ asset('js/main.js') }}" ></script>
         {{ isset($scripts) ? $scripts : ''}}
+        
+        <script>
+            var limit = 5;
+            $(document).on('click', '.notification-dropdown-trigger, .view-all, .markAllasread', function(){
+                let count = parseInt("{{auth()->user()->unreadNotifications->count()}}");
+                var is_all = false;
+
+                if($(this).hasClass('markAllasread')){
+                    is_all = true;
+                }
+
+                if(count > limit){
+                    $('.load-more').removeClass('d-none');
+                    limit = (limit + 4) >= count ? count : limit + 4;
+                }
+                ajax('/notifications', 'GET', function(response){
+                    $('#notification-dropdown-items').html(response)
+                    $('#notifications-list').toggle()
+                    if(limit >= count || is_all){
+                        $('.view-all').addClass('d-none')
+                        limit = 0
+                    }
+                }, {limit: limit, is_all: is_all})
+            })
+        </script>
     </body>
 </html>

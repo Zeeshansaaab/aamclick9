@@ -75,17 +75,17 @@
             </div>
             @elseif ($title == 'Committee Plans') 
             <div class="row">
-                <div class="col-4">
+                <div class="col-md-4 col-sm-12">
                     <div class="card card-bordered pricing text-center">
                         <div class="pricing-body">
                             <div class="pricing-media">
-                                <img src="./images/icons/plan-s1.svg" alt="">
+                                <img src="/images/svg/plan-s1.svg" alt="">
                             </div>
                             <div class="pricing-title w-220px mx-auto">
                                 <h5 class="title">{{ $plan->name }}</h5>
                             </div>
                             <div class="pricing-amount">
-                                <div class="amount">{{ $plan->price }}</div>
+                                <div class="amount">{{ currency($plan->price) }}</div>
                             </div>
                             <div class="pricing-action">
                                 <a href="#" class="btn btn-primary">Select Plan</a>

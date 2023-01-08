@@ -1,7 +1,7 @@
 
 <x-app-layout>
     <x-slot name="breadcrumb">
-        <x-breadcrumb currentPage="Transactions" title="Transactions" :links="['dashboard' => 'dashboard']"/>
+        <x-breadcrumb currentPage="{{ $type }} History" title="{{ $type }} History" :links="['dashboard' => 'dashboard']"/>
     </x-slot>
     <x-slot name="header">
         
@@ -12,7 +12,7 @@
                 <div class="card-inner">
                     <div class="card-title-group">
                         <div class="card-title">
-                            <h5 class="title">Transactions</h5>
+                            <h5 class="title text-capitalize">{{ $type }} History</h5>
                         </div>
                         <div class="card-tools mr-n1">
                             <ul class="btn-toolbar gx-1">
@@ -21,21 +21,20 @@
                                 </li>
                             </ul><!-- .btn-toolbar -->
                         </div>
-                        <x-search-input url="{{ route('reports.transactions.table') }}" placeholder="Search by trx or remark"/>
+                        <x-search-input url="{{ route('reports.payments', $type) }}" placeholder="Search by trx or remark"/>
                     </div><!-- .card-title-group -->
                 </div><!-- .card-inner -->
-
-                <div id="table">
-
-                </div>
             </div><!-- .card-inner-group -->
+            <div id="table">
+
+            </div>
         </div><!-- .card -->
     </div>
 
     <x-slot name="scripts">
         <script>
             NioApp.coms.docReady.push(function(){ 
-                ajax("{{ route('reports.transactions.table') }}", 'GET', function(response){
+                ajax("{{ route('reports.payments.table', $type) }}", 'GET', function(response){
                     $('#table').html(response)
                 })
             })

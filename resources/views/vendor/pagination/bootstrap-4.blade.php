@@ -3,7 +3,7 @@
     <div class="card-inner">
         <div class="nk-block-between-md g-3">
             <div class="g">
-                <ul class="pagination justify-content-center justify-content-md-start">
+                <ul class="pagination pagination-sm justify-content-center justify-content-md-start">
                     @if ($paginator->onFirstPage())
                         <li class="page-item"><span class="page-link" aria-hidden="true">&lsaquo;</span></li>
                     @else
@@ -16,14 +16,16 @@
 
                         {{-- Array Of Links --}}
                         @if (is_array($element))
-                        @foreach ($element as $page => $url)
-                            @if ($page == $paginator->currentPage())
-                                <li class="page-item" aria-current="page"><span class="page-link">{{ $page }}</span></li>
-                            @else
-                                <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
-                            @endif
-                        @endforeach
-                    @endif
+                            @foreach ($element as $page => $url)
+                                @if($loop->index < 2)
+                                    @if ($page == $paginator->currentPage())
+                                        <li class="page-item" aria-current="page"><span class="page-link">{{ $page }}</span></li>
+                                    @else
+                                        <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
+                                    @endif
+                                @endif
+                            @endforeach
+                        @endif
                     @endforeach
                     {{-- Next Page Link --}}
                     @if ($paginator->hasMorePages())

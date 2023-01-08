@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('details')->nullable();
             $table->string('remark', 40)->nullable();
             $table->string('type', 20)->nullable();
+            $table->string('status', 10)->default('active');
             $table->timestamps();
         });
     }

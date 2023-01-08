@@ -32,11 +32,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('referrals', [App\Http\Controllers\FrontEnd\UserController::class, 'referrals'])->name('referrals');
     Route::get('referrals/table', [App\Http\Controllers\FrontEnd\UserController::class, 'loadReferralTable'])->name('referrals.table');
     
-    Route::prefix('reports')->group(function () {
+    Route::prefix('reports')->name('reports.')->group(function () {
         //Transactions
         Route::get('transactions', [App\Http\Controllers\FrontEnd\ReportController::class, 'transactions'])->name('transactions');
         Route::get('transactions/table', [App\Http\Controllers\FrontEnd\ReportController::class, 'loadTransactionsTable'])->name('transactions.table');
+        Route::get('{type}/payments/', [App\Http\Controllers\FrontEnd\ReportController::class, 'payments'])->name('payments');
+        Route::get('{type}/payments/table', [App\Http\Controllers\FrontEnd\ReportController::class, 'loadPaymentsTable'])->name('payments.table');
     });
+
+    //Deposit
+    Route::get('deposit', [App\Http\Controllers\FrontEnd\DepositController::class, 'index'])->name('deposit');
+    Route::post('deposit/confirm', [App\Http\Controllers\FrontEnd\DepositController::class, 'depositConfirmation'])->name('deposit.confirm');
+    Route::post('deposit/confirmed', [App\Http\Controllers\FrontEnd\DepositController::class, 'depositConfirmed'])->name('deposit.confirmed');
+
+    Route::get('notifications', [App\Http\Controllers\FrontEnd\UserController::class, 'notifications'])->name('notifications');
 });
 
 Route::get('plans', [App\Http\Controllers\FrontEnd\PlanController::class, 'index'])->name('plans.index');

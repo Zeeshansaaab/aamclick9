@@ -52,7 +52,7 @@
                         </li>
                         <x-nav-link 
                             title="Deposit Now" 
-                            link="deposit.index" 
+                            link="{{ route('deposit') }}" 
                             icon="icon ni ni-dashboard" 
                         />
                         <x-nav-link 
@@ -77,11 +77,11 @@
                         <x-dropdown 
                             title="Reports" 
                             :links="[
-                                'Deposit History'      => null, 
-                                'Withdraw History'     => null, 
+                                'Deposit History'      => 'reports.payments, credit', 
+                                'Withdraw History'     => 'reports.payments, debit', 
                                 'Committee History'    => null,
                                 'Installment History'  => null,
-                                'Transactions'         => 'transactions',
+                                'Transactions'         => 'reports.transactions',
                                 'Commission'           => null,
                             ]" 
                         />

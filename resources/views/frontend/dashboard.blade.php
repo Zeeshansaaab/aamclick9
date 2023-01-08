@@ -85,18 +85,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="nk-block">
-                    <div class="nk-block">
-                        <div class="card card-bordered text-light is-dark h-100">
-                            <div class="card-inner text-center">
-                                <div class="nk-wg7">
-                                    <div class="nk-wg7-stats">
-                                        <div class="nk-wg7-title">
-                                            User ID
-                                        </div>
-                                        <div class="amount" style="font-size: 1.5rem;">
-                                            {{ $user->uuid }} 
-                                        </div>
+                <div class="nk-block" style="padding-top: 20px;">
+                    <div class="nk-block-head-xs">
+                        <div class="nk-block-head-content">
+                            <h6 class="nk-block-title title">Detail</h6>
+                        </div>
+                    </div>
+                    <div class="card card-bordered text-light is-dark h-100">
+                        <div class="card-inner text-center">
+                            <div class="nk-wg7">
+                                <div class="nk-wg7-stats">
+                                    <div class="nk-wg7-title">
+                                        User ID
+                                    </div>
+                                    <div class="amount" style="font-size: 1.5rem;">
+                                        {{ $user->uuid }} 
                                     </div>
                                 </div>
                             </div>
@@ -125,7 +128,7 @@
                                         ><div class="nk-wgw-name">
                                             <div class="nk-wgw-icon">
                                                 <em
-                                                    class="icon ni ni-sign-btc"
+                                                    class="icon ni ni-sign-usd"
                                                 ></em>
                                             </div>
                                             <h5 class="nk-wgw-title title">
@@ -153,7 +156,7 @@
                                         ><div class="nk-wgw-name">
                                             <div class="nk-wgw-icon">
                                                 <em
-                                                    class="icon ni ni-sign-btc"
+                                                    class="icon ni ni-sign-usd"
                                                 ></em>
                                             </div>
                                             <h5 class="nk-wgw-title title">
@@ -220,7 +223,7 @@
                                         ><div class="nk-wgw-name">
                                             <div class="nk-wgw-icon">
                                                 <em
-                                                    class="icon ni ni-sign-btc"
+                                                    class="icon ni ni-sign-usd"
                                                 ></em>
                                             </div>
                                             <h5 class="nk-wgw-title title">
@@ -248,7 +251,7 @@
                                         ><div class="nk-wgw-name">
                                             <div class="nk-wgw-icon">
                                                 <em
-                                                    class="icon ni ni-sign-btc"
+                                                    class="icon ni ni-sign-usd"
                                                 ></em>
                                             </div>
                                             <h5 class="nk-wgw-title title">
@@ -288,7 +291,7 @@
                                         ><div class="nk-wgw-name">
                                             <div class="nk-wgw-icon">
                                                 <em
-                                                    class="icon ni ni-sign-btc"
+                                                    class="icon ni ni-sign-usd"
                                                 ></em>
                                             </div>
                                             <h5 class="nk-wgw-title title">
@@ -316,7 +319,7 @@
                                         ><div class="nk-wgw-name">
                                             <div class="nk-wgw-icon">
                                                 <em
-                                                    class="icon ni ni-sign-btc"
+                                                    class="icon ni ni-sign-usd"
                                                 ></em>
                                             </div>
                                             <h5 class="nk-wgw-title title">
@@ -385,7 +388,7 @@
                                     <div class="tranx-label">
                                         {{ $transaction->remark }}
                                         <em
-                                            class="tranx-icon sm icon ni ni-sign-btc"
+                                            class="tranx-icon sm icon ni ni-sign-usd @if($transaction->type == 'credit') bg-success-dim @else bg-danger-dim @endif"
                                         ></em>
                                     </div>
                                     <div class="tranx-date">
@@ -541,207 +544,205 @@
 
 <x-slot name="scripts">
     <script>
-   
-
-    function referStats(selector, set_data){
-        var $selector = (selector) ? $(selector) : $('.chart-refer-stats');
-        $selector.each(function(){
-            var $self = $(this), _self_id = $self.attr('id'), _get_data = (typeof set_data === 'undefined') ? eval(_self_id) : set_data;
-            var selectCanvas = document.getElementById(_self_id).getContext("2d");
-            var chart_data = [];
-            for (var i = 0; i < _get_data.datasets.length; i++) {
-                chart_data.push({
-                    label: _get_data.datasets[i].label,
-                    data: _get_data.datasets[i].data,
-                    // Styles
-                    backgroundColor: _get_data.datasets[i].color,
-                    borderWidth:2,
-                    borderColor: 'transparent',
-                    hoverBorderColor : 'transparent',
-                    borderSkipped : 'top',
-                    barPercentage : .5,
-                    categoryPercentage : .7
-                });
-            } 
-            var chart = new Chart(selectCanvas, {
-                type: 'bar',
-                data: {
-                    labels: _get_data.labels,
-                    datasets: chart_data,
-                },
-                options: {
-                    legend: {
-                        display: false,
+        function referStats(selector, set_data){
+            var $selector = (selector) ? $(selector) : $('.chart-refer-stats');
+            $selector.each(function(){
+                var $self = $(this), _self_id = $self.attr('id'), _get_data = (typeof set_data === 'undefined') ? eval(_self_id) : set_data;
+                var selectCanvas = document.getElementById(_self_id).getContext("2d");
+                var chart_data = [];
+                for (var i = 0; i < _get_data.datasets.length; i++) {
+                    chart_data.push({
+                        label: _get_data.datasets[i].label,
+                        data: _get_data.datasets[i].data,
+                        // Styles
+                        backgroundColor: _get_data.datasets[i].color,
+                        borderWidth:2,
+                        borderColor: 'transparent',
+                        hoverBorderColor : 'transparent',
+                        borderSkipped : 'top',
+                        barPercentage : .5,
+                        categoryPercentage : .7
+                    });
+                } 
+                var chart = new Chart(selectCanvas, {
+                    type: 'bar',
+                    data: {
+                        labels: _get_data.labels,
+                        datasets: chart_data,
                     },
-                    maintainAspectRatio: false,
-                    tooltips: {
-                        enabled: true,
-                        rtl: NioApp.State.isRTL,
-                        callbacks: {
-                            title: function(tooltipItem, data) {
-                                return data.datasets[tooltipItem[0].datasetIndex].label;
-                            },
-                            label: function(tooltipItem, data) {
-                                return data.datasets[tooltipItem.datasetIndex]['data'][tooltipItem['index']] + ' ' + _get_data.dataUnit;
-                            }
-                        },
-                        backgroundColor: '#fff',
-                        titleFontSize: 13,
-                        titleFontColor: '#6783b8',
-                        titleMarginBottom: 6,
-                        bodyFontColor: '#9eaecf',
-                        bodyFontSize: 12,
-                        bodySpacing:4,
-                        yPadding: 10,
-                        xPadding: 10,
-                        footerMarginTop: 0,
-                        displayColors: false
-                    },
-                    scales: {
-                        yAxes: [{
+                    options: {
+                        legend: {
                             display: false,
-                            ticks: {
-                                beginAtZero: true
-                            },
-                        }],
-                        xAxes: [{
-                            display: false,
-                            ticks: {
-                                reverse: NioApp.State.isRTL
-                            }
-                        }]
-                    }
-                }
-            });
-        })
-    }
-    
-
-    function accountSummary(selector, set_data){
-        var $selector = (selector) ? $(selector) : $('.chart-account-summary');
-        $selector.each(function(){
-            var $self = $(this), _self_id = $self.attr('id'), _get_data = (typeof set_data === 'undefined') ? eval(_self_id) : set_data;
-            var selectCanvas = document.getElementById(_self_id).getContext("2d");
-            var chart_data = [];
-            for (var i = 0; i < _get_data.datasets.length; i++) {
-                chart_data.push({
-                    label: _get_data.datasets[i].label,
-                    tension:.4,
-                    backgroundColor: 'transparent',
-                    borderWidth:2,
-                    borderColor: _get_data.datasets[i].color,
-                    pointBorderColor: 'transparent',
-                    pointBackgroundColor: 'transparent',
-                    pointHoverBackgroundColor: "#fff",
-                    pointHoverBorderColor: _get_data.datasets[i].color,
-                    pointBorderWidth: 2,
-                    pointHoverRadius: 4,
-                    pointHoverBorderWidth: 2,
-                    pointRadius: 4,
-                    pointHitRadius: 4,
-                    data: _get_data.datasets[i].data,
-                });
-            } 
-            var chart = new Chart(selectCanvas, {
-                type: 'line',
-                data: {
-                    labels: _get_data.labels,
-                    datasets: chart_data,
-                },
-                options: {
-                    legend: {
-                        display: false,
-                    },
-                    maintainAspectRatio: false,
-                    tooltips: {
-                        rtl: NioApp.State.isRTL,
-                        callbacks: {
-                            title: function(tooltipItem, data) {
-                                return data['labels'][tooltipItem[0]['index']];
-                            },
-                            label: function(tooltipItem, data) {
-                                return data.datasets[tooltipItem.datasetIndex]['data'][tooltipItem['index']] + ' ' + _get_data.dataUnit;
-                            }
                         },
-                        backgroundColor: '#eff6ff',
-                        titleFontSize: 13,
-                        titleFontColor: '#6783b8',
-                        titleMarginBottom: 6,
-                        bodyFontColor: '#9eaecf',
-                        bodyFontSize: 12,
-                        bodySpacing:4,
-                        yPadding: 10,
-                        xPadding: 10,
-                        footerMarginTop: 0,
-                        displayColors: false
-                    },
-                    scales: {
-                        yAxes: [{
-                            position : NioApp.State.isRTL ? "right" : "left",
-                            ticks: {
-                                beginAtZero: false,
-                                fontSize:12,
-                                fontColor:'#9eaecf',
-                                padding: 10
+                        maintainAspectRatio: false,
+                        tooltips: {
+                            enabled: true,
+                            rtl: NioApp.State.isRTL,
+                            callbacks: {
+                                title: function(tooltipItem, data) {
+                                    return data.datasets[tooltipItem[0].datasetIndex].label;
+                                },
+                                label: function(tooltipItem, data) {
+                                    return data.datasets[tooltipItem.datasetIndex]['data'][tooltipItem['index']] + ' ' + _get_data.dataUnit;
+                                }
                             },
-                            gridLines: { 
-                                color: NioApp.hexRGB("#526484",.2),
-                                tickMarkLength:0,
-                                zeroLineColor: NioApp.hexRGB("#526484",.2)
-                            },
-                        }],
-                        xAxes: [{
-                            ticks: {
-                                fontSize:12,
-                                fontColor:'#9eaecf',
-                                source: 'auto',
-                                padding: 5,
-                                reverse: NioApp.State.isRTL
-                            },
-                            gridLines: {
-                                color: "transparent",
-                                tickMarkLength:20,
-                                zeroLineColor: NioApp.hexRGB("#526484",.2),
-                                offsetGridLines: true,
-                            }
-                        }]
+                            backgroundColor: '#fff',
+                            titleFontSize: 13,
+                            titleFontColor: '#6783b8',
+                            titleMarginBottom: 6,
+                            bodyFontColor: '#9eaecf',
+                            bodyFontSize: 12,
+                            bodySpacing:4,
+                            yPadding: 10,
+                            xPadding: 10,
+                            footerMarginTop: 0,
+                            displayColors: false
+                        },
+                        scales: {
+                            yAxes: [{
+                                display: false,
+                                ticks: {
+                                    beginAtZero: true
+                                },
+                            }],
+                            xAxes: [{
+                                display: false,
+                                ticks: {
+                                    reverse: NioApp.State.isRTL
+                                }
+                            }]
+                        }
                     }
-                }
-            });
-        })
-    }
-
-    // init accountSummary
-NioApp.coms.docReady.push(function(){ 
-    ajax("{{ route('dashboard.chart') }}", 'GET', function(response){
-        // {{-- Ref bar chart --}}
-        var refBarChart = {
-            labels : response.data.referralUsersLabels,
-            dataUnit : 'People',
-            datasets : [{
-                label : "Joined",
-                color : "#6baafe",
-                data: response.data.referralUsersData
-            }]
+                });
+            })
         }
-        // {{-- Summarybalance --}}
-        var summaryBalance = {
-            labels : response.data.transactionsLabels,
-            dataUnit : "{{ $cur_text }}",
-            datasets : [{
-                label : "Total Transactions",
-                color : "#5ce0aa",
-                data  : response.data.transactionsData
-            }]
-        };
+        
 
-        accountSummary('.chart-account-summary', summaryBalance); 
-        console.log(refBarChart)
-        referStats('.chart-refer-stats', refBarChart); 
-    })
+        function accountSummary(selector, set_data){
+            var $selector = (selector) ? $(selector) : $('.chart-account-summary');
+            $selector.each(function(){
+                var $self = $(this), _self_id = $self.attr('id'), _get_data = (typeof set_data === 'undefined') ? eval(_self_id) : set_data;
+                var selectCanvas = document.getElementById(_self_id).getContext("2d");
+                var chart_data = [];
+                for (var i = 0; i < _get_data.datasets.length; i++) {
+                    chart_data.push({
+                        label: _get_data.datasets[i].label,
+                        tension:.4,
+                        backgroundColor: 'transparent',
+                        borderWidth:2,
+                        borderColor: _get_data.datasets[i].color,
+                        pointBorderColor: 'transparent',
+                        pointBackgroundColor: 'transparent',
+                        pointHoverBackgroundColor: "#fff",
+                        pointHoverBorderColor: _get_data.datasets[i].color,
+                        pointBorderWidth: 2,
+                        pointHoverRadius: 4,
+                        pointHoverBorderWidth: 2,
+                        pointRadius: 4,
+                        pointHitRadius: 4,
+                        data: _get_data.datasets[i].data,
+                    });
+                } 
+                var chart = new Chart(selectCanvas, {
+                    type: 'line',
+                    data: {
+                        labels: _get_data.labels,
+                        datasets: chart_data,
+                    },
+                    options: {
+                        legend: {
+                            display: false,
+                        },
+                        maintainAspectRatio: false,
+                        tooltips: {
+                            rtl: NioApp.State.isRTL,
+                            callbacks: {
+                                title: function(tooltipItem, data) {
+                                    return data['labels'][tooltipItem[0]['index']];
+                                },
+                                label: function(tooltipItem, data) {
+                                    return data.datasets[tooltipItem.datasetIndex]['data'][tooltipItem['index']] + ' ' + _get_data.dataUnit;
+                                }
+                            },
+                            backgroundColor: '#eff6ff',
+                            titleFontSize: 13,
+                            titleFontColor: '#6783b8',
+                            titleMarginBottom: 6,
+                            bodyFontColor: '#9eaecf',
+                            bodyFontSize: 12,
+                            bodySpacing:4,
+                            yPadding: 10,
+                            xPadding: 10,
+                            footerMarginTop: 0,
+                            displayColors: false
+                        },
+                        scales: {
+                            yAxes: [{
+                                position : NioApp.State.isRTL ? "right" : "left",
+                                ticks: {
+                                    beginAtZero: false,
+                                    fontSize:12,
+                                    fontColor:'#9eaecf',
+                                    padding: 10
+                                },
+                                gridLines: { 
+                                    color: NioApp.hexRGB("#526484",.2),
+                                    tickMarkLength:0,
+                                    zeroLineColor: NioApp.hexRGB("#526484",.2)
+                                },
+                            }],
+                            xAxes: [{
+                                ticks: {
+                                    fontSize:12,
+                                    fontColor:'#9eaecf',
+                                    source: 'auto',
+                                    padding: 5,
+                                    reverse: NioApp.State.isRTL
+                                },
+                                gridLines: {
+                                    color: "transparent",
+                                    tickMarkLength:20,
+                                    zeroLineColor: NioApp.hexRGB("#526484",.2),
+                                    offsetGridLines: true,
+                                }
+                            }]
+                        }
+                    }
+                });
+            })
+        }
 
-    
-});
+        // init accountSummary
+        NioApp.coms.docReady.push(function(){ 
+            ajax("{{ route('dashboard.chart') }}", 'GET', function(response){
+                // {{-- Ref bar chart --}}
+                var refBarChart = {
+                    labels : response.data.referralUsersLabels,
+                    dataUnit : 'People',
+                    datasets : [{
+                        label : "Joined",
+                        color : "#6baafe",
+                        data: response.data.referralUsersData
+                    }]
+                }
+                // {{-- Summarybalance --}}
+                var summaryBalance = {
+                    labels : response.data.transactionsLabels,
+                    dataUnit : "{{ $cur_text }}",
+                    datasets : [{
+                        label : "Total Transactions",
+                        color : "#5ce0aa",
+                        data  : response.data.transactionsData
+                    }]
+                };
+
+                accountSummary('.chart-account-summary', summaryBalance); 
+                console.log(refBarChart)
+                referStats('.chart-refer-stats', refBarChart); 
+            })
+
+            
+        });
     </script>
 </x-slot>
 

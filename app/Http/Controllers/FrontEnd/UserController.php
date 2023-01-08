@@ -22,6 +22,17 @@ class UserController extends Controller
 
         return Blade::render('<x-users-list :users="$users"/>', ['users' => $users]);
     }
+
+    public function notifications()
+    {
+        if(request()->is_all == "true"){
+            auth()->user()->unreadNotifications->markAsRead();
+        }
+        $notifications = auth()->user()->unreadNotifications()->limit(request()->limit)->get();
+        return Blade::render('<x-notification-list :notifications="$notifications"/>', [
+            'notifications' => $notifications
+        ]);
+    }
     
    
 }

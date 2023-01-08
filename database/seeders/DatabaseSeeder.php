@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             SettingSeeder::class,
             PlanSeeder::class,
+            GatewaySeeder::class,
         ]);
 
         
@@ -40,7 +41,7 @@ class DatabaseSeeder extends Seeder
 
         $user->load('planUser');
         $balance = 1000;
-        for ($i = 0; $i < 2000; $i++){
+        for ($i = 0; $i < 10; $i++){
             $amount = mt_rand(10, 100);
             $type = Arr::random(['credit', 'debit']);
 
@@ -65,6 +66,6 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        User::factory(1000)->create();
+        User::factory(50)->create();
     }
 }

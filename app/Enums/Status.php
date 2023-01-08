@@ -4,13 +4,15 @@ namespace App\Enums;
 
 enum Status : string {
     case Active = 'active';
+    case Pending = 'pending';
     case InActive = 'inactive';
 
     public function label()
     {
         return match($this){
             self::Active => 'Active',
-            self::InActive => 'Banned'
+            self::Pending => 'Pending',
+            self::InActive => 'In Active'
         };
     }
 
@@ -18,6 +20,7 @@ enum Status : string {
     {
         return match($this){
             self::Active => 'success text-success',
+            self::Pending => 'warning text-warning',
             self::InActive => 'danger text-danger'
         };
     }

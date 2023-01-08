@@ -90,4 +90,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Device::class);
     }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }
