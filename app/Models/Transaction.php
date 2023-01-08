@@ -14,7 +14,7 @@ class Transaction extends Model
     protected $guarded = [];
     protected $casts = [
         'created_at' => 'datetime',
-        'status'     => Status::class,
+        // 'status'     => Status::class,
     ];
 
     public function scopeActive($query)
