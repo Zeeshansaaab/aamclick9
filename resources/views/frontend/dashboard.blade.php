@@ -21,18 +21,9 @@
             <div class="nk-block-head-content">
                 <ul class="nk-block-tools gx-3">
                     <li>
-                        <a href="#" class="btn btn-primary"><span>Deposit</span> <em class="icon ni ni-arrow-long-right"></em></a>
+                        <a href="{{ $route('deposit', 'credit') }}" class="btn btn-primary"><span>Deposit</span> <em class="icon ni ni-arrow-long-right"></em></a>
                     </li>
-                    <li><a href="#" class="btn btn-white btn-light"><span>Buy / Sell</span> <em class="icon ni ni-arrow-long-right d-none d-sm-inline-block"></em></a></li>
-                    <li class="opt-menu-md dropdown">
-                        <a href="#" class="btn btn-white btn-light btn-icon" data-toggle="dropdown"><em class="icon ni ni-setting"></em></a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <ul class="link-list-opt no-bdr">
-                                <li><a href="#"><em class="icon ni ni-coin-alt"></em><span>Curreny Settings</span></a></li>
-                                <li><a href="#"><em class="icon ni ni-notify"></em><span>Push Notification</span></a></li>
-                            </ul>
-                        </div>
-                    </li>
+                    <li><a href="{{ $route('deposit', 'debit') }}" class="btn btn-white btn-light"><span>Withdraw</span> <em class="icon ni ni-arrow-long-right d-none d-sm-inline-block"></em></a></li>
                 </ul>
             </div><!-- .nk-block-head-content -->
         </div><!-- .nk-block-between -->

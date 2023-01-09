@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Artisan;
 
 Route::get('update-database', function () {
     Artisan::call('migrate:fresh --seed');
+    return "PHP ARTISAN MIGRATE:FRESH --SEED HAS EXECUTED SUCCESSFULLY";
 });
 
 Route::get('/', function () {

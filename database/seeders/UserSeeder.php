@@ -35,13 +35,19 @@ class UserSeeder extends Seeder
         foreach($users as $user){
             $balance = 1000;
             $user->load('planUser');
-            for ($i = 0; $i < 10; $i++){
+            $month = 1;
+            $totalRecords = 10;
+            for ($i = 0; $i < $totalRecords; $i++){
+
                 $amount = mt_rand(10, 100);
                 $type = Arr::random(['credit', 'debit']);
-    
                 $balance = $type == 'credit' ? $balance + $amount : $balance - $amount ;
         
-                $randomNum = mt_rand(strtotime('2022-1-1'), strtotime('2023-1-1'));
+                if($month > 12){
+                    $month = 1;
+                }
+
+                $randomNum = mt_rand(strtotime('2022-' . $month .'-1'), strtotime('2023-1-1'));
                 $date = date("Y-m-d", $randomNum);
     
                 $user->transactions()->create([
@@ -58,6 +64,10 @@ class UserSeeder extends Seeder
                 $user->planUser()->update([
                     'balance'    => $balance
                 ]);
+
+                // if($totalRecords/12 == $user->id){
+                    $month++;
+                // }
             }
         }
     }
