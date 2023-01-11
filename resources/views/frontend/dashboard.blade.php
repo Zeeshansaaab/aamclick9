@@ -21,9 +21,9 @@
             <div class="nk-block-head-content">
                 <ul class="nk-block-tools gx-3">
                     <li>
-                        <a href="{{ $route('deposit', 'credit') }}" class="btn btn-primary"><span>Deposit</span> <em class="icon ni ni-arrow-long-right"></em></a>
+                        <a href="{{ route('deposit', 'credit') }}" class="btn btn-primary"><span>Deposit</span> <em class="icon ni ni-arrow-long-right"></em></a>
                     </li>
-                    <li><a href="{{ $route('deposit', 'debit') }}" class="btn btn-white btn-light"><span>Withdraw</span> <em class="icon ni ni-arrow-long-right d-none d-sm-inline-block"></em></a></li>
+                    <li><a href="{{ route('deposit', 'debit') }}" class="btn btn-white btn-light"><span>Withdraw</span> <em class="icon ni ni-arrow-long-right d-none d-sm-inline-block"></em></a></li>
                 </ul>
             </div><!-- .nk-block-head-content -->
         </div><!-- .nk-block-between -->
