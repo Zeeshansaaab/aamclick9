@@ -1,8 +1,8 @@
 @php
     $cur_text = cur_text();
 @endphp
-
 <x-app-layout>
+    <x-slot name="title">Deposit</x-slot>
     <x-slot name="breadcrumb">
         <x-breadcrumb currentPage="Deposit" title="Deposit" :links="['dashboard' => 'dashboard']"/>
     </x-slot>

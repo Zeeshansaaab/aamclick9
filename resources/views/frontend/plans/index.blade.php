@@ -2,6 +2,7 @@
     $cur_text = cur_text();
 @endphp
 <x-app-layout>
+    <x-slot name="title">{{ $title }}</x-slot>
     <x-slot name="breadcrumb">
         <x-breadcrumb :currentPage="$title" title="Plans" :links="['dashboard' => 'dashboard']"/>
     </x-slot>

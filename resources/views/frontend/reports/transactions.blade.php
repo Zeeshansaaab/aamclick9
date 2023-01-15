@@ -1,5 +1,7 @@
 
 <x-app-layout>
+    <x-slot name="title">Transactions</x-slot>
+
     <x-slot name="breadcrumb">
         <x-breadcrumb currentPage="Transactions" title="Transactions" :links="['dashboard' => 'dashboard']"/>
     </x-slot>

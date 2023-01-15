@@ -5,6 +5,8 @@
     $cur_text = cur_text();
 @endphp
 <x-app-layout>
+    <x-slot name="title">Dashboard</x-slot>
+
     <x-slot name="breadcrumb">
         <x-breadcrumb currentPage="Dashboard" title="Dashboard"/>
     </x-slot>
@@ -186,7 +188,7 @@
                                             <div class="amount">
                                                 0.000560<span
                                                     class="currency currency-eth"
-                                                    >ETH</span
+                                                    >{{ $cur_text }}</span
                                                 >
                                             </div>
                                         </div></a
@@ -254,7 +256,7 @@
                                                 {{-- auth()->user()->withdrawals()->sum('amount') --}}
                                                 0<span
                                                     class="currency currency-btc"
-                                                    >BTC</span
+                                                    >{{ $cur_text }}</span
                                                 >
                                             </div>
                                         </div></a

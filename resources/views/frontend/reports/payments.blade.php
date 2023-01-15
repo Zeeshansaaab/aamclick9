@@ -1,5 +1,7 @@
 
 <x-app-layout>
+    <x-slot name="title">{{ucFirst($type)}}</x-slot>
+
     <x-slot name="breadcrumb">
         <x-breadcrumb currentPage="{{ $type }} History" title="{{ $type }} History" :links="['dashboard' => 'dashboard']"/>
     </x-slot>

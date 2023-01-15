@@ -1,5 +1,6 @@
 
 <x-app-layout>
+    <x-slot name="title">Referrals</x-slot>
     <x-slot name="breadcrumb">
         <x-breadcrumb currentPage="Your Referrals" title="Your Referrals" :links="['dashboard' => 'dashboard']"/>
     </x-slot>

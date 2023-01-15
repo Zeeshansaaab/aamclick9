@@ -3,7 +3,6 @@
         <div class="nk-sidebar-brand">
             <a href="html/crypto/index.html" class="logo-link nk-sidebar-logo">
                 <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                <span class="nio-version">{{ config('app.name') }}</span>
             </a>
         </div>
         <div class="nk-menu-trigger mr-n2">
@@ -80,10 +79,10 @@
                             :links="[
                                 'Deposit History'      => 'reports.payments, credit', 
                                 'Withdraw History'     => 'reports.payments, debit', 
-                                'Committee History'    => null,
-                                'Installment History'  => null,
+                                'Committee History'    => 'reports.payments, debit',
+                                'Installment History'  => 'reports.payments, debit',
                                 'Transactions'         => 'reports.transactions',
-                                'Commission'           => null,
+                                'Commission'           => 'reports.payments, debit',
                             ]"
                         />
 
