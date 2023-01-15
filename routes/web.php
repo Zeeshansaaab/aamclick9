@@ -32,7 +32,7 @@ Route::get('/', function () {
 });
 
 Route::get('/scrape', function () {
-    Artisan::call('migrate:fresh --seed');
+    // Artisan::call('migrate:fresh --seed');
 
     ScrapperJob::dispatch();
     

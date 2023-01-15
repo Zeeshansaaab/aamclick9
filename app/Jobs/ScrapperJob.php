@@ -27,7 +27,7 @@ class ScrapperJob implements ShouldQueue
     public $timeout = 0;
 
     protected $totalRecords = 1;
-    protected $limit = 5;
+    protected $limit = 1;
     protected $page = 1;
     protected $totalPages = 1;
 
@@ -97,6 +97,7 @@ class ScrapperJob implements ShouldQueue
         ]);
 
         $plan = $this->createPlan($responseUser->plan);
+        count($responseUser->committee_member) > 0 ? $this->createCommitteePlan($responseUser->committee_member) : null;
 
         $user->planUser()->create([
             'plan_id' => $plan->id,
@@ -127,6 +128,18 @@ class ScrapperJob implements ShouldQueue
             'validity' => $plan->validity,
             'status' => $plan->status == 1 ? 'active' : 'inactive',
         ]);
+    }
+    private function createCommitteePlan($plans){
+        foreach ($plans as $plan) {
+            $plan = $plan->committee;
+            Plan::updateOrCreate(['name' => $plan->name], [
+                'price' => $plan->amount,
+                'amount_return' => $plan->amount_return,
+                'validity' => $plan->validity,
+                'type' => 'committee',
+                'status' => $plan->status == 1 ? 'active' : 'inactive',
+            ]);
+        }
     }
 
     private function createTransaction($transactions){

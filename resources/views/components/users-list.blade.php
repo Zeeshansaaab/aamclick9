@@ -14,7 +14,7 @@
             <div class="nk-tb-item">
                 {{-- Full name --}}
                 <div class="nk-tb-col">
-                    <a href="html/user-details-regular.html">
+                    <a href="#">
                         <div class="user-card">
                             <div class="user-avatar bg-primary">
                                 <span>AB</span>

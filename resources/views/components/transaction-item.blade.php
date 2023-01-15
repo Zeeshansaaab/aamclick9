@@ -8,7 +8,7 @@
                 <em class="icon ni ni-arrow-up-right"></em>
             </div>
             <div class="nk-tnx-type-text">
-                <span class="tb-lead">{{ $transaction->remark }}</span>
+                <span class="tb-lead">{{ $transaction->details }}</span>
                 <span class="tb-date">{{ $transaction->created_at->format('d/m/Y h:i:s a') }}</span>
             </div>
         </div>
