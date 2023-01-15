@@ -25,14 +25,14 @@ class User extends Authenticatable
          * @return void
          */
         static::creating(function (User $user) {
-            $user->uuid = getUserId();
+            env('APP_ENV') != 'local' ? $user->uuid = getUserId() : null;
         });
 
         static::created(function (User $user) {
-            $user->planUser()->create([
+            env('APP_ENV') != 'local' ? $user->planUser()->create([
                 'balance' => 0,
                 'plan_id' => 1,
-            ]);
+            ]) : null;
         });
     }
 
@@ -43,12 +43,22 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'id',
         'name',
         'email',
         'password',
         'country_code',
         'mobile',
         'status',
+        'uuid',
+        'address',
+        'sv',
+        'ban_reason',
+        'created_at',
+        'updated_at',
+        'email_verified_at',
+        'ref_by',
+
     ];
 
     /**
