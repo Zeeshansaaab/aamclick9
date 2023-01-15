@@ -25,7 +25,7 @@ class ScrapperJob implements ShouldQueue
     public $timeout = 0;
 
     protected $totalRecords = 1;
-    protected $limit = 1;
+    protected $limit = 5;
     protected $page = 1;
     protected $totalPages = 1;
 
