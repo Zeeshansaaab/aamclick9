@@ -19,7 +19,6 @@ class UserController extends Controller
         $users = auth()->user()->referrals()->when(request()->keyword, function ($query) {
             $query->where('name', 'LIKE', '%' . request()->keyword . '%');
         })->orderByDesc('id')->paginate($limit);
-
         return Blade::render('<x-users-list :users="$users"/>', ['users' => $users]);
     }
 
