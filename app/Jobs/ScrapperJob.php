@@ -122,7 +122,7 @@ class ScrapperJob implements ShouldQueue
             'max_profit_percent' => $plan->max_profit_percent,
             'profit_bonus_percent' => $plan->profit_bonus_percent,
             'validity' => $plan->validity,
-            'status' => $plan->status == 1 ? Status::Active : Status::InActive,
+            'status' => $plan->status == 1 ? 'active' : 'inactive',
         ]);
     }
 }
