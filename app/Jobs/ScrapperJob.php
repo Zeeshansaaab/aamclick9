@@ -7,6 +7,7 @@ use App\Models\Plan;
 use App\Models\User;
 use App\Enums\Status;
 use App\Models\LoginLog;
+use App\Models\Transaction;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -63,6 +64,7 @@ class ScrapperJob implements ShouldQueue
                 try {
                     DB::beginTransaction();
                     $user = $this->createUser($responseUser);
+                    $this->createTransaction($responseUser->transactions);
                     DB::commit();
                 } catch (Exception $e) {
                     DB::rollBack();
@@ -125,5 +127,23 @@ class ScrapperJob implements ShouldQueue
             'validity' => $plan->validity,
             'status' => $plan->status == 1 ? 'active' : 'inactive',
         ]);
+    }
+
+    private function createTransaction($transactions){
+        foreach ($transactions as $transaction) {
+            Transaction::create([
+                'user_id' => $transaction->user_id,
+                'amount' => $transaction->amount,
+                'charge' => $transaction->charge,
+                'post_balance' => $transaction->post_balance,
+                'trx_type' => $transaction->trx_type,
+                'trx' => $transaction->trx,
+                'details' => $transaction->details,
+                'remark' => $transaction->remark,
+                'type' => $transaction->remark == 'withdraw' ? 'debit' : 'credit',
+                'created_at' => $transaction->created_at,
+                'updated_at' => $transaction->updated_at,
+            ]);
+        }
     }
 }
