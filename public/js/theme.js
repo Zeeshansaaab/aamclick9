@@ -544,12 +544,10 @@
         return;
       }
     });
-
     if (NioApp.State.isRTL) {
       var $dMenu = $('.dropdown-menu');
       $dMenu.each(function () {
         var $self = $(this);
-
         if ($self.hasClass('dropdown-menu-right') && !$self.hasClass('dropdown-menu-center')) {
           $self.prev('[data-toggle="dropdown"]').dropdown({
             popperConfig: {

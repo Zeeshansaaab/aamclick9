@@ -5758,7 +5758,7 @@ input[type="radio"]:checked ~ label { cursor: default; }
 
 .ni-sign-brl-alt:before { content: ""; }
 
-.ni-sign-btc-alt:before { content: ""; }
+.ni-sign-usd-alt:before { content: ""; }
 
 .ni-sign-cc-alt:before { content: ""; }
 
@@ -7366,7 +7366,7 @@ input[type="radio"]:checked ~ label { cursor: default; }
 
 .ni-tether:before { content: ""; }
 
-.ni-sign-btc:before { content: ""; }
+.ni-sign-usd:before { content: ""; }
 
 .ni-bitcoin:before { content: ""; }
 

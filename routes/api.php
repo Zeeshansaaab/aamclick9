@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('logout', [App\Http\Controllers\API\Auth\AuthenticationController::class, 'logout']);
+    //Deposit
+    // Route::get('deposit', [App\Http\Controllers\FrontEnd\UserController::class, 'index'])->name('referrals.table');
+    Route::get('deposit/gateways', [App\Http\Controllers\API\DepositController::class, 'gateways']);
 });
+
+Route::post('register', [App\Http\Controllers\API\Auth\AuthenticationController::class, 'register']);
+Route::post('login', [App\Http\Controllers\API\Auth\AuthenticationController::class, 'login']);

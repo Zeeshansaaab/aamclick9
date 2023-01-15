@@ -21,7 +21,7 @@
                                 </li>
                             </ul><!-- .btn-toolbar -->
                         </div>
-                        <x-search-input url="transactions.table" placeholder="Search by trx or remark"/>
+                        <x-search-input url="{{ route('reports.transactions.table') }}" placeholder="Search by trx or remark"/>
                     </div><!-- .card-title-group -->
                 </div><!-- .card-inner -->
 
@@ -35,7 +35,7 @@
     <x-slot name="scripts">
         <script>
             NioApp.coms.docReady.push(function(){ 
-                ajax("{{ route('transactions.table') }}", 'GET', function(response){
+                ajax("{{ route('reports.transactions.table') }}", 'GET', function(response){
                     $('#table').html(response)
                 })
             })

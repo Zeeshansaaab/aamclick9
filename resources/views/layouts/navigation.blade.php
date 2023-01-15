@@ -51,10 +51,10 @@
                         <li class="nk-menu-heading mt-2">
                             <h6 class="overline-title">Payments</h6>
                         </li>
-                        <x-nav-link
-                            title="Deposit Now"
-                            link="deposit.index"
-                            icon="icon ni ni-wallet-fill"
+                        <x-nav-link 
+                            title="Deposit Now" 
+                            link="{{ route('deposit') }}" 
+                            icon="icon ni ni-wallet-fill" 
                         />
                         <x-nav-link
                             title="Withdraw"
@@ -78,11 +78,11 @@
                         <x-dropdown
                             title="Reports"
                             :links="[
-                                'Deposit History'      => null,
-                                'Withdraw History'     => null,
+                                'Deposit History'      => 'reports.payments, credit', 
+                                'Withdraw History'     => 'reports.payments, debit', 
                                 'Committee History'    => null,
                                 'Installment History'  => null,
-                                'Transactions'         => 'transactions',
+                                'Transactions'         => 'reports.transactions',
                                 'Commission'           => null,
                             ]"
                         />

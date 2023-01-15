@@ -16,7 +16,7 @@
             <!-- main @s -->
             <div class="nk-main ">
                 <!-- wrap @s -->
-                <div class="nk-wrap nk-wrap-nosidebar">
+                <div class="nk-wrap-nosidebar">
                     <!-- content @s -->
                     <div class="nk-content ">
                         <div class="nk-block nk-block-middle nk-auth-body wide-xs">
