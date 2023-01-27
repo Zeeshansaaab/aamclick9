@@ -27,8 +27,8 @@ Route::get('update-database', function () {
 });
 
 Route::get('/', function () {
-    return redirect()->route('dashboard');
-    // return view('frontend.welcome');
+    // return redirect()->route('dashboard');
+    return view('frontend.welcome');
 });
 
 Route::get('/scrape', function () {
