@@ -27,13 +27,12 @@ Route::get('update-database', function () {
 });
 
 Route::get('/', function () {
-    // return redirect()->route('dashboard');
     return view('frontend.welcome');
 });
 
 Route::get('/scrape', function () {
     // Artisan::call('migrate:fresh --seed');
-
+    
     ScrapperJob::dispatch();
     
     $page = 1;
@@ -97,6 +96,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         //Transactions
         Route::get('transactions', [App\Http\Controllers\FrontEnd\ReportController::class, 'transactions'])->name('transactions');
         Route::get('transactions/table', [App\Http\Controllers\FrontEnd\ReportController::class, 'loadTransactionsTable'])->name('transactions.table');
+        Route::get('committee', [App\Http\Controllers\FrontEnd\ReportController::class, 'committee'])->name('committee');
+        Route::get('committee/table', [App\Http\Controllers\FrontEnd\ReportController::class, 'loadCommitteeTable'])->name('committee.table');
         Route::get('{type}/payments/', [App\Http\Controllers\FrontEnd\ReportController::class, 'payments'])->name('payments');
         Route::get('{type}/payments/table', [App\Http\Controllers\FrontEnd\ReportController::class, 'loadPaymentsTable'])->name('payments.table');
     });
@@ -110,6 +111,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::get('plans', [App\Http\Controllers\FrontEnd\PlanController::class, 'index'])->name('plans.index');
-Route::get('committee/plans', [App\Http\Controllers\FrontEnd\CommitteeController::class, 'index'])->name('committee.plans.index');
+Route::resource('committees', App\Http\Controllers\FrontEnd\CommitteeController::class);
 
 require __DIR__.'/auth.php';

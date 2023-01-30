@@ -35,7 +35,7 @@
                         />
                         <x-nav-link
                             title="Committee Plans"
-                            link="{{ route('committee.plans.index') }}"
+                            link="{{ route('committees.index') }}"
                             icon="icon ni ni-folders-fill"
                         />
                         <li class="nk-menu-heading mt-2">
@@ -79,7 +79,7 @@
                             :links="[
                                 'Deposit History'      => 'reports.payments, credit', 
                                 'Withdraw History'     => 'reports.payments, debit', 
-                                'Committee History'    => 'reports.payments, debit',
+                                'Committee History'    => 'reports.committee',
                                 'Installment History'  => 'reports.payments, debit',
                                 'Transactions'         => 'reports.transactions',
                                 'Commission'           => 'reports.payments, debit',

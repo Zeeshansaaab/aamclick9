@@ -25,14 +25,14 @@ class User extends Authenticatable
          * @return void
          */
         static::creating(function (User $user) {
-            env('APP_ENV') != 'local' ? $user->uuid = getUserId() : null;
+            $user->uuid = getUserId();
         });
 
         static::created(function (User $user) {
-            env('APP_ENV') != 'local' ? $user->planUser()->create([
+            $user->planUser()->create([
                 'balance' => 0,
                 'plan_id' => 1,
-            ]) : null;
+            ]);
         });
     }
 
@@ -104,5 +104,10 @@ class User extends Authenticatable
     public function payments()
     {
         return $this->hasMany(Payment::class);
+    }
+
+    public function committees()
+    {
+        return $this->hasMany(CommitteeUser::class);
     }
 }

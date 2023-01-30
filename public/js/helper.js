@@ -1,3 +1,4 @@
+
 var loading = false;
 function ajaxForm(formItems) {
     var form = new FormData();
@@ -72,3 +73,57 @@ function searchKeyword(button){
  
 }
   
+$("body").on("click", "[data-act=ajax-page]", function () {
+  const _self = $(this);
+  const contentId = _self.data('content')
+  const swalContent = _self.data('swal-content')
+  const content = $(contentId);
+  Swal.fire({
+    title: "",
+    text: "Please wait...",
+    showConfirmButton: false,
+    backdrop: true,
+  });
+  // const spinner = $("#ajax_model_spinner");
+
+  // content.hide();
+  // spinner.show();
+
+  // var attr = _self.attr("data-modal-size");
+
+  // if (typeof attr !== "undefined" && attr !== false) {
+  //     $("#ajax_model").addClass("bd-example-modal-xl");
+  //     $(".modal-dialog").addClass("modal-xl");
+  // }
+
+  // $("#ajax_model").modal({ backdrop: "static" });
+  // $("#ajax_model_title").html(_self.attr("data-title"));
+  var metaData = {};
+  $(this).each(function () {
+      $.each(this.attributes, function () {
+          if (this.specified && this.name.match("^data-post-")) {
+              var dataName = this.name.replace("data-post-", "");
+              metaData[dataName] = this.value;
+          }
+      });
+  });
+  axios({
+      method: _self.attr("data-method"),
+      url: _self.attr("data-action-url"),
+      data: metaData,
+  }).then((response) => {
+      Swal.close();
+      if(content)
+        var conetentData =  _.isString(response.data) ? response.data : response.data.data;
+        content.html(conetentData);
+      if(swalContent){
+        Swal.fire(response.data.message)
+      }else {
+        NioApp.Toast('success', response.data.message);
+      }
+        
+    }).catch((error) => {
+      Swal.close();
+      NioApp.Toast('error', error.response.data.message);
+  });
+});

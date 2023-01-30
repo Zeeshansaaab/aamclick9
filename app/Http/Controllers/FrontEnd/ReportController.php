@@ -51,4 +51,19 @@ class ReportController extends Controller
         return Blade::render('<x-payment-list :payments="$payments"/>', ['payments' => $payments]);
     }
 
+    public function committee()
+    {
+        return view('frontend.reports.committee');
+    }
+    public function loadCommitteeTable()
+    {
+        $limit = \config()->get('settings.pagination_limit');
+        $committees = auth()->user()->committees()->with(['plan'])->when(request()->keyword, function ($query) {
+            $query->whereHas('plan', function($subQuery){
+                $subQuery->where('name', 'LIKE', '%' . request()->keyword . '%');
+            });
+        })->orderByDesc('id')->paginate($limit);
+        return Blade::render('<x-committee-item :committees="$committees"/>', ['committees' => $committees]);
+    }
+
 }

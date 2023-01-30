@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('plans', function (Blueprint $table) {
             $table->id();
             $table->string('name', 40);
+            $table->uuid('uuid');
+            $table->foreignId('parent_id')->nullable()->constrained('plans')->onDelete('cascade');
             $table->string('description')->nullable();
             $table->decimal('price', 28, 8)->default(0);
             $table->decimal('min_price', 28, 8)->default(0);
@@ -25,6 +27,7 @@ return new class extends Migration
             $table->float('max_profit_percent')->default(0);
             $table->float('profit_bonus_percent')->default(0);
             $table->string('validity')->default('0');
+            $table->integer('total_members')->default(0);
             $table->string('status')->default('inactive');
             $table->string('type')->default('default');
             $table->timestamps();
