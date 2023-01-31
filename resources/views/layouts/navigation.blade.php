@@ -66,7 +66,7 @@
 
                         <x-nav-link
                             title="Apply for installments"
-                            link="installments.index"
+                            link="{{ route('installments.create') }}"
                             icon="icon ni ni-cc-secure-fill"
                         />
 

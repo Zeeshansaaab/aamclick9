@@ -106,6 +106,10 @@ class User extends Authenticatable
         return $this->hasMany(Payment::class);
     }
 
+    public function installments()
+    {
+        return $this->hasMany(Installment::class);
+    }
     public function committees()
     {
         return $this->hasMany(CommitteeUser::class);

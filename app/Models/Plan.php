@@ -37,6 +37,10 @@ class Plan extends Model
     {
         return $this->hasMany(CommitteeUser::class, 'plan_id');
     }
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
     public function scopeDefault($query)
     {
         $query->whereType('default');

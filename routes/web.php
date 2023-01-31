@@ -108,7 +108,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('deposit/confirmed', [App\Http\Controllers\FrontEnd\PaymentController::class, 'depositConfirmed'])->name('deposit.confirmed');
     Route::post('withdraw/confirm', [App\Http\Controllers\FrontEnd\PaymentController::class, 'withdrawConfirmation'])->name('withdraw.confirm');
     Route::post('withdraw/confirmed', [App\Http\Controllers\FrontEnd\PaymentController::class, 'withdrawConfirmed'])->name('withdraw.confirmed');
-
+    Route::resource('installments', App\Http\Controllers\FrontEnd\InstallmentController::class);
     Route::get('notifications', [App\Http\Controllers\FrontEnd\UserController::class, 'notifications'])->name('notifications');
 });
 
