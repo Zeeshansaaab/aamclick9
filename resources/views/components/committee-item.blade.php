@@ -27,6 +27,11 @@
                         <span class="badge badge-dot text-capitalize badge-{{ $committee->status == 'pending' ? 'warning' : 'success'}}">{{ $committee->status }}</span>
                     </span>
                 </td>
+                <td class="tb-odr-action">
+                    <div class="tb-odr-btns d-none d-sm-inline">
+                        <a href="{{ route('reports.payments', ['credit', 'committee']) }}?uuid={{ $committee->plan->uuid }}" class="btn btn-dim btn-sm btn-primary">View Installments</a>
+                    </div>
+                </td>
             </tr><!-- .tb-odr-item -->
         @endforeach
     </tbody>

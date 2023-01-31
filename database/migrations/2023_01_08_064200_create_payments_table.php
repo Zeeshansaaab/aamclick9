@@ -18,7 +18,9 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('gateway_id')->constrained()->onDelete('cascade');
             $table->foreignId('transaction_id')->constrained()->onDelete('cascade');
+            $table->foreignId('plan_id')->nullable()->constrained()->onDelete('cascade');
             $table->enum('type', ['credit', 'debit']);
+            $table->enum('deposit_type', ['default', 'committee'])->nullable()->default('default');
             $table->json('parameters')->nullable();
             $table->timestamps();
         });

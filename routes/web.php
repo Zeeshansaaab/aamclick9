@@ -98,14 +98,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('transactions/table', [App\Http\Controllers\FrontEnd\ReportController::class, 'loadTransactionsTable'])->name('transactions.table');
         Route::get('committee', [App\Http\Controllers\FrontEnd\ReportController::class, 'committee'])->name('committee');
         Route::get('committee/table', [App\Http\Controllers\FrontEnd\ReportController::class, 'loadCommitteeTable'])->name('committee.table');
-        Route::get('{type}/payments/', [App\Http\Controllers\FrontEnd\ReportController::class, 'payments'])->name('payments');
-        Route::get('{type}/payments/table', [App\Http\Controllers\FrontEnd\ReportController::class, 'loadPaymentsTable'])->name('payments.table');
+        Route::get('{type}/{deposit_type}/payments/', [App\Http\Controllers\FrontEnd\ReportController::class, 'payments'])->name('payments');
+        Route::get('{type}/{deposit_type}/payments/table', [App\Http\Controllers\FrontEnd\ReportController::class, 'loadPaymentsTable'])->name('payments.table');
     });
 
     //Deposit
-    Route::get('deposit', [App\Http\Controllers\FrontEnd\DepositController::class, 'index'])->name('deposit');
-    Route::post('deposit/confirm', [App\Http\Controllers\FrontEnd\DepositController::class, 'depositConfirmation'])->name('deposit.confirm');
-    Route::post('deposit/confirmed', [App\Http\Controllers\FrontEnd\DepositController::class, 'depositConfirmed'])->name('deposit.confirmed');
+    Route::get('payment/{type}', [App\Http\Controllers\FrontEnd\PaymentController::class, 'index'])->name('payment');
+    Route::post('deposit/confirm', [App\Http\Controllers\FrontEnd\PaymentController::class, 'depositConfirmation'])->name('deposit.confirm');
+    Route::post('deposit/confirmed', [App\Http\Controllers\FrontEnd\PaymentController::class, 'depositConfirmed'])->name('deposit.confirmed');
+    Route::post('withdraw/confirm', [App\Http\Controllers\FrontEnd\PaymentController::class, 'withdrawConfirmation'])->name('withdraw.confirm');
+    Route::post('withdraw/confirmed', [App\Http\Controllers\FrontEnd\PaymentController::class, 'withdrawConfirmed'])->name('withdraw.confirmed');
 
     Route::get('notifications', [App\Http\Controllers\FrontEnd\UserController::class, 'notifications'])->name('notifications');
 });

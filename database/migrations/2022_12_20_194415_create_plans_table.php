@@ -28,6 +28,7 @@ return new class extends Migration
             $table->float('profit_bonus_percent')->default(0);
             $table->string('validity')->default('0');
             $table->integer('total_members')->default(0);
+            $table->dateTime('starting_date')->nullable();
             $table->string('status')->default('inactive');
             $table->string('type')->default('default');
             $table->timestamps();

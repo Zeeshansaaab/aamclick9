@@ -36,8 +36,8 @@ NioApp.coms.docReady.push(function(){
                     modal.remove()
                 })
             }
+            NioApp.Toast(response.message, 'success');
             if(closeModal){
-                console.log(closeModal)
                 $(`#${closeModal}`).modal('hide');
             }
         }, form[0], true)

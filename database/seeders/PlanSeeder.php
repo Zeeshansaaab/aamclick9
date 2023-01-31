@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Plan;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -52,6 +53,7 @@ class PlanSeeder extends Seeder
             'parent_id'             => 2,
             'type'                  => 'committee',
             'total_members'         => 10,
+            'starting_date'         => Carbon::now()->addMonth(1),
             'status'                => 'active',
             ]
     ];

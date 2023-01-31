@@ -27,6 +27,10 @@ class Payment extends Model
     {
         return $this->belongsTo(Gateway::class);
     }
+    public function plan()
+    {
+        return $this->belongsTo(Plan::class);
+    }
     public function scopeDeposit($query)
     {
         $query->whereRelation('transactions', 'type', 'credit');

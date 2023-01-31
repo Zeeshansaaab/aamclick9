@@ -31,10 +31,10 @@ function ajax(url, method, functionsOnSuccess, form = {}, isFormData=false) {
           try{
             error = JSON.parse(xhr.responseText)
             const messages = error.message.split('.');
+            NioApp.Toast(messages[0], 'error');
           } catch(e){
             console.log(e)
           }
-          NioApp.Toast(messages[0], 'error');
         },
         success: functionsOnSuccess
     }

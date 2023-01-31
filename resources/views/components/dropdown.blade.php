@@ -17,7 +17,7 @@
             }
         @endphp
             <li class="nk-menu-item">
-                <a href="{{ $route ? ($params ? route($route, $params) : route($route)) : '' }}" class="nk-menu-link">
+                <a href="{{ $route ? ($params ? route($route, explode(',', $params)) : route($route)) : '' }}" class="nk-menu-link">
                     <span class="nk-menu-text">{{ $key }}</span>
                 </a>
             </li>
