@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('plan_id')->constrained()->cascadeOnDelete();
+            $table->integer('committee_number')->nullable();
             $table->string('status')->default('pending');
             $table->timestamps();
         });
