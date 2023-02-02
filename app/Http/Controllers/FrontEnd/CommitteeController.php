@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\FrontEnd;
 
+use Exception;
+use Carbon\Carbon;
 use App\Models\Plan;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\CommitteeUser;
-use Exception;
 use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
 
 class CommitteeController extends Controller
 {
@@ -42,6 +43,9 @@ class CommitteeController extends Controller
         try{
             $plan = auth()->user()->committees()->where('plan_id', $request->plan_id)->first();
             if($plan){
+                if(Carbon::now()->greaterThan(Carbon::parse($plan->starting_date))){
+
+                }
                 return response()->json([
                     'status' => JsonResponse::HTTP_OK,
                     'message' => "You have already applied for this committee"
