@@ -15,7 +15,7 @@
         <div class="nk-app-root">
             <!-- main @s -->
             <div class="nk-main ">
-                <div class="nk-wrap">
+                <div class="nk-wrap-nosidebar">
                     <div class="nk-header nk-header-fluid nk-header-fixed is-light">
                         <div class="container-fluid">
                             <div class="nk-header-wrap">
