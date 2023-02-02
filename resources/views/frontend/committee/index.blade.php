@@ -17,26 +17,28 @@
         </div><!-- .nk-block-between -->
     </x-slot>
     
-    <div class="row" id="plans">
-    @foreach ($plans as $plan)
-        <div class="col-md-4 col-sm-12">
-            <div class="card card-bordered pricing text-center">
-                <div class="pricing-body">
-                    <div class="pricing-media">
-                        <img src="/images/svg/plan-s1.svg" alt="">
-                    </div>
-                    <div class="pricing-title w-220px mx-auto">
-                        <h5 class="title">Name: {{ $plan->name }}</h5>
-                    </div>
-                    <div class="pricing-amount">
-                        <div class="amount">{{ currency($plan->price) }}</div>
-                    </div>
-                    <div class="pricing-action">
-                        <a data-act="ajax-page" data-content="#plans" data-method="get"  data-action-url="{{ route('committees.show', $plan->uuid) }}" href="javascript:void(0)" class="btn btn-primary eg-swal-success">Show all plans</a>
-                    </div>
+    <div id="plans">
+        @foreach ($plans as $plan)
+            <div class="row">
+                <div class="col-md-4 col-sm-12">
+                    <div class="card card-bordered pricing text-center">
+                        <div class="pricing-body">
+                            <div class="pricing-media">
+                                <img src="/images/svg/plan-s1.svg" alt="">
+                            </div>
+                            <div class="pricing-title w-220px mx-auto">
+                                <h5 class="title">Name: {{ $plan->name }}</h5>
+                            </div>
+                            <div class="pricing-amount">
+                                <div class="amount">{{ currency($plan->price) }}</div>
+                            </div>
+                            <div class="pricing-action">
+                                <a data-act="ajax-page" data-content="#plans" data-method="get"  data-action-url="{{ route('committees.show', $plan->uuid) }}" href="javascript:void(0)" class="btn btn-primary eg-swal-success">Show all plans</a>
+                            </div>
+                        </div>
+                    </div> 
                 </div>
-            </div> 
-        </div>
+            </div>
         @endforeach
     </div>
 </x-app-layout>

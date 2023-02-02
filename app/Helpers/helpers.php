@@ -131,4 +131,8 @@ function getUserId(){
     }
     return "AAM00001";
 }
+
+function getFile($path){
+    return asset('storage/' . $path);
+}
 ?>
