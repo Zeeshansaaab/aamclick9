@@ -41,10 +41,10 @@ class CommitteeController extends Controller
     public function store(Request $request)
     {
         try{
-            $plan = auth()->user()->committees()->where('plan_id', $request->plan_id)->first();
+            $plan = auth()->user()->committees()->with('plan')->where('plan_id', $request->plan_id)->first();
             if($plan){
-                if(Carbon::now()->greaterThan(Carbon::parse($plan->starting_date))){
-
+                if(Carbon::parse($plan->plan->starting_date)->lessThanOrEqualTo(Carbon::now())){
+                    return view('frontend.committee.committee-number', compact('plan'));
                 }
                 return response()->json([
                     'status' => JsonResponse::HTTP_OK,

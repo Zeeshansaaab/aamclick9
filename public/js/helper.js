@@ -113,9 +113,11 @@ $("body").on("click", "[data-act=ajax-page]", function () {
       data: metaData,
   }).then((response) => {
       Swal.close();
-      if(content)
+      if(content){
         var conetentData =  _.isString(response.data) ? response.data : response.data.data;
+        console.log(conetentData)
         content.html(conetentData);
+      }
       if(swalContent){
         Swal.fire(response.data.message)
       }else {

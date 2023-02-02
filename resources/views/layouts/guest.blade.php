@@ -20,16 +20,7 @@
                     <!-- content @s -->
                     <div class="nk-content ">
                         <div class="nk-block nk-block-middle nk-auth-body wide-xs">
-                            <div class="brand-logo pb-4 text-center">
-                                <a href="html/index.html" class="logo-link">
-                                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                                </a>
-                            </div>
-                            <div class="card card-bordered">
-                                <div class="card-inner card-inner-lg">
                                     {{ $slot }}
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
