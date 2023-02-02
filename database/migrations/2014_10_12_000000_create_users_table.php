@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('email')->unique();
             $table->string('password');
-
             $table->string('country_code', 4);
             $table->string('mobile', 7);
             $table->text('address')->nullable()->comment('contains full address');

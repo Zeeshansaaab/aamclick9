@@ -1,8 +1,8 @@
 @php
     $cur_text = cur_text();
 @endphp
-
 <x-app-layout>
+    <x-slot name="title">Deposit</x-slot>
     <x-slot name="breadcrumb">
         <x-breadcrumb currentPage="Deposit" title="Deposit" :links="['dashboard' => 'dashboard']"/>
     </x-slot>
@@ -13,7 +13,7 @@
             <h2 class="title">What do you want to Deposit!</h2>
         </div><!-- .buysell-title -->
         <div class="buysell-block" id="deposit-block">
-            <form action="{{ route('deposit.confirm') }}" method="POST" class="buysell-form" id="deposit_form" data-form="ajax-form" data-backend-modal="deposit-confirm">
+            <form action="{{ $type == 'deposit' ? route('deposit.confirm') . '?type=deposit' : route('withdraw.confirm') . '?type=withdraw'  }}" method="POST" class="buysell-form" id="deposit_form" data-form="ajax-form" data-backend-modal="deposit-confirm">
                 <div class="buysell-field form-group">
                     <div class="form-label-group">
                         <label class="form-label">Payment Method</label>
@@ -22,6 +22,9 @@
                         <x-gateways-dropdown :gateways="$gateways"/>
                     </div>
                 </div><!-- Payment method -->
+                @php
+                    $types = $type == 'deposit' ? config('payment')['deposit'] : config('payment')['withdrawal'];
+                @endphp
                 <div class="buysell-field form-group">
                     <div class="form-label-group">
                         <label class="form-label" for="buysell-amount">Deposit type</label>
@@ -29,12 +32,14 @@
                     <div class="form-control-group">
                         <select class="form-control" name="deposit_type" required>
                             <option disabled selected value="">Select Type</option>
-                            <option value="default">Default</option>
-                            <option value="committee">Committee</option>
+                            @foreach ($types as $key => $value)
+                            {{-- {{ dd($value) }} --}}
+                                <option value="{{ $key }}">{{ $value }}</option>
+                            @endforeach
                         </select>
                     </div>
-                    
                 </div><!-- Deposit type -->
+
                 <div class="buysell-field form-group">
                     <div class="form-label-group">
                         <label class="form-label" for="buysell-amount">Amount to Deposit</label>

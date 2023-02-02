@@ -3,7 +3,6 @@
         <div class="nk-sidebar-brand">
             <a href="html/crypto/index.html" class="logo-link nk-sidebar-logo">
                 <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                <span class="nio-version">{{ config('app.name') }}</span>
             </a>
         </div>
         <div class="nk-menu-trigger mr-n2">
@@ -36,7 +35,7 @@
                         />
                         <x-nav-link
                             title="Committee Plans"
-                            link="{{ route('committee.plans.index') }}"
+                            link="{{ route('committees.index') }}"
                             icon="icon ni ni-folders-fill"
                         />
                         <li class="nk-menu-heading mt-2">
@@ -53,12 +52,12 @@
                         </li>
                         <x-nav-link 
                             title="Deposit Now" 
-                            link="{{ route('deposit') }}" 
+                            link="{{ route('payment', 'deposit') }}" 
                             icon="icon ni ni-wallet-fill" 
                         />
                         <x-nav-link
                             title="Withdraw"
-                            link="withdraw.index"
+                            link="{{ route('payment', 'withdrawal') }}"
                             icon="icon ni ni-coin-alt-fill"
                         />
                         <li class="nk-menu-heading mt-2">
@@ -67,7 +66,7 @@
 
                         <x-nav-link
                             title="Apply for installments"
-                            link="installments.index"
+                            link="{{ route('installments.create') }}"
                             icon="icon ni ni-cc-secure-fill"
                         />
 
@@ -78,12 +77,12 @@
                         <x-dropdown
                             title="Reports"
                             :links="[
-                                'Deposit History'      => 'reports.payments, credit', 
-                                'Withdraw History'     => 'reports.payments, debit', 
-                                'Committee History'    => null,
-                                'Installment History'  => null,
+                                'Deposit History'      => 'reports.payments, credit,default', 
+                                'Withdraw History'     => 'reports.payments, debit,default', 
+                                'Committee History'    => 'reports.committee',
+                                'Installment History'  => 'reports.payments, debit,default',
                                 'Transactions'         => 'reports.transactions',
-                                'Commission'           => null,
+                                'Commission'           => 'reports.payments, debit,default',
                             ]"
                         />
 

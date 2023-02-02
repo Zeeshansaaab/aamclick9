@@ -5,6 +5,8 @@
     $cur_text = cur_text();
 @endphp
 <x-app-layout>
+    <x-slot name="title">Dashboard</x-slot>
+
     <x-slot name="breadcrumb">
         <x-breadcrumb currentPage="Dashboard" title="Dashboard"/>
     </x-slot>
@@ -21,9 +23,9 @@
             <div class="nk-block-head-content">
                 <ul class="nk-block-tools gx-3">
                     <li>
-                        <a href="{{ route('deposit', 'credit') }}" class="btn btn-primary"><span>Deposit</span> <em class="icon ni ni-arrow-long-right"></em></a>
+                        <a href="{{ route('payment', 'credit') }}" class="btn btn-primary"><span>Deposit</span> <em class="icon ni ni-arrow-long-right"></em></a>
                     </li>
-                    <li><a href="{{ route('deposit', 'debit') }}" class="btn btn-white btn-light"><span>Withdraw</span> <em class="icon ni ni-arrow-long-right d-none d-sm-inline-block"></em></a></li>
+                    <li><a href="{{ route('payment', 'debit') }}" class="btn btn-white btn-light"><span>Withdraw</span> <em class="icon ni ni-arrow-long-right d-none d-sm-inline-block"></em></a></li>
                 </ul>
             </div><!-- .nk-block-head-content -->
         </div><!-- .nk-block-between -->
@@ -186,7 +188,7 @@
                                             <div class="amount">
                                                 0.000560<span
                                                     class="currency currency-eth"
-                                                    >ETH</span
+                                                    >{{ $cur_text }}</span
                                                 >
                                             </div>
                                         </div></a
@@ -254,7 +256,7 @@
                                                 {{-- auth()->user()->withdrawals()->sum('amount') --}}
                                                 0<span
                                                     class="currency currency-btc"
-                                                    >BTC</span
+                                                    >{{ $cur_text }}</span
                                                 >
                                             </div>
                                         </div></a

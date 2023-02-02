@@ -1,5 +1,7 @@
 
 <x-app-layout>
+    <x-slot name="title">{{ucFirst($type)}}</x-slot>
+
     <x-slot name="breadcrumb">
         <x-breadcrumb currentPage="{{ $type }} History" title="{{ $type }} History" :links="['dashboard' => 'dashboard']"/>
     </x-slot>
@@ -21,7 +23,7 @@
                                 </li>
                             </ul><!-- .btn-toolbar -->
                         </div>
-                        <x-search-input url="{{ route('reports.payments', $type) }}" placeholder="Search by trx or remark"/>
+                        <x-search-input url="{{ route('reports.payments', [$type, Request::route('deposit_type')]) }}?uuid=request()->uuid" placeholder="Search by trx or remark"/>
                     </div><!-- .card-title-group -->
                 </div><!-- .card-inner -->
             </div><!-- .card-inner-group -->
@@ -34,7 +36,7 @@
     <x-slot name="scripts">
         <script>
             NioApp.coms.docReady.push(function(){ 
-                ajax("{{ route('reports.payments.table', $type) }}", 'GET', function(response){
+                ajax("{{ route('reports.payments.table', [$type, Request::route('deposit_type'), request()->uuid]) }}", 'GET', function(response){
                     $('#table').html(response)
                 })
             })

@@ -9,7 +9,7 @@ class PlanUser extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['balance'];
+    protected $guarded = [];
 
     public function plan()
     {

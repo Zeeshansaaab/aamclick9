@@ -58,9 +58,9 @@ class PaymentNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'title'         => 'You requested '. $this->payment->transaction->amount . ' for' . ucfirst($this->payment->transaction->type == 'credit' ? 'deposit' : 'withdrawal'),
+            'title'         => 'You requested '. currency($this->payment->transaction->amount) . ' for ' . ucfirst($this->payment->transaction->type == 'credit' ? 'deposit' : 'withdrawal'),
             'description'   => ucfirst($this->payment->transaction->type) . 'request via ' . ucfirst($this->payment->gateway->name),
-            'redirect_url'  => route('reports.payments', $this->payment->transaction->type),
+            'redirect_url'  => route('reports.payments', [$this->payment->transaction->type, $this->payment->deposit_type]),
         ];
     }
 }

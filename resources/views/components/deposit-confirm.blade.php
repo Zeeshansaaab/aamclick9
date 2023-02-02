@@ -3,7 +3,9 @@
 @endphp
 @props([
     'amount',
-    'gateway'
+    'gateway',
+    'committees',
+    'type'
 ])
 <div class="modal fade" tabindex="-1" id="deposit-confirm" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
@@ -11,7 +13,7 @@
             <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
             <div class="modal-body modal-body-lg">
                 <div class="nk-block-head nk-block-head-xs text-center">
-                    <h5 class="nk-block-title">Confirm Deposit</h5>
+                    <h5 class="nk-block-title">Confirm {{ $type == 'deposit' ? 'Deposit' : 'Withdrawal'}}</h5>
                     <div class="nk-block-text">
                         <div class="caption-text">You are about to deposit <strong>{{ $amount }}</strong> {{ $cur_text }} for <strong>{{ currency($amount * $gateway->currency_value, true) }}</strong> {{ $gateway->currency }}*</div>
                         <span class="sub-text-sm">Exchange rate: 1 {{ $cur_text }} = {{ currency($gateway->currency_value) }} {{ $gateway->currency }}</span>
@@ -39,7 +41,7 @@
                             {!! $gateway->description !!}
                         </div>
                     </div>
-                    <form action="{{ route('deposit.confirmed') }}" method="POST" class="buysell-form" id="deposit_confirmed_form" data-form="ajax-form" data-close="deposit-confirm">
+                    <form action="{{ $type == 'deposit' ? route('deposit.confirmed') : route('withdraw.confirmed') }}" method="POST" class="buysell-form" id="deposit_confirmed_form" data-form="ajax-form" data-close="deposit-confirm">
                         <div class="buysell-field form-group">
                             <div class="form-label-group justify-content-center border">
                                 <label class="form-label">Please fill these fields*</label>
@@ -62,7 +64,22 @@
                                     </div>
                                 </div>
                             @endforeach
-                            
+                            @if(request()->deposit_type == 'committee')
+                                
+                                    <div class="buysell-field form-group">
+                                        <div class="form-label-group">
+                                            <label class="form-label" for="buysell-amount">Committees</label>
+                                        </div>
+                                        <div class="form-control-group">
+                                            <select class="form-control" name="committee_id" required>
+                                                <option disabled selected value="">Select Type</option>
+                                                @foreach ($committees as $committee)
+                                                    <option value="{{ $committee->plan->id }}">{{ $committee->plan->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div><!-- Deposit type -->
+                            @endif
                         </div><!-- .buysell-field -->
                         <input type="hidden" name="method_id" value="{{ $gateway->id }}" />
                         <div class="buysell-field form-action text-center">

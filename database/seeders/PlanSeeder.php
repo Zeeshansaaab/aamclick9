@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Plan;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -29,17 +30,32 @@ class PlanSeeder extends Seeder
             'status'                => 'active',
             ],
             [
-            'name'                  => 'Starter',
-            'description'           => 'Invest as entry level',
-            'price'                 => 1000,
-            'max_price'             => 0,
-            'min_profit_percent'    => 6,
-            'max_profit_percent'    => 16,
-            'amount_return'         => 0,
-            'validity'              => '6 Months',
+            'name'                  => '100 dollar',
+            // 'description'           => 'Invest as entry level',
+            'price'                 => 100,
+            // 'max_price'             => 0,
+            // 'min_profit_percent'    => 0,
+            // 'max_profit_percent'    => 0,
+            // 'amount_return'         => 10,
+            // 'validity'              => '10 Months',
             'type'                  => 'committee',
             'status'                => 'active',
-        ]
+            ],
+            [
+            'name'                  => '100 dollar',
+            'description'           => 'Invest as entry level',
+            'price'                 => 100,
+            'max_price'             => 0,
+            'min_profit_percent'    => 0,
+            'max_profit_percent'    => 0,
+            'amount_return'         => 10,
+            'validity'              => '10 Months',
+            'parent_id'             => 2,
+            'type'                  => 'committee',
+            'total_members'         => 10,
+            'starting_date'         => Carbon::now()->addMonth(1),
+            'status'                => 'active',
+            ]
     ];
 
         foreach($plans as $plan){

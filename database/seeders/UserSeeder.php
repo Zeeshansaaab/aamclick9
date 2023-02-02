@@ -27,6 +27,7 @@ class UserSeeder extends Seeder
             'country_code'   => '0300',
             'mobile'   => '8090100',
             'status'   => 'active',
+            'uuid'     => 'AAM100000'
         ]);
 
         User::factory(50)->create();

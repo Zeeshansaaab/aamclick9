@@ -75,9 +75,9 @@ function removeFile($path)
 {
     return file_exists($path) && is_file($path) ? @unlink($path) : false;
 }
-function uploadImage($file, $location, $size = null, $old = null, $thumb = null)
+function uploadImage($file, $directory, $size = null, $old = null, $thumb = null)
 {
-    $location = 'storage/' . $location;
+    $location = 'storage/' . $directory;
     $path = makeDirectory($location);
     if (!$path) throw new Exception('File could not been created.');
     if (!empty($old)) {
@@ -103,7 +103,7 @@ function uploadImage($file, $location, $size = null, $old = null, $thumb = null)
         $thumb = explode('x', $thumb);
         Image::make($file)->resize($thumb[0], $thumb[1])->save($location . '/thumb_' . $filename);
     }
-    return $filename;
+    return $directory . $filename;
 }
 
 function cur_text(){
