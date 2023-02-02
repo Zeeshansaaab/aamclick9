@@ -1,31 +1,28 @@
 <x-guest-layout>
-    <div class="nk-wg7">
-        <div class="nk-wg7-stats">
-            <div class="nk-wg7-title">
-                Total Deposit in Talha khan
+{{-- slider --}}
+    <div id="carouselExFade" class="carousel slide carousel-fade" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{{ getFile('images/slides/slide1.jpeg') }}" class="d-block w-100" alt="carousel">
             </div>
-            <div class="number-lg amount">
-                Talha khan
+            <div class="carousel-item">
+                <img src="{{ getFile('images/slides/slide2.jpeg') }}" class="d-block w-100" alt="carousel">
             </div>
-        </div>
-        <div class="nk-wg7-stats-group">
-            <div class="nk-wg7-stats w-50">
-                <div class="nk-wg7-title">Profit Balance</div>
-                <div class="number-lg">Talha khan</div>
-            </div>
-            <div class="nk-wg7-stats w-50">
-                <div class="nk-wg7-title">
-                    Plan
-                </div>
-                <div class="number">
-                    Talha Khan
-                </div>
+            <div class="carousel-item">
+                <img src="{{ getFile('images/slides/slide3.jpeg') }}" class="d-block w-100" alt="carousel">
             </div>
         </div>
-        <div class="nk-wg7-foot">
-            <span class="nk-wg7-note">Last login at
-                <span>19 Nov, 2019</span></span
-            >
-        </div>
+        <a class="carousel-control-prev" href="#carouselExFade" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExFade" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
+    {{-- sliderend --}}
+    <h3>
+        How AAM CLICK WORKS
+    </h3>
 </x-guest-layout>
