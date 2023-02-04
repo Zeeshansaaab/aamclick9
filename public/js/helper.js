@@ -38,7 +38,6 @@ function ajax(url, method, functionsOnSuccess, form = {}, isFormData=false) {
         },
         success: functionsOnSuccess
     }
-
     if (typeof functionsOnSuccess === 'undefined') {
         ajaxParams.success = [];
     }
@@ -115,7 +114,6 @@ $("body").on("click", "[data-act=ajax-page]", function () {
       Swal.close();
       if(content){
         var conetentData =  _.isString(response.data) ? response.data : response.data.data;
-        console.log(conetentData)
         content.html(conetentData);
       }
       if(swalContent){
@@ -129,3 +127,14 @@ $("body").on("click", "[data-act=ajax-page]", function () {
       NioApp.Toast('error', error.response.data.message);
   });
 });
+
+function generateCommitteeNumber($el, event){
+  let _self = $(event.target);
+  let url = _self.data('url');
+  let method = _self.data('method');
+  let id = _self.data('id');
+  ajax(url, method, function(){
+    $($el).html(committeeNumer);
+  }, {id: id});
+}
+

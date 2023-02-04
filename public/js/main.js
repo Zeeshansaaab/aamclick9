@@ -1,5 +1,5 @@
 // const { ajax } = require("jquery");
-
+var spinner = '<span style="width: 17px;" id="spinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>';
 NioApp.coms.docReady.push(function(){ 
     $(document).on('click', '.search-submit', function(){
         searchKeyword(this)
@@ -21,13 +21,17 @@ NioApp.coms.docReady.push(function(){
     });
 
 
-    $('body').on('submit', '[data-form=ajax-form]', function(e) {
+    $('body').on('submit', '[data-form=ajax-form]', async function(e) {
         e.preventDefault();
         const form = $(this);
         const confirm = $(form).data('confirm'); // data-confimr="yes"
         const backendModal = form.data('backend-modal');
+        const redirectURL = form.data('redirect-url');
         const closeModal = form.data('close');
-        ajax(form.attr('action'), form.attr('method'), function(response){
+        const submitBtn = form.find('[type=submit');
+        submitBtn.append(spinner);
+        submitBtn.attr("disabled", "disabled").button('refresh');
+        await ajax(form.attr('action'), form.attr('method'), function(response){
             if(backendModal){
                 $('body').append(response);
                 const modal = $(`#${backendModal}`);
@@ -40,8 +44,12 @@ NioApp.coms.docReady.push(function(){
             if(closeModal){
                 $(`#${closeModal}`).modal('hide');
             }
+            form[0].reset()
+            $('.custom-file-label').html('');
+            $('#spinner').remove()
+            submitBtn.removeAttr("disabled").button('refresh');
+            // if(redirectURL) window.location.href = redirectURL;
         }, form[0], true)
-        
         return;
         
         if (confirm=='yes') {

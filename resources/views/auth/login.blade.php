@@ -1,11 +1,6 @@
 <x-guest-layout>
-    <div class="brand-logo pb-4 text-center">
-        <a href="html/index.html" class="logo-link">
-            <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-        </a>
-    </div>
     <!-- Session Status -->
-    <div class="card card-bordered">
+    <div class="card card-bordered m-auto mt-5" style="width: 50%;">
         <div class="card-inner card-inner-lg">
             <x-auth-session-status class="mb-4" :status="session('status')" />
             <div class="nk-block-head">

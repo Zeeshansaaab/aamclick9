@@ -5,6 +5,7 @@ namespace App\Http\Controllers\FrontEnd;
 use Exception;
 use Carbon\Carbon;
 use App\Models\Plan;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\Models\CommitteeUser;
 use Illuminate\Http\JsonResponse;
@@ -112,5 +113,15 @@ class CommitteeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getCommitteeNumber(){
+        $plan = CommitteeUser::with('plan')->findOrFail(request()->id);
+        if(!$plan->committee_number){
+            $committees = CommitteeUser::where('plan_id', $plan->plan_id)->pluck('committee_number')->toArray();
+            $plan->committee_number = Arr::random(array_diff(range(1, $plan->plan->total_members), $committees));
+            $plan->save();
+        }
+        return view('frontend.committee.committee-number', compact('plan'));
     }
 }
