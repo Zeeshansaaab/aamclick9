@@ -1,6 +1,6 @@
 <x-guest-layout>
     <!-- Session Status -->
-    <div class="card card-bordered m-auto mt-5" style="width: 50%;">
+    <div class="card card-bordered m-auto" style="width: 50%; margin-top: 19vh!important;">
         <div class="card-inner card-inner-lg">
             <x-auth-session-status class="mb-4" :status="session('status')" />
             <div class="nk-block-head">

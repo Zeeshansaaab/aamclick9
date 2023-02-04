@@ -1,17 +1,15 @@
 <x-guest-layout>
-    <div class="nk-block-head">
+    <div class="nk-block-head" style="width: 50%; margin: auto;">
         <div class="nk-block-head-content">
             <h4 class="nk-block-title">Sign-Up</h4>
             <div class="nk-block-des">
                 <p>Create new {{ config('app.name', 'Laravel') }} account.
-                
                 </p>
             </div>
         </div>
     </div>
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register') }}" style="width: 50%; margin: auto;">
         @csrf
-
         <!-- Name -->
         <div class="form-group">
             <div class="form-label-group">
