@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Enums\Status;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Installment extends Model
 {
@@ -16,5 +17,9 @@ class Installment extends Model
         'user_id',
         'amount',
         'image'
+    ];
+
+    protected $casts = [
+        'status' => Status::class
     ];
 }

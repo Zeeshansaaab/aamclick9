@@ -75,4 +75,15 @@ class ReportController extends Controller
         return Blade::render('<x-committee-item :committees="$committees"/>', ['committees' => $committees]);
     }
 
+    function installments(){
+        return view('frontend.reports.installments');
+    }
+
+    function installmentsTable(){
+        $limit = \config()->get('settings.pagination_limit');
+        $installments = auth()->user()->installments()->when(request()->keyword, function ($query) {
+            $query->where('name', 'LIKE', request()->keyword);
+        })->orderByDesc('id')->paginate($limit);
+        return Blade::render('<x-installment-item :installments="$installments"/>', ['installments' => $installments]);
+    }
 }

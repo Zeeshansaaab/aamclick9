@@ -16199,7 +16199,10 @@ body.dark-mode.nk-body.ui-softy, body.dark-mode.nk-body.ui-shady { background: #
 .nk-block-head{
     padding-bottom: 5px!important;
 }
-
+.form-group.required .form-label:after {
+    content:"*";
+    color:red;
+}
 @media only screen and (min-width: 1200px){
     .nk-sidebar {
         width: 300px!important;

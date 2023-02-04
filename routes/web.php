@@ -101,6 +101,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('committee/table', [App\Http\Controllers\FrontEnd\ReportController::class, 'loadCommitteeTable'])->name('committee.table');
         Route::get('{type}/{deposit_type}/payments/', [App\Http\Controllers\FrontEnd\ReportController::class, 'payments'])->name('payments');
         Route::get('{type}/{deposit_type}/payments/table', [App\Http\Controllers\FrontEnd\ReportController::class, 'loadPaymentsTable'])->name('payments.table');
+        Route::get('installments', [App\Http\Controllers\FrontEnd\ReportController::class, 'installments'])->name('installments');
+        Route::get('installments/table', [App\Http\Controllers\FrontEnd\ReportController::class, 'installmentsTable'])->name('installments.table');
     });
 
     //Deposit
@@ -111,9 +113,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('withdraw/confirmed', [App\Http\Controllers\FrontEnd\PaymentController::class, 'withdrawConfirmed'])->name('withdraw.confirmed');
     Route::resource('installments', App\Http\Controllers\FrontEnd\InstallmentController::class);
     Route::get('notifications', [App\Http\Controllers\FrontEnd\UserController::class, 'notifications'])->name('notifications');
+    Route::resource('committees', App\Http\Controllers\FrontEnd\CommitteeController::class)->only(['index', 'store', 'show']);
+    Route::post('committees/get-committee-number', [App\Http\Controllers\FrontEnd\CommitteeController::class, 'getCommitteeNumber'])->name('committees.get-committee-number');
 });
 
 Route::get('plans', [App\Http\Controllers\FrontEnd\PlanController::class, 'index'])->name('plans.index');
-Route::resource('committees', App\Http\Controllers\FrontEnd\CommitteeController::class);
 
 require __DIR__.'/auth.php';

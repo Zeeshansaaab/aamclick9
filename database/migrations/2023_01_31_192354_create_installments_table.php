@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('name', 25);
             $table->string('phone', 25);
-            $table->string('email', 25);
+            $table->string('email');
             $table->string('address', 25);
             $table->decimal('amount', 18, 8)->default(0);
             $table->string('image', 150);

@@ -80,7 +80,7 @@
                                 'Deposit History'      => 'reports.payments, credit,default', 
                                 'Withdraw History'     => 'reports.payments, debit,default', 
                                 'Committee History'    => 'reports.committee',
-                                'Installment History'  => 'reports.payments, debit,default',
+                                'Installment History'  => 'reports.installments',
                                 'Transactions'         => 'reports.transactions',
                                 'Commission'           => 'reports.payments, debit,default',
                             ]"
