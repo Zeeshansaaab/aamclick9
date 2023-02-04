@@ -69,11 +69,9 @@
                         </div>
                     </div>
                     <div class="nk-content nk-content-fluid">
-                        <div class="container-xl wide-lg">
-                            <div class="nk-content-body">     
-                                <div class="nk-block" style="margin-top: 5vh">
-                                    {{ $slot }}
-                                </div>
+                        <div class="nk-content-body">
+                            <div class="nk-block">
+                                {{ $slot }}
                             </div>
                         </div>
                     </div>
