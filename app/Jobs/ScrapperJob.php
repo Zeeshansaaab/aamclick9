@@ -68,16 +68,26 @@ class ScrapperJob implements ShouldQueue
             
             foreach ($response->object()->data as $responseUser) {
                 try {
-                    // DB::beginTransaction();
-                    // $user = $this->createUser($responseUser);
-                    // $this->loginLogs($responseUser->login_logs, $user);
-                    // $this->deposits($responseUser->deposits, $user);
-                    // $this->withdrawals($responseUser->withdrawals, $user);
-                    // $this->createTransaction($responseUser->transactions, $user);
-                    // $this->commissions($responseUser->commissions, $user);
-                    // DB::commit();
+                    DB::beginTransaction();
+                    $user = $this->createUser($responseUser);
+                    DB::commit();
+                    DB::beginTransaction();
+                    $this->loginLogs($responseUser->login_logs, $user);
+                    DB::commit();
+                    DB::beginTransaction();
+                    $this->deposits($responseUser->deposits, $user);
+                    DB::commit();
+                    DB::beginTransaction();
+                    $this->withdrawals($responseUser->withdrawals, $user);
+                    DB::commit();
+                    DB::beginTransaction();
+                    $this->createTransaction($responseUser->transactions, $user);
+                    DB::commit();
+                    DB::beginTransaction();
+                    $this->commissions($responseUser->commissions, $user);
+                    DB::commit();
                 } catch (Exception $e) {
-                    // DB::rollBack();
+                    DB::rollBack();
                     Log::error($e);
                 }
             }
