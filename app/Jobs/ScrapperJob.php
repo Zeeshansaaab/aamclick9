@@ -34,7 +34,7 @@ class ScrapperJob implements ShouldQueue
     protected $limit = 1;
     protected $page = 1;
     protected $totalPages = 1;
-    protected $URL = 'https://aamclick.com/api/users'; //http://127.0.0.1/api/users
+    protected $URL = 'http://127.0.0.1:8000/api/users'; //http://127.0.0.1/api/users
 
     /**
      * Create a new job instance.
@@ -58,7 +58,7 @@ class ScrapperJob implements ShouldQueue
         while ($this->totalPages >= $this->page) {
             $response = Http::withHeaders([
                 // 'Authorization' => 'Bearer 3e28d3d0-bed4-450b-bb38-9c4f2f6415dd'
-            ])->get($this->URL, [
+            ])->get('https://aamclick.com/api/users', [
                 'limit' => $this->limit,
                 'page' => $this->page
             ]);
@@ -70,20 +70,10 @@ class ScrapperJob implements ShouldQueue
                 try {
                     DB::beginTransaction();
                     $user = $this->createUser($responseUser);
-                    DB::commit();
-                    DB::beginTransaction();
                     $this->loginLogs($responseUser->login_logs, $user);
-                    DB::commit();
-                    DB::beginTransaction();
                     $this->deposits($responseUser->deposits, $user);
-                    DB::commit();
-                    DB::beginTransaction();
                     $this->withdrawals($responseUser->withdrawals, $user);
-                    DB::commit();
-                    DB::beginTransaction();
                     $this->createTransaction($responseUser->transactions, $user);
-                    DB::commit();
-                    DB::beginTransaction();
                     $this->commissions($responseUser->commissions, $user);
                     DB::commit();
                 } catch (Exception $e) {
@@ -106,7 +96,7 @@ class ScrapperJob implements ShouldQueue
         $user = User::withoutEvents(function () use ($responseUser, $ref) {
                 return User::create([
                     'uuid' => $responseUser->aam_id,
-                    'ref_by' => $ref ? $ref->id : 1,
+                    'ref_by' => $ref ? $ref->id : null,
                     'name' => $responseUser->firstname . ' ' . $responseUser->lastname,
                     'email' => $responseUser->email == 'Sidhushamoon@gmail.com' ? 'user@aamclick.com' : $responseUser->email,
                     'country_code' => substr($responseUser->mobile, 0, 4),
