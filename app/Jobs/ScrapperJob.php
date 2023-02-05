@@ -34,7 +34,7 @@ class ScrapperJob implements ShouldQueue
     protected $limit = 50;
     protected $page = 1;
     protected $totalPages = 1;
-    protected $URL = 'https://aamclick.com/'; //http://127.0.0.1
+    protected $URL = 'https://aamclick.com/api/users'; //http://127.0.0.1/api/users
 
     /**
      * Create a new job instance.
@@ -58,7 +58,7 @@ class ScrapperJob implements ShouldQueue
         while ($this->totalPages >= $this->page) {
             $response = Http::withHeaders([
                 // 'Authorization' => 'Bearer 3e28d3d0-bed4-450b-bb38-9c4f2f6415dd'
-            ])->get($this.URL . '/api/users', [
+            ])->get($this->URL, [
                 'limit' => $this->limit,
                 'page' => $this->page
             ]);
