@@ -103,6 +103,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('{type}/{deposit_type}/payments/table', [App\Http\Controllers\FrontEnd\ReportController::class, 'loadPaymentsTable'])->name('payments.table');
         Route::get('installments', [App\Http\Controllers\FrontEnd\ReportController::class, 'installments'])->name('installments');
         Route::get('installments/table', [App\Http\Controllers\FrontEnd\ReportController::class, 'installmentsTable'])->name('installments.table');
+        Route::get('commissions', [App\Http\Controllers\FrontEnd\ReportController::class, 'commissions'])->name('commissions');
+        Route::get('commissions/table', [App\Http\Controllers\FrontEnd\ReportController::class, 'commissionsTable'])->name('commissions.table');
     });
 
     //Deposit
@@ -115,8 +117,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('notifications', [App\Http\Controllers\FrontEnd\UserController::class, 'notifications'])->name('notifications');
     Route::resource('committees', App\Http\Controllers\FrontEnd\CommitteeController::class)->only(['index', 'store', 'show']);
     Route::post('committees/get-committee-number', [App\Http\Controllers\FrontEnd\CommitteeController::class, 'getCommitteeNumber'])->name('committees.get-committee-number');
+    Route::get('plans', [App\Http\Controllers\FrontEnd\PlanController::class, 'index'])->name('plans.index');
 });
 
-Route::get('plans', [App\Http\Controllers\FrontEnd\PlanController::class, 'index'])->name('plans.index');
 
 require __DIR__.'/auth.php';

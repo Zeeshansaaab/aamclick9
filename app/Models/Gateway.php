@@ -31,16 +31,20 @@ class Gateway extends Model
 
     public function scopeDeposit($query)
     {
-        $query->where('type', 'deposit')->orWhere('type', 'both');
+        $query->where('type', 'deposit')->orWhere('type', 'both')->active();
     }
 
     public function scopeWithdrawal($query)
     {
-        $query->where('type', 'withdrawal')->orWhere('type', 'both');
+        $query->where('type', 'withdrawal')->orWhere('type', 'both')->active();
     }
 
     public function payments()
     {
         return $this->hasMany(Payment::class);
+    }
+
+    public function scopeActive($query){
+        $query->whereStatus('active');
     }
 }

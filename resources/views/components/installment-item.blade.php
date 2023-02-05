@@ -16,7 +16,7 @@
         </tr>
     </thead>
     <tbody class="tb-odr-body">
-        @foreach ($installments as $installment)
+        @forelse ($installments as $installment)
             <tr class="tb-odr-item">
                 <td class="tb-odr-info">
                     <span class="tb-odr-id"><a href="#">{{ $installment->name }}</a></span>
@@ -35,6 +35,10 @@
                     </span>
                 </td>
             </tr><!-- .tb-odr-item -->
-        @endforeach
+        @empty
+            <tr>
+                <td colspan="3" class="text-center">No Data found</td>
+            </tr>
+        @endforelse
     </tbody>
 </table>

@@ -18,7 +18,8 @@ class ReportController extends Controller
         $transactions = auth()->user()->transactions()->active()->when(request()->keyword, function ($query) {
             $query->where('trx', 'LIKE', '%' . request()->keyword . '%')
             ->orWhere('remark', 'LIKE', '%' . request()->keyword . '%')
-            ->orWhere('details', 'LIKE', '%' . request()->keyword . '%');
+            ->orWhere('details', 'LIKE', '%' . request()->keyword . '%')
+            ->orWhere('type', 'LIKE', '%' . request()->keyword . '%');
         })->orderBy('id', 'desc')->paginate($limit);
         return Blade::render('<x-transaction-list :transactions="$transactions"/>', ['transactions' => $transactions]);
     }
@@ -31,7 +32,7 @@ class ReportController extends Controller
     public function loadPaymentsTable($type, $deposit_type)
     {
         $limit = \config()->get('settings.pagination_limit');
-        $payments = auth()->user()->payments()->where('deposit_type', $deposit_type)->whereRelation('transaction', 'type', $type)->with([
+        $payments = auth()->user()->payments()->where('deposit_type', $deposit_type)->whereRelation('transaction', 'remark', $type)->with([
             'transaction' => function ($query) {
                 $query->when(
                     request()->keyword,
@@ -55,7 +56,7 @@ class ReportController extends Controller
                     $query->whereUuid(request()->uuid);
                 });
             }
-            ])->orderByDesc('id')->paginate($limit);
+            ])->latest()->paginate($limit);
 
         return Blade::render('<x-payment-list :payments="$payments"/>', ['payments' => $payments]);
     }
@@ -71,7 +72,7 @@ class ReportController extends Controller
             $query->whereHas('plan', function($subQuery){
                 $subQuery->where('name', 'LIKE', '%' . request()->keyword . '%');
             });
-        })->orderByDesc('id')->paginate($limit);
+        })->latest()->paginate($limit);
         return Blade::render('<x-committee-item :committees="$committees"/>', ['committees' => $committees]);
     }
 
@@ -83,7 +84,18 @@ class ReportController extends Controller
         $limit = \config()->get('settings.pagination_limit');
         $installments = auth()->user()->installments()->when(request()->keyword, function ($query) {
             $query->where('name', 'LIKE', request()->keyword);
-        })->orderByDesc('id')->paginate($limit);
+        })->latest()->paginate($limit);
         return Blade::render('<x-installment-item :installments="$installments"/>', ['installments' => $installments]);
+    }
+    function commissions(){
+        return view('frontend.reports.commissions');
+    }
+
+    function commissionsTable(){
+        $limit = \config()->get('settings.pagination_limit');
+        $commissions = auth()->user()->commissions()->with(['from', 'transaction'])->when(request()->keyword, function ($query) {
+            $query->where('name', 'LIKE', request()->keyword);
+        })->latest()->paginate($limit);
+        return Blade::render('<x-commission-item :commissions="$commissions"/>', ['commissions' => $commissions]);
     }
 }

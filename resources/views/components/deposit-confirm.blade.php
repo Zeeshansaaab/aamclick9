@@ -41,23 +41,24 @@
                             {!! $gateway->description !!}
                         </div>
                     </div>
-                    <form action="{{ $type == 'deposit' ? route('deposit.confirmed') : route('withdraw.confirmed') }}" method="POST" class="buysell-form" id="deposit_confirmed_form" data-form="ajax-form" data-close="deposit-confirm">
+                    <form action="{{ $type == 'deposit' ? route('deposit.confirmed') : route('withdraw.confirmed') }}" method="POST" class="buysell-form" id="deposit_confirmed_form" data-form="ajax-form" data-close="deposit-confirm" data-redirect-url="{{route('reports.payments', [$type == 'deposit' ? 'deposited' : 'withdrawal', request()->deposit_type])}}">
                         <div class="buysell-field form-group">
                             <div class="form-label-group justify-content-center border">
                                 <label class="form-label">Please fill these fields*</label>
                             </div>
                             @php
-                                $parameters = json_decode($gateway->gateway_parameters, true);
+                                $parameters = is_array($gateway->gateway_parameters) ? $gateway->gateway_parameters : json_decode($gateway->gateway_parameters, true);
+                                
                             @endphp
                             @foreach ($parameters as $input)
                                 <div class="form-group">
-                                    <x-input-label for="{{ $input['label'] }}" value="{{ $input['label'] }}"/>
+                                    <x-input-label class="text-capitalize" for="{{ $input['label'] }}" value="{{ $input['name'] }}"/>
                                     <div class="form-control-wrap">
                                         <x-text-input 
                                             id="{{ $input['label'] }}" 
-                                            class="form-control" 
+                                            class="form-control text-capitalize" 
                                             type="{{ $input['type'] }}" 
-                                            placeholder="{{ $input['label'] }}" 
+                                            placeholder="{{ $input['name'] }}" 
                                             name="parameters[{{ $input['label']  }}]"
                                             required 
                                         />

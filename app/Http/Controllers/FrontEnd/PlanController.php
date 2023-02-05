@@ -10,7 +10,7 @@ class PlanController extends Controller
 {
     public function index()
     {
-        $plans = Plan::default()->whereStatus('active')->orderBy('min_price', 'asc')->get();
+        $plans = Plan::with('levels')->default()->whereStatus('active')->orderBy('min_price', 'asc')->get();
         return view('frontend.plans.index', compact('plans'));
     }
 

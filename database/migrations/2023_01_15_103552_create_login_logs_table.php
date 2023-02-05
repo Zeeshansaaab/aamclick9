@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('login_logs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onCascade('delete');
+            $table->string('ip')->nullable();
             $table->string('city')->nullable();
             $table->string('country')->nullable();
             $table->string('country_code')->nullable();

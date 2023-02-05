@@ -13,7 +13,7 @@
         </tr>
     </thead>
     <tbody class="tb-odr-body">
-        @foreach ($committees as $committee)
+        @forelse ($committees as $committee)
             <tr class="tb-odr-item">
                 <td class="tb-odr-info">
                     <span class="tb-odr-id"><a href="html/invoice-details.html">{{ $committee->plan->name }}</a></span>
@@ -33,6 +33,14 @@
                     </div>
                 </td>
             </tr><!-- .tb-odr-item -->
-        @endforeach
+        @empty
+            <tr>
+                <td colspan="3" class="text-center">No Data found</td>
+            </tr>
+        @endforelse
     </tbody>
 </table>
+
+{{-- Pagination --}}
+{{ $committees->links() }}
+{{-- Pagination End --}}

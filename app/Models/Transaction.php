@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use App\Enums\Status;
 use Couchbase\Scope;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Enums\Status;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Transaction extends Model
 {
@@ -16,6 +17,26 @@ class Transaction extends Model
         'created_at' => 'datetime',
         'status'     => Status::class,
     ];
+
+    protected static function booted()
+    {
+        parent::boot();
+
+        /**
+         * Handle the product "creating" event.
+         *
+         * @return void
+         */
+        static::created(function (Transaction $transaction) {
+            // $transaction->post_balance = $transaction->user->balance();
+            // $transaction->save();
+        });
+    }
+
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 
     public function scopeActive($query)
     {

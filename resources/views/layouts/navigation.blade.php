@@ -77,12 +77,12 @@
                         <x-dropdown
                             title="Reports"
                             :links="[
-                                'Deposit History'      => 'reports.payments, credit,default', 
-                                'Withdraw History'     => 'reports.payments, debit,default', 
+                                'Deposit History'      => 'reports.payments, deposited,default', 
+                                'Withdraw History'     => 'reports.payments, withdrawal,default', 
                                 'Committee History'    => 'reports.committee',
                                 'Installment History'  => 'reports.installments',
                                 'Transactions'         => 'reports.transactions',
-                                'Commission'           => 'reports.payments, debit,default',
+                                'Commission'           => 'reports.commissions',
                             ]"
                         />
 

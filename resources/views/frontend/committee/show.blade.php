@@ -24,7 +24,8 @@
                         <div class="amount">{{ currency($plan->price) }}</div>
                     </div>
                     <div class="pricing-action">
-                        <a data-act="ajax-page" data-method="post" data-content="#{{\Carbon\Carbon::now()->greaterThanOrEqualTo(\Carbon\Carbon::parse($plan->starting_date)) ? 'plans' : 'total-members'}}" data-post-plan_id="{{ $plan->id }}" data-action-url="{{ route('committees.store') }}" data-swal-content="{{\Carbon\Carbon::now()->lessThan(\Carbon\Carbon::parse($plan->starting_date))}}" class="btn btn-primary text-white eg-swal-success">Select Plan</a>
+                        <a data-act="ajax-page" data-method="post" data-content="#{{\Carbon\Carbon::now()->greaterThanOrEqualTo(\Carbon\Carbon::parse($plan->starting_date)) ? 'plans' : 'total-members'}}" data-post-plan_id="{{ $plan->id }}" data-action-url="{{ route('committees.store') }}" data-swal-content="{{\Carbon\Carbon::now()->lessThanOrEqualTo(\Carbon\Carbon::parse($plan->starting_date))}}" class="btn btn-primary text-white eg-swal-success">
+                            @if(auth()->user()->committees()->where('plan_id', $plan->id)->count() > 0) Show Committe Number @else Select Plan @endif</a>
                     </div>
                 </div>
             </div> 

@@ -53,21 +53,19 @@
                                 <p class="card-title title">Deposit Commission</p>
                             </div>
                             <ul class="">
-                                <li><span class="w-50">Level-1</span> - <span class="ml-auto">{{ currency($plan->min_price) }}</span></li>
-                                <li><span class="w-50">Level-2</span> - <span class="ml-auto">{{ currency($plan->max_price) }}</span></li>
-                                <li><span class="w-50">Level-3</span> - <span class="ml-auto">{{ currency($plan->min_price) }}</span></li>
-                                <li><span class="w-50">Level-4</span> - <span class="ml-auto">{{ currency($plan->max_price) }}</span></li>
+                                @foreach ($plan->levels->where('type', 'deposit_commission')->values() as $level)
+                                    <li><span class="w-50">Level - {{$level->level}}</span> - <span class="ml-auto">{{ $level->percentage }} %</span></li>
+                                @endforeach
                             </ul>
                         </div>
                         <div class="col-md-3">
-                            <div class="pricing-title text-center">
+                        <div class="pricing-title text-center">
                                 <p class="card-title title">Profit bonus</p>
                             </div>
                             <ul class="">
-                                <li><span class="w-50">Level-1</span> - <span class="ml-auto">{{ currency($plan->min_price) }}</span></li>
-                                <li><span class="w-50">Level-2</span> - <span class="ml-auto">{{ currency($plan->max_price) }}</span></li>
-                                <li><span class="w-50">Level-3</span> - <span class="ml-auto">{{ currency($plan->min_price) }}</span></li>
-                                <li><span class="w-50">Level-4</span> - <span class="ml-auto">{{ currency($plan->max_price) }}</span></li>
+                                @foreach ($plan->levels->where('type', 'profit_bonus')->values() as $level)
+                                    <li><span class="w-50">Level - {{$level->level}}</span> - <span class="ml-auto">{{ $level->percentage }} %</span></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>

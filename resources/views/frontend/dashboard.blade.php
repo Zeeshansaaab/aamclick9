@@ -186,7 +186,7 @@
                                         </div>
                                         <div class="nk-wgw-balance">
                                             <div class="amount">
-                                                0.000560<span
+                                                {{currency(0)}}<span
                                                     class="currency currency-eth"
                                                     >{{ $cur_text }}</span
                                                 >
@@ -253,8 +253,8 @@
                                         </div>
                                         <div class="nk-wgw-balance">
                                             <div class="amount">
-                                                {{-- auth()->user()->withdrawals()->sum('amount') --}}
-                                                0<span
+                                                {{currency(auth()->user()->transactions()->whereType('debit')->sum('amount'), true)}}
+                                                <span
                                                     class="currency currency-btc"
                                                     >{{ $cur_text }}</span
                                                 >
@@ -293,9 +293,9 @@
                                         </div>
                                         <div class="nk-wgw-balance">
                                             <div class="amount">
-                                                0<span
+                                                {{auth()->user()->committees()->count()}}<span
                                                     class="currency currency-nio"
-                                                    >{{ $cur_text }}</span
+                                                    ></span
                                                 >
                                             </div>
                                         </div></a
@@ -308,7 +308,7 @@
                                 <div class="nk-wgw sm">
                                     <a
                                         class="nk-wgw-inner"
-                                        href="/demo5/crypto/wallet-bitcoin.html"
+                                        href="{{route('installments.create')}}"
                                         ><div class="nk-wgw-name">
                                             <div class="nk-wgw-icon">
                                                 <em
@@ -379,7 +379,7 @@
                             <div class="tranx-info">
                                 <div class="tranx-data">
                                     <div class="tranx-label">
-                                        {{ $transaction->remark }}
+                                        {{ $transaction->details }}
                                         <em
                                             class="tranx-icon sm icon ni ni-sign-usd @if($transaction->type == 'credit') bg-success-dim @else bg-danger-dim @endif"
                                         ></em>

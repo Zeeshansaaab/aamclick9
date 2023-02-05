@@ -18,9 +18,9 @@
     </x-slot>
     
     <div id="plans">
-        @foreach ($plans as $plan)
-            <div class="row">
-                <div class="col-md-4 col-sm-12">
+        <div class="row">
+            @foreach ($plans as $plan)
+                <div class="col-md-4 col-sm-12 mt-3">
                     <div class="card card-bordered pricing text-center">
                         <div class="pricing-body">
                             <div class="pricing-media">
@@ -38,8 +38,8 @@
                         </div>
                     </div> 
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
     </div>
 </x-app-layout>
 

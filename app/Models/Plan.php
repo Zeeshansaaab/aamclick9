@@ -41,6 +41,9 @@ class Plan extends Model
     {
         return $this->hasMany(Payment::class);
     }
+    public function levels(){
+        return $this->hasMany(PlanLevel::class);
+    }
     public function scopeDefault($query)
     {
         $query->whereType('default');

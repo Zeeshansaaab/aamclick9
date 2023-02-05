@@ -20,7 +20,7 @@ class CommitteeController extends Controller
      */
     public function index()
     {
-        $plans = Plan::committee()->parent()->whereStatus('active')->get();
+        $plans = Plan::committee()->parent()->whereStatus('active')->orderBy('price', 'asc')->get();
         return view('frontend.committee.index', compact('plans'));
     }
     /**
@@ -52,18 +52,19 @@ class CommitteeController extends Controller
                     'message' => "You have already applied for this committee"
                 ]);
             }
-            auth()->user()->committees()->create([
+            $plan = auth()->user()->committees()->create([
                 'plan_id' => $request->plan_id
             ]);
             return response()->json([
                 'status'  => JsonResponse::HTTP_OK,
-                'message' => "10 members poory hone ka intezar kre",
+                'message' => $plan->plan->total_members . " members poory hone ka intezar kre",
                 'data'    => CommitteeUser::where('plan_id', $request->plan_id)->count(),
             ]);
         } catch(Exception $e){
             return response()->json([
                 'status' => JsonResponse::HTTP_OK,
-                'message' => $e->getMessage()
+                'message' => $e->getMessage(),
+                'line' => $e->getLine()
             ]);
         }
     }

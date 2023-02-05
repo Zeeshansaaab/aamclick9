@@ -138,34 +138,44 @@ class PaymentController extends Controller
 
     public function createPayment($request, $gateway, $trx_type, $amount)
     {
-        $depositType =  Session::get('deposit_type');
-        $amount = floatval($amount);
-        $charge = $gateway->fixed_charge + ($amount * $gateway->percent_charge / 100);
-        $afterCharge = ($amount) - $charge;
-        $finalAmount = $afterCharge * $gateway->currency_value;
-        $transation = auth()->user()->transactions()->create([
-            'amount'        => $finalAmount,
-            'charge'        => $charge,
-            'trx_type'      => $trx_type,
-            'trx'           => getTrx(),
-            'details'       => "Amount " . $trx_type == '-' ? "deposited" : 'withdrawal' . " via " . $gateway->name,
-            'remark'        => "Amount " . $trx_type == '-' ? "deposited" : 'withdrawal',
-            'type'          => $trx_type == '-' ? 'debit' : 'credit',
-            'status'        => Status::Pending
-        ]);
-        
-        $payment = $gateway->payments()->create([
-            'user_id'           => auth()->user()->id,
-            'transaction_id'    => $transation->id,
-            'type'              => $trx_type == '-' ? 'debit' : 'credit',
-            'parameters'        => $request->parameters,
-            'deposit_type'      => $trx_type == '-' ? 'default' : $depositType ,
-            'plan_id'           => $request->committee_id,
-        ]);
+        try{
+            DB::beginTransaction();
+            $depositType =  Session::get('deposit_type');
+            $amount = floatval($amount);
+            $charge = $gateway->fixed_charge + ($amount * $gateway->percent_charge / 100);
+            $afterCharge = ($amount) - $charge;
+            $finalAmount = $afterCharge * $gateway->currency_value;
+            $transation = auth()->user()->transactions()->create([
+                'amount'        => $finalAmount,
+                'charge'        => $charge,
+                'trx_type'      => $trx_type,
+                'trx'           => getTrx(),
+                'details'       => "Amount " . $trx_type == '-' ? "withdrawal" : 'deposited' . " via " . $gateway->name,
+                'remark'        => $trx_type == '-' ? "withdrawal" : 'deposited',
+                'type'          => $trx_type == '-' ? 'debit' : 'credit',
+                'status'        => Status::Pending
+            ]);
+            
+            $payment = $gateway->payments()->create([
+                'user_id'           => auth()->user()->id,
+                'transaction_id'    => $transation->id,
+                'type'              => $trx_type == '-' ? 'debit' : 'credit',
+                'parameters'        => $request->parameters,
+                'deposit_type'      => $trx_type == '-' ? 'default' : $depositType ,
+                'plan_id'           => $request->committee_id,
+            ]);
 
-        $payment->load(['transaction', 'gateway']);
-        auth()->user()->notify(new PaymentNotification($payment));
-        return $payment;
+            $payment->load(['transaction', 'gateway']);
+            auth()->user()->notify(new PaymentNotification($payment));
+            DB::commit();
+            return $payment;
+        } catch(Exception $e){
+            DB::rollBack(); 
+            return response()->json([
+                'status'   => JsonResponse::HTTP_INTERNAL_SERVER_ERROR,
+                'message'  => $e->getMessage()
+            ], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
 }

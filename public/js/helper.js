@@ -29,6 +29,8 @@ function ajax(url, method, functionsOnSuccess, form = {}, isFormData=false) {
         data: form,
         error: function(xhr, textStatus, error) {
           try{
+            $('#spinner').remove()
+            $('[type=submit]').removeAttr("disabled").button('refresh');
             error = JSON.parse(xhr.responseText)
             const messages = error.message.split('.');
             NioApp.Toast(messages[0], 'error');

@@ -22,9 +22,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             SettingSeeder::class,
-            PlanSeeder::class,
-            GatewaySeeder::class,
-            UserSeeder::class,
+            // PlanSeeder::class,
+            // GatewaySeeder::class,
+            // UserSeeder::class,
         ]);
     }
 }

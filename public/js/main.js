@@ -40,7 +40,7 @@ NioApp.coms.docReady.push(function(){
                     modal.remove()
                 })
             }
-            NioApp.Toast(response.message, 'success');
+            if(response.message) NioApp.Toast(response.message, 'success');
             if(closeModal){
                 $(`#${closeModal}`).modal('hide');
             }
@@ -48,7 +48,7 @@ NioApp.coms.docReady.push(function(){
             $('.custom-file-label').html('');
             $('#spinner').remove()
             submitBtn.removeAttr("disabled").button('refresh');
-            // if(redirectURL) window.location.href = redirectURL;
+            if(redirectURL) window.location.href = redirectURL;
         }, form[0], true)
         return;
         

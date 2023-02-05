@@ -132,6 +132,10 @@ function getUserId(){
     return "AAM00001";
 }
 
+function formatDate($date){
+    return $date->format('d M D Y');
+}
+
 function getFile($path){
     return asset('storage/' . $path);
 }

@@ -9,9 +9,13 @@
             <div class="nk-tb-col text-right"><span>Amount</span></div>
             <div class="nk-tb-col nk-tb-col-status"><span class="sub-text d-none d-md-block">Status</span></div>
         </div><!-- .nk-tb-item -->
-        @foreach ($payments as $payment)
+        @forelse ($payments as $payment)
             <x-payment-item :payment="$payment" />
-        @endforeach
+        @empty
+        <div class="text-center my-2 ">
+            No Data found
+        </div>
+        @endforelse
     </div>
 </div>
 

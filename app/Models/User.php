@@ -86,6 +86,11 @@ class User extends Authenticatable
         return $this->hasOne(PlanUser::class);
     }
 
+    public function balance(){
+        $user = $this->load('planUser');
+        return $user->planUser->balance + $user->planUser->referral_income + $user->planUser->profit_bonus + $user->planUser->referral_deposit + $user->planUser->current_profit;
+    }
+
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
@@ -105,6 +110,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Payment::class);
     }
+    public function withdrawals()
+    {
+        return $this->hasMany(Payment::class)->where('type', 'debit');
+    }
+    public function deposits()
+    {
+        return $this->hasMany(Payment::class)->where('type', 'credit');
+    }
 
     public function installments()
     {
@@ -113,5 +126,13 @@ class User extends Authenticatable
     public function committees()
     {
         return $this->hasMany(CommitteeUser::class);
+    }
+    public function commissions()
+    {
+        return $this->hasMany(CommissionLog::class, 'to_id');
+    }
+
+    public function loginLogs(){
+        return $this->hasMany(LoginLog::class);
     }
 }
