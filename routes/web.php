@@ -27,7 +27,7 @@ Route::get('update-database', function () {
 });
 
 Route::get('/', function () {
-    // return redirect()->route('dashboard');
+    return redirect()->route('dashboard');
     return view('frontend.home');
 });
 
