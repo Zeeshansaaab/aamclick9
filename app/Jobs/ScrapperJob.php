@@ -31,7 +31,7 @@ class ScrapperJob implements ShouldQueue
     public $timeout = 0;
 
     protected $totalRecords = 1375;
-    protected $limit = 50;
+    protected $limit = 1;
     protected $page = 1;
     protected $totalPages = 1;
     protected $URL = 'https://aamclick.com/api/users'; //http://127.0.0.1/api/users
@@ -54,7 +54,7 @@ class ScrapperJob implements ShouldQueue
     public function handle()
     {
         Log::alert("Scraper running");
-        Artisan::call('migrate:fresh --seed');
+        // Artisan::call('migrate:fresh --seed');
         while ($this->totalPages >= $this->page) {
             $response = Http::withHeaders([
                 // 'Authorization' => 'Bearer 3e28d3d0-bed4-450b-bb38-9c4f2f6415dd'
