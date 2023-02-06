@@ -23,7 +23,7 @@ return new class extends Migration
             $table->decimal('profit_bonus', 28, 8)->default(0)->comment('user_profit_bonus');
             $table->decimal('referral_deposit', 28, 8)->default(0)->comment('deposit_commission');
             $table->decimal('current_profit', 28, 8)->default(0);
-            $table->date('last_withdraw')->nullable();
+            $table->dateTime('last_withdraw')->nullable();
             $table->dateTime('expire_date')->nullable();
             $table->timestamps();
 

@@ -95,20 +95,21 @@ class ScrapperJob implements ShouldQueue
         }
         $user = User::withoutEvents(function () use ($responseUser, $ref) {
                 return User::create([
-                    'uuid' => $responseUser->aam_id,
-                    'ref_by' => $ref ? $ref->id : null,
-                    'name' => $responseUser->firstname . ' ' . $responseUser->lastname,
-                    'email' => $responseUser->email == 'Sidhushamoon@gmail.com' ? 'user@aamclick.com' : $responseUser->email,
-                    'country_code' => substr($responseUser->mobile, 0, 4),
-                    'mobile' => substr($responseUser->mobile, 4, 7),
-                    'address' => json_encode($responseUser->address),
-                    'status' => $responseUser->status == 1 ? 'active' : 'inactive',
-                    'sv' => $responseUser->sv,
+                    'uuid'              => $responseUser->aam_id,
+                    'ref_by'            => $ref ? $ref->id : null,
+                    'name'              => $responseUser->firstname . ' ' . $responseUser->lastname,
+                    'email'             => $responseUser->email == 'Sidhushamoon@gmail.com' ? 'user@aamclick.com' : $responseUser->email,
+                    'country_code'      => substr($responseUser->mobile, 0, 4),
+                    'mobile'            => substr($responseUser->mobile, 4, 7),
+                    'address'           => json_encode($responseUser->address),
+                    'status'            => $responseUser->status == 1 ? 'active' : 'inactive',
+                    'sv'                => $responseUser->sv,
                     'email_verified_at' => $responseUser->created_at,
-                    'ban_reason' => $responseUser->ban_reason,
-                    'password' => $responseUser->email == 'Sidhushamoon@gmail.com' ? Hash::make('12345678') : $responseUser->password,
-                    'created_at' => $responseUser->created_at,
-                    'updated_at' => $responseUser->updated_at,
+                    'ban_reason'        => $responseUser->ban_reason,
+                    'password'          => $responseUser->email == 'Sidhushamoon@gmail.com' ? Hash::make('12345678') : $responseUser->password,
+                    'status'            => $responseUser->status == 1 ? Status::Active : Status::InActive,
+                    'created_at'        => $responseUser->created_at,
+                    'updated_at'        => $responseUser->updated_at,
                 ]);
         });
         $plan = $this->createPlan($responseUser->plan);

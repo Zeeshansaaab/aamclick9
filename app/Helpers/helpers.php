@@ -1,11 +1,15 @@
 <?php
 
 use App\Models\Plan;
+use App\Enums\Status;
 use App\Models\Setting;
+use App\Models\PlanLevel;
 use App\Models\CommissionRecord;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cache;
 use Intervention\Image\Facades\Image;
+use App\Notifications\NotificationManager;
 function getRealIP()
 {
     $ip = $_SERVER["REMOTE_ADDR"];
@@ -138,5 +142,50 @@ function formatDate($date){
 
 function getFile($path){
     return asset('storage/' . $path);
+}
+
+function levelCommission($user, $amount, $commissionType)
+{
+    $levels = $user->planUser->plan->levels->where('commission_type', $commissionType)->where('percentage', '>', 0)->values();
+    $level = 1;
+    foreach($levels as $level){
+        $referer = $user->refBy()->with('planLevel.plan')->first();
+        $plan = $referer->planUser->plan;
+        if($referer && $referer->planUser->plan){
+            $commissionLevel = $plan->levels()->where('commission_type', $commissionType)
+            ->where('percentage', '>', 0)
+            ->where('level', $level)->first();
+            if($commissionLevel && $commissionLevel->percent > 0){
+                $commission = ($amount * $commissionLevel->percent) / 100;
+                $referer->planLevel->$commissionType += $commission;
+                $referer->planLevel->save();
+
+                $transaction = $referer->transactions()->create([
+                    'amount'        => $commission,
+                    'charge'        => 0,
+                    'trx_type'      => '+',
+                    'trx'           => getTrx(),
+                    'details'       => $commissionLevel->percent . "% profit bonus added",
+                    'remark'        => 'referral_commission',
+                    'type'          => 'credit',
+                    'status'        =>  Status::Active
+                ]);
+
+                $referer->commissions()->create([
+                    'from_id'         => $user->id,
+                    'level'           => $level,
+                    'transaction_id'  => $transaction->id
+                ]);
+
+                $referer->notify(new NotificationManager([
+                    'title'         => 'REFERRAL COMMISSION',
+                    'description'   => currency($commission) . " amount is added for level $level referral commission",
+                    'redirect_url'  => route('reports.commissions')
+                ]));
+            }
+        }
+        $level++;
+        $user = $referer;
+    }
 }
 ?>
