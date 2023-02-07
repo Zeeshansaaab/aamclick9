@@ -21,9 +21,9 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-Route::get('update-database', function () {
-    Artisan::call('migrate:fresh --seed');
-    return "PHP ARTISAN MIGRATE:FRESH --SEED HAS EXECUTED SUCCESSFULLY";
+Route::get('crons', function () {
+    Artisan::call('schedule:work');
+    return "PHP ARTISAN Schedule:work";
 });
 
 Route::get('/', function () {
