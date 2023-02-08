@@ -7,7 +7,8 @@
         <link rel="icon" type="image/x-icon" href="/favicon.ico">
         <title>{{ $title }} | {{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Scripts -->
+        <!-- Styles -->
+        {{-- <link rel="stylesheet" href="{{ mix('css/theme.css') }}" /> --}}
         <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
     </head>
     <body class="nk-body npc-crypto bg-white has-sidebar ">

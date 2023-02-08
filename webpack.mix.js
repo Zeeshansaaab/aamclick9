@@ -17,9 +17,10 @@ mix.scripts([
     'resources/theme/js/bundle.js',
     'resources/theme/js/scripts.js',
     'resources/theme/js/sweetalert.js'
-    // 'resources/theme/js/chart-crypto.js',
 ], 'public/js/theme.js');
     
+// mix.sass('resources/theme/css/dashlite.css', 'public/css/theme.css')
+
 mix.styles([
     'resources/theme/css/dashlite.css',
     'resources/css/app.css',
