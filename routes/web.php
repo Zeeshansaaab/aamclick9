@@ -29,7 +29,7 @@ Route::get('crons', function () {
 Route::get('/', function () {
     // return redirect()->route('dashboard');
     return view('frontend.home');
-});
+})->name('home');
 
 Route::get('/scrape', function () {
     ScrapperJob::dispatch();

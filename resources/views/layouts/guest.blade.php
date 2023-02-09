@@ -8,8 +8,9 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
         <link rel="icon" type="image/x-icon" href="/favicon.ico">
         <!-- Scripts -->
+        {{-- <link rel="stylesheet" href="{{ mix('css/theme.css') }}" /> --}}
         <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
-
+        {{isset($styles) ? $styles : ''}}
     </head>
     <body class="nk-body bg-white npc-general pg-auth">
         <div class="nk-app-root">
@@ -18,52 +19,44 @@
                 <div class="nk-wrap-nosidebar">
                     <div class="nk-header nk-header-fluid nk-header-fixed is-light">
                         <div class="container-fluid">
-                            <div class="nk-header-wrap">
-                                <div class="nk-menu-trigger d-xl-none ml-n1">
-                                    <a href="#" class="nk-nav-toggle nk-quick-nav-icon" data-target="sidebarMenu"><em class="icon ni ni-menu"></em></a>
-                                </div>
-                                <div class="nk-header-brand d-xl-none">
+                            <div class="nk-header-wrap" style="height: 60px;">
+                                <div class="nk-header-brand">
                                     <a href="{{ route('dashboard') }}" class="logo-link">
                                         <x-application-logo width="100px"/>
                                     </a>
                                 </div>
                                 <div class="nk-header-tools">
-                                    <ul class="nk-quick-nav">
-                                        <li class="dropdown user-dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                                <div class="user-toggle">
-                                                    <div class="user-avatar sm">
-                                                        <em class="icon ni ni-user-alt"></em>
-                                                    </div>
-                                                    <div class="user-info d-none d-md-block">
-                                                        <div class="user-status "></div>
-                                                        <div class="user-name dropdown-indicator"></div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1">
-                                                <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
-                                                    <div class="user-card">
-                                                        <div class="user-avatar">
-                                                            <span>AB</span>
-                                                        </div>
-                                                        <div class="user-info">
-                                                            <span class="lead-text"></span>
-                                                            <span class="sub-text"></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="dropdown-inner">
-                                                    <ul class="link-list">
-                                                        <li><a href="html/crypto/profile.html"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
-                                                        <li><a href="html/crypto/profile-security.html"><em class="icon ni ni-setting-alt"></em><span>Account Setting</span></a></li>
-                                                        <li><a href="html/crypto/profile-activity.html"><em class="icon ni ni-activity-alt"></em><span>Login Activity</span></a></li>
-                                                        <li><a class="dark-switch" href="#"><em class="icon ni ni-moon"></em><span>Dark Mode</span></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                    <nav class="navbar navbar-expand-lg">
+                                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                          <span class="navbar-toggler-icon"></span>
+                                        </button>
+                                      
+                                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                          <ul class="navbar-nav mr-auto">
+                                            <li class="nav-item active">
+                                              <a class="nav-link" href="{{route('home')}}">Home <span class="sr-only">(current)</span></a>
+                                            </li>
+                                            <li class="nav-item">
+                                              <a class="nav-link" href="#">About</a>
+                                            </li>
+                                            <li class="nav-item active">
+                                              <a class="nav-link" href="#">Pricing</a>
+                                            </li>
+                                            <li class="nav-item">
+                                              <a class="nav-link" href="#">About</a>
+                                            </li>
+                                            <li class="nav-item active">
+                                              <a class="nav-link" href="#">Blog</a>
+                                            </li>
+                                            <li class="nav-item">
+                                              <a class="nav-link" href="#">Contact</a>
+                                            </li>
+                                            <li class="nav-item">
+                                              <a class="nav-link" href="{{route('login')}}">Login</a>
+                                            </li>
+                                          </ul>
+                                        </div>
+                                    </nav>
                                 </div>
                             </div>
                         </div>
@@ -80,5 +73,7 @@
         </div>
         <script src="{{ mix('js/app.js') }}" ></script>
         <script src="{{ mix('js/theme.js') }}"></script>
+        <script src="{{ asset('js/helper.js') }}" ></script>
+        <script src="{{ asset('js/main.js') }}" ></script>
     </body>
 </html>

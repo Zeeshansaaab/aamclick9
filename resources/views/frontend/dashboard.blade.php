@@ -53,7 +53,7 @@
                                         </div>
                                     </div>
                                     <div class="nk-wg7-stats-group">
-                                        <div class="nk-wg7-stats w-50">
+                                        <div class="nk-wg7-stats w-70">
                                             <div class="nk-wg7-title">Profit Balance</div>
                                             <div class="number-lg">{{ currency($user->planUser->profit_bonus, true) }}</div>
                                         </div>
@@ -70,7 +70,7 @@
                                     </div>
                                     <div class="nk-wg7-foot">
                                         <span class="nk-wg7-note">Last login at
-                                            <span>19 Nov, 2019</span></span
+                                            <span>{{formatDate($last_login)}}</span></span
                                         >
                                     </div>
                                 </div>
@@ -117,7 +117,7 @@
                                 <div class="nk-wgw sm">
                                     <a
                                         class="nk-wgw-inner"
-                                        href="/demo5/crypto/wallet-bitcoin.html"
+                                        href="#"
                                         ><div class="nk-wgw-name">
                                             <div class="nk-wgw-icon">
                                                 <em
@@ -145,7 +145,7 @@
                                 <div class="nk-wgw sm">
                                     <a
                                         class="nk-wgw-inner"
-                                        href="/demo5/crypto/wallet-bitcoin.html"
+                                        href="#"
                                         ><div class="nk-wgw-name">
                                             <div class="nk-wgw-icon">
                                                 <em
@@ -173,7 +173,7 @@
                                 <div class="nk-wgw sm">
                                     <a
                                         class="nk-wgw-inner"
-                                        href="/demo5/crypto/wallet-bitcoin.html"
+                                        href="#"
                                         ><div class="nk-wgw-name">
                                             <div class="nk-wgw-icon">
                                                 <em
@@ -212,7 +212,7 @@
                                 <div class="nk-wgw sm">
                                     <a
                                         class="nk-wgw-inner"
-                                        href="/demo5/crypto/wallet-bitcoin.html"
+                                        href="#"
                                         ><div class="nk-wgw-name">
                                             <div class="nk-wgw-icon">
                                                 <em
@@ -240,7 +240,7 @@
                                 <div class="nk-wgw sm">
                                     <a
                                         class="nk-wgw-inner"
-                                        href="/demo5/crypto/wallet-bitcoin.html"
+                                        href="#"
                                         ><div class="nk-wgw-name">
                                             <div class="nk-wgw-icon">
                                                 <em
@@ -280,7 +280,7 @@
                                 <div class="nk-wgw sm">
                                     <a
                                         class="nk-wgw-inner"
-                                        href="/demo5/crypto/wallet-bitcoin.html"
+                                        href="#"
                                         ><div class="nk-wgw-name">
                                             <div class="nk-wgw-icon">
                                                 <em
@@ -333,7 +333,7 @@
                                 <div class="nk-wgw sm">
                                     <a
                                         class="nk-wgw-inner"
-                                        href="/demo5/crypto/wallet-bitcoin.html"
+                                        href="#"
                                         ><div class="nk-wgw-name">
                                             <div class="nk-wgw-icon">
                                                 <em
@@ -464,9 +464,6 @@
                         <div class="title-sub">
                             Use the bellow link to invite your friends.
                         </div>
-                    </div>
-                    <div class="nk-refwg-action">
-                        <a href="#" class="btn btn-primary">Invite</a>
                     </div>
                 </div>
                 <div class="nk-refwg-url">

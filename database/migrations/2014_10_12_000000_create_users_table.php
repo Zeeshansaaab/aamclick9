@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('country_code', 4);
-            $table->string('mobile', 7);
+            $table->string('mobile', 10);
             $table->text('address')->nullable()->comment('contains full address');
             //Enum COlumns
             $table->string('status')->default('active');

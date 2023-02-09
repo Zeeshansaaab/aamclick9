@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Providers\RouteServiceProvider;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Traits\LoginLogTrait;
 
 class AuthenticatedSessionController extends Controller
 {
+    use LoginLogTrait;
     /**
      * Display the login view.
      *
@@ -32,6 +34,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        $this->createLoginLog(auth()->user());
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
