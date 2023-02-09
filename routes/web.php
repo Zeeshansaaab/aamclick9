@@ -1,13 +1,7 @@
 <?php
 
-use App\Models\User;
-use App\Enums\Status;
 use App\Jobs\ScrapperJob;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\ProfileController;
 
 /*
@@ -21,10 +15,10 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-Route::get('crons', function () {
-    Artisan::call('schedule:work');
-    return "PHP ARTISAN Schedule:work";
-});
+// Route::get('crons', function () {
+//     Artisan::call('schedule:work');
+//     return "PHP ARTISAN Schedule:work";
+// });
 
 Route::get('/', function () {
     // return redirect()->route('dashboard');
