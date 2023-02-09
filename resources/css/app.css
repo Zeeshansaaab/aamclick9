@@ -8,6 +8,30 @@
     content:"*";
     color:red;
 }
+.site-text-color{
+    color: #0b3175;
+}
+.border-color{
+    border-color: #0b3175!important;
+    border: 2px solid #0b3175!important;
+}
+.bg-site{
+    background-color: #0b3175;
+}
+.margin-max-top{
+    margin-top: 100px;
+}
+.margin-max-rbl{
+    margin-right: 30px;
+}
+.padding-max{
+    padding: 15px;
+}
+.line-space{
+        line-height: 2.2;
+      }
+
+
 @media only screen and (min-width: 1200px){
     .nk-sidebar {
         width: 300px!important;
