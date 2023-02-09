@@ -13,7 +13,9 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('frontend.dashboard');
+        return view('frontend.dashboard', [
+            'last_login'         => auth()->user()->loginLogs()->latest()->first()->created_at
+        ]);
     }
 
     public function charts()
@@ -44,7 +46,7 @@ class DashboardController extends Controller
                 'transactionsLabels' => $transactionsLabels,
                 'transactionsData'   => $transactionsData,
                 'referralUsersLabels'=> $referralUsersLabels,
-                'referralUsersData' => $referralUsersdData
+                'referralUsersData'  => $referralUsersdData,
             ]
         ], JsonResponse::HTTP_OK);
 

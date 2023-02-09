@@ -16,7 +16,7 @@ $cur_text = cur_text();
         <div class="nk-block-head">
             <div class="nk-block-head-sub"><span>Welcome!</span></div>
             <div class="nk-block-head-content">
-                <h2 class="nk-block-title fw-normal">{{ $user->name }}</h2>
+                <h2 class="nk-block-title fw-normal text-capitalize">{{ $user->name }}</h2>
                 <div class="nk-block-des"><p></p></div>
             </div>
         </div><!-- .nk-block-head-content -->

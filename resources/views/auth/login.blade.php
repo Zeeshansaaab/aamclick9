@@ -1,6 +1,6 @@
 <x-guest-layout>
     <!-- Session Status -->
-    <div class="card card-bordered m-auto" style="width: 50%; margin-top: 19vh!important;">
+    <div class="card card-bordered mx-auto" style="width: 40%; margin-top: 50px;">
         <div class="card-inner card-inner-lg">
             <x-auth-session-status class="mb-4" :status="session('status')" />
             <div class="nk-block-head">
@@ -11,7 +11,7 @@
                     </div>
                 </div>
             </div>
-            <form method="POST" action="{{ route('login') }}">
+            <form method="POST" action="{{ route('login') }}" data-form="ajax-form" data-redirect-url="{{route('dashboard')}}" style="margin: auto; margin-top: 10px;">
                 @csrf
                 <div class="form-group">
                     <div class="form-label-group">
