@@ -139,6 +139,9 @@ function getUserId(){
 function formatDate($date){
     return $date->format('d M D Y');
 }
+function formatDateTime($date){
+    return $date->format('d M D Y h:m');
+}
 
 function getFile($path){
     return asset('storage/' . $path);

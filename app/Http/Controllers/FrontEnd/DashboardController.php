@@ -14,7 +14,7 @@ class DashboardController extends Controller
     public function index()
     {
         return view('frontend.dashboard', [
-            'last_login'         => auth()->user()->loginLogs()->latest()->first()->created_at
+            'last_login'         => auth()->user()->loginLogs()->latest()->first()->updated_at
         ]);
     }
 

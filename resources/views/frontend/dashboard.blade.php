@@ -70,7 +70,7 @@
                                     </div>
                                     <div class="nk-wg7-foot">
                                         <span class="nk-wg7-note">Last login at
-                                            <span>{{formatDate($last_login)}}</span></span
+                                            <span>{{formatDateTime($last_login)}}</span></span
                                         >
                                     </div>
                                 </div>
