@@ -57,7 +57,7 @@
         {{ isset($scripts) ? $scripts : ''}}
         
         <script>
-            var limit = 5;
+            var limit = 2;
             $(document).on('click', '.notification-dropdown-trigger, .view-all, .markAllasread', function(){
                 let count = parseInt("{{auth()->user()->unreadNotifications->count()}}");
                 var is_all = false;
