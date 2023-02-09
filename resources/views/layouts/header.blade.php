@@ -32,7 +32,7 @@
                             <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                                 <div class="user-card">
                                     <div class="user-avatar">
-                                        <span>AB</span>
+                                        <span>{{nameAronnym(auth()->user()->name)}}</span>
                                     </div>
                                     <div class="user-info">
                                         <span class="lead-text">{{ auth()->user()->name }}</span>
@@ -57,7 +57,6 @@
                                                 <em class="icon ni ni-signout">
                                             </em><span>Sign out</span></a></a>
                                           </form>
-                                        
                                     </li>
                                 </ul>
                             </div>

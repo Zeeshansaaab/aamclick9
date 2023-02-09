@@ -143,6 +143,11 @@ function formatDateTime($date){
     return $date->format('d M D Y h:m');
 }
 
+function nameAronnym($name){
+    preg_match_all('/(?<=\s|^)\w/iu', $name, $matches);
+    return mb_strtoupper(implode('', array_slice($matches[0], 0, 2)));
+}
+
 function getFile($path){
     return asset('storage/' . $path);
 }
