@@ -82,7 +82,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <x-text-input name="mobile" type="tel" pattern="[0-9]{10}" placeholder="1234567" required/>
+                        <x-text-input name="mobile" type="tel" pattern="[0-9]{10}" placeholder="3001212123" required/>
                     </div>
                 </div>
             </div>
