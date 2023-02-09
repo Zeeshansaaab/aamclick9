@@ -63,7 +63,7 @@ class RegisteredUserController extends Controller
 
             $this->createLoginLog($user);
 
-            event(new Registered($user));
+            // event(new Registered($user));
     
             Auth::login($user);
     
