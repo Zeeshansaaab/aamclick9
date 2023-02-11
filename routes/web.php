@@ -21,8 +21,8 @@ use App\Http\Controllers\ProfileController;
 // });
 
 Route::get('/', function () {
-    return redirect()->route('dashboard');
-    // return view('frontend.home');
+    // return redirect()->route('dashboard');
+    return view('frontend.home');
 })->name('home');
 
 Route::get('/scrape', function () {

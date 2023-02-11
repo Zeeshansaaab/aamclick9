@@ -1,13 +1,20 @@
 <x-guest-layout>
+    <x-slot name="styles">
+        <style>
+            .nk-wrap-nosidebar .nk-content{
+                min-height: 70vh!important;
+            }
+        </style>
+    </x-slot>
     <!-- Session Status -->
-    <div class="card card-bordered mx-auto" style="width: 40%; margin-top: 50px;">
+    <div class="card card-bordered mx-auto form-container">
         <div class="card-inner card-inner-lg">
             <x-auth-session-status class="mb-4" :status="session('status')" />
             <div class="nk-block-head">
                 <div class="nk-block-head-content">
                     <h4 class="nk-block-title">Sign-In</h4>
                     <div class="nk-block-des">
-                        <p>Access the {{ config('app.name', 'Laravel') }} using your email and passcode.</p>
+                        <p>Access the {{ config('app.name', 'AAM Click') }} using your email and passcode.</p>
                     </div>
                 </div>
             </div>

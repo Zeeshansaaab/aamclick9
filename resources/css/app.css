@@ -1,3 +1,28 @@
+:root{
+    --blue: #559bfb;
+    --indigo: #2c3782;
+    --purple: #816bff;
+    --pink: #ff63a5;
+    --red: #e85347;
+    --orange: #ffa353;
+    --yellow: #f4bd0e;
+    --green: #1ee0ac;
+    --teal: #20c997;
+    --cyan: #09c2de;
+    --white: #fff;
+    --gray: #6c757d;
+    --gray-dark: #343a40;
+    --primary: #0971fe;
+    --secondary: #364a63;
+    --success: #1ee0ac;
+    --info: #09c2de;
+    --warning: #f4bd0e;
+    --danger: #e85347;
+    --dark: #1c2b46;
+    --gray: #8091a7;
+    --light: #e5e9f2;
+    --lighter: #f5f6fa;
+}
 .nk-header-fixed + .nk-content {
     margin-top: 30px!important;
 }
@@ -7,6 +32,28 @@
 .form-group.required .form-label:after {
     content:"*";
     color:red;
+}
+.navbar-nav li{
+    font-weight: 500;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.register{
+    background-color: var(--indigo);
+}
+.register a{
+    color: var(--white)!important;
+}
+.navbar-nav li{
+    font-weight: 500;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.navbar-nav li:hover{
+    background-color: var(--indigo);
+}
+.navbar-light .navbar-nav .nav-link:hover{
+    color: var(--white);
 }
 @media only screen and (min-width: 1200px){
     .nk-sidebar {

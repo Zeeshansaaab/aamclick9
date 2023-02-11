@@ -1,14 +1,12 @@
 <x-guest-layout>
-    <div class="nk-block-head" style="width: 40%; margin: auto; margin-top: 60px;">
-        <div class="nk-block-head-content">
-            <h4 class="nk-block-title">Sign-Up</h4>
-            <div class="nk-block-des">
-                <p>Create new {{ config('app.name', 'Laravel') }} account.
-                </p>
-            </div>
-        </div>
-    </div>
-    <form method="POST" action="{{ route('register') }}" data-form="ajax-form" data-redirect-url="{{route('dashboard')}}" style="width: 40%; margin: auto;">
+    <x-slot name="styles">
+        <style>
+            .nk-wrap-nosidebar .nk-content{
+                min-height: auto!important;
+            }
+        </style>
+    </x-slot>
+    <form method="POST" action="{{ route('register') }}" data-form="ajax-form" data-redirect-url="{{route('dashboard')}}" class="form-container">
         @csrf
         <div class="row">
             <div class="col-md-6 mt-3">
@@ -104,9 +102,10 @@
                 </div>
             </div>
         </div>
-    </form>
+        
     <div class="form-note-s2 text-center pt-4"> 
         Already have an account? 
         <a href="{{ route('login') }}"><strong>Sign in instead</strong></a>
     </div>
+    </form>
 </x-guest-layout>
