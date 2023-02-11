@@ -16,8 +16,17 @@ class ProfileUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['string', 'max:255'],
-            'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
+            'name'           => ['required_without:address', 'string', 'max:255'],
+            'country_code'   => ['required_without:address', 'min:2', 'max:2'],
+            'mobile'         => ['required_without:address', 'regex:/[0-9]{10}/'],
+        ];
+    }
+
+    public function messages(){
+        return [
+            'name.required_without' => "Name is required",
+            'country_code.required_without' => "Country code is required",
+            'mobile.required_without' => "Mobile number is required",
         ];
     }
 }

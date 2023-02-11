@@ -79,7 +79,8 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'status' => Status::class
+        'status' => Status::class,
+        'address' => 'object'
     ];
 
     public function planUser()
@@ -101,6 +102,11 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(User::class, 'ref_by');
     }
+
+    public function team() {
+        return $this->hasMany(User::class, 'ref_by')->with('team.planUser');
+    }
+
     public function refBy()
     {
         return $this->belongsTo(User::class, 'ref_by');

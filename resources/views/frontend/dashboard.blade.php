@@ -15,10 +15,10 @@
         <div class="nk-block-between-md g-4">
             <div class="nk-block-head">
                 <div class="nk-block-head-sub"><span>Welcome!</span></div>
-                <div class="nk-block-head-content">
+                <a href="{{route('profile.show')}}" class="nk-block-head-content">
                     <h2 class="nk-block-title fw-normal">{{ $user->name }}</h2>
                     <div class="nk-block-des"><p></p></div>
-                </div>
+                </a>
             </div><!-- .nk-block-head-content -->
             <div class="nk-block-head-content">
                 <ul class="nk-block-tools gx-3">
@@ -48,15 +48,15 @@
                                         <div class="nk-wg7-title">
                                             Total Deposit in {{ $cur_text }}
                                         </div>
-                                        <div class="number-lg amount">
+                                        <a href="{{ route('reports.payments', ['deposit', 'default']) }}" class="text-white number-lg amount">
                                             {{ currency($user->planUser->balance, true) }} 
-                                        </div>
+                                        </a>
                                     </div>
                                     <div class="nk-wg7-stats-group">
-                                        <div class="nk-wg7-stats w-70">
+                                        <a href="{{route('reports.transactions')}}?keyword=profit_bonus" class="nk-wg7-stats w-70 text-white">
                                             <div class="nk-wg7-title">Profit Balance</div>
                                             <div class="number-lg">{{ currency($user->planUser->profit_bonus, true) }}</div>
-                                        </div>
+                                        </a>
                                         <div class="nk-wg7-stats w-50">
                                             <div class="nk-wg7-title">
                                                 Plan

@@ -58,8 +58,8 @@ class RegistrationRequest extends FormRequest
                 ],
                 'password' => ['required', 'min:8'],
                 'password_confirmation' => ['required', 'min:8', 'same:password'],
-                'country_code'          => ['required', 'min:4', 'max:4'],
-                'mobile'         => ['required', 'regex:/[0-9]{7}/'],
+                'country_code'          => ['required', 'min:2', 'max:2'],
+                'mobile'         => ['required', 'regex:/[0-9]{10}/'],
                 'terms'          => 'required'
                 // 'avatar' => "sometimes|mimes:png,jpg,jpeg|max:$size|dimensions:$avatarKeys[0]=$width,$avatarKeys[1]=$height",
                 // 'addresses.*.name' => 'required_with:addresses.*.address',

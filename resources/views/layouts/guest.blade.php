@@ -51,9 +51,18 @@
                                             <li class="nav-item">
                                               <a class="nav-link" href="#">Contact</a>
                                             </li>
-                                            <li class="nav-item">
-                                              <a class="nav-link" href="{{route('login')}}">Login</a>
+                                            @guest
+                                              <li class="nav-item">
+                                                <a class="nav-link" href="{{route('login')}}">Login</a>
+                                              </li>
+                                              <li class="nav-item">
+                                                <a class="nav-link" href="{{route('register')}}">Login</a>
+                                              </li>
+                                             @else 
+                                             <li class="nav-item">
+                                              <a class="nav-link" href="{{route('dashboard')}}">Dashboard</a>
                                             </li>
+                                            @endguest
                                           </ul>
                                         </div>
                                     </nav>

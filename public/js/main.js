@@ -28,7 +28,7 @@ NioApp.coms.docReady.push(function(){
         const backendModal = form.data('backend-modal');
         const redirectURL = form.data('redirect-url');
         const closeModal = form.data('close');
-        const submitBtn = form.find('[type=submit');
+        const submitBtn = form.find('[type=submit]');
         submitBtn.append(spinner);
         submitBtn.attr("disabled", "disabled").button('refresh');
         await ajax(form.attr('action'), form.attr('method'), function(response){
@@ -50,24 +50,30 @@ NioApp.coms.docReady.push(function(){
             submitBtn.removeAttr("disabled").button('refresh');
             if(redirectURL) window.location.href = redirectURL;
         }, form[0], true)
-        return;
-        
-        if (confirm=='yes') {
-            window.swal.fire({
-                title: 'Are you sure?',
-                text: "Do you really want to submit this form?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: "Yes, do it!"
-            }).then((result) => {
-                if (result.value) 
-                    console.log("a")
-            });
-        } else {
-            sendAjaxForm(form);
-        }
+    });
+
+    $('body').on('click', '[data-act=modal-form]', async function(e) {
+        const _self = $(this);
+        const backendModal = _self.data('backend-modal');
+        const action = _self.data('action');
+        const method = _self.data('method');
+        await ajax(action, method, function(response){
+            if(backendModal){
+                $('body').append(response);
+                const modal = $(`#${backendModal}`);
+                modal.modal('show');
+                NioApp.Select2.init()
+                modal.on('hidden.bs.modal', function(){
+                    modal.remove()
+                })
+            }
+            if(method == "DELETE"){
+                $(e.target).closest('tr').remove();
+            }
+            if(response.message) NioApp.Toast(response.message, 'success');
+            $('.custom-file-label').html('');
+            $('#spinner').remove()
+        })
     });
     
 })

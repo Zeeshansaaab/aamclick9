@@ -21,8 +21,8 @@ use App\Http\Controllers\ProfileController;
 // });
 
 Route::get('/', function () {
-    return redirect()->route('dashboard');
-    // return view('frontend.home');
+    // return redirect()->route('dashboard');
+    return view('frontend.home');
 })->name('home');
 
 Route::get('/scrape', function () {
@@ -30,7 +30,10 @@ Route::get('/scrape', function () {
 });
 Route::middleware(['auth'])->group(function () {
    
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/login-activity', [ProfileController::class, 'loginLogs'])->name('profile.login-logs');
+    Route::delete('/profile/login-activity/{log}', [ProfileController::class, 'destroyLoginLogs'])->name('profile.destroy.login-logs');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('dashboard', [App\Http\Controllers\FrontEnd\DashboardController::class, 'index'])->name('dashboard');
