@@ -1,5 +1,5 @@
 // const { ajax } = require("jquery");
-var spinner = '<span style="width: 17px;" id="spinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>';
+var spinner = '<span style="width: 17px; margin-left:10px;" id="spinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>';
 NioApp.coms.docReady.push(function(){ 
     $(document).on('click', '.search-submit', function(){
         searchKeyword(this)

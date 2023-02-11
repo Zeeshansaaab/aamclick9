@@ -14,7 +14,7 @@ class DashboardController extends Controller
     public function index()
     {
         $user = auth()->user()->load(['planUser.plan', 'referrals']);
-        $transactions = auth()->user()->transactions()->orderByDesc('id')->limit(4)->get();
+        $transactions = auth()->user()->transactions()->where('remark', 'profit_bonus')->orderByDesc('id')->limit(4)->get();
         return view('frontend.dashboard', [
             'last_login'   => auth()->user()->loginLogs()->latest()->first()->updated_at,
             'user'         => $user,

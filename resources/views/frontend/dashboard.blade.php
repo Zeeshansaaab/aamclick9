@@ -14,7 +14,9 @@
             <div class="nk-block-head">
                 <div class="nk-block-head-sub"><span>Welcome!</span></div>
                 <a href="{{route('profile.show')}}" class="nk-block-head-content">
-                    <h2 class="nk-block-title fw-normal">{{ $user->name }}</h2>
+                    <h2 class="nk-block-title fw-normal">{{ $user->name }}
+                        <span class="badge badge-primary">{{$user->planUser->plan->name}}</span>
+                    </h2>
                     <div class="nk-block-des"><p></p></div>
                 </a>
             </div><!-- .nk-block-head-content -->
@@ -51,25 +53,15 @@
                                         </a>
                                     </div>
                                     <div class="nk-wg7-stats-group">
-                                        <a href="{{route('reports.transactions')}}?keyword=profit_bonus" class="nk-wg7-stats w-70 text-white">
+                                        <a href="{{route('reports.transactions')}}?keyword=profit_bonus" class="nk-wg7-stats w-100 text-white">
                                             <div class="nk-wg7-title">Profit Balance</div>
                                             <div class="number-lg">{{ currency($user->planUser->profit_bonus, true) }}</div>
                                         </a>
-                                        <div class="nk-wg7-stats w-50">
-                                            <div class="nk-wg7-title">
-                                                Plan
-                                            </div>
-                                            <div class="number">
-                                                @if($user->planUser->plan)
-                                                {{ $user->planUser->plan->name }}
-                                                @endif
-                                            </div>
-                                        </div>
                                     </div>
                                     <div class="nk-wg7-foot">
                                         <span class="nk-wg7-note">Last login at
-                                            <span>{{formatDateTime($last_login)}}</span></span
-                                        >
+                                            <span>{{formatDateTime($last_login)}}</span>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -367,7 +359,7 @@
             @if(count($transactions) > 0)
             <div class="card-head">
                 <div class="card-title mb-0">
-                    <h5 class="title">Recent Transactions</h5>
+                    <h5 class="title">Profit Bonus</h5>
                 </div>
             </div>
             <div class="tranx-list card card-bordered">

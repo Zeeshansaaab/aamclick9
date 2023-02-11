@@ -172,6 +172,7 @@ function levelCommission($user, $amount, $commissionType)
                     'amount'        => $commission,
                     'charge'        => 0,
                     'trx_type'      => '+',
+                    'post_balance'  => $referer->planLevel->$commissionType,
                     'trx'           => getTrx(),
                     'details'       => $commissionLevel->percent . "% profit bonus added",
                     'remark'        => 'referral_commission',

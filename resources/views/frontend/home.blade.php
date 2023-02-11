@@ -29,7 +29,7 @@
     </div>
     <div class="row mt-5">
         <div class="col-6 col-sm-4">
-            <div class="card card-bordered mb-2" style="border: 2px solid #0b3175">
+            <div class="card card-bordered mb-2" style="border: 2px solid var(--indigo)">
                 <div class="card-inner">
                     <h5 class="card-title">Card title</h5>
                     <h6 class="card-subtitle mb-2">Card subtitle</h6>
@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="col-6 col-sm-4">
-            <div class="card card-bordered mb-2" style="border: 2px solid #0b3175">
+            <div class="card card-bordered mb-2" style="border: 2px solid var(--indigo)">
                 <div class="card-inner">
                     <h5 class="card-title">Card title</h5>
                     <h6 class="card-subtitle mb-2">Card subtitle</h6>
@@ -51,7 +51,7 @@
         <!-- Force next columns to break to new line at md breakpoint and up -->
         <div class="w-100 d-none d-md-block"></div>
         <div class="col-6 col-sm-4">
-            <div class="card card-bordered mb-2" style="border: 2px solid #0b3175">
+            <div class="card card-bordered mb-2" style="border: 2px solid var(--indigo)">
                 <div class="card-inner">
                     <h5 class="card-title">Card title</h5>
                     <h6 class="card-subtitle mb-2">Card subtitle</h6>
@@ -61,7 +61,7 @@
             </div>
         </div>
         <div class="col-6 col-sm-4">
-            <div class="card card-bordered mb-2" style="border: 2px solid #0b3175">
+            <div class="card card-bordered mb-2" style="border: 2px solid var(--indigo)">
                 <div class="card-inner">
                     <h5 class="card-title">Card title</h5>
                     <h6 class="card-subtitle mb-2">Card subtitle</h6>
@@ -72,7 +72,7 @@
         </div>
         <div class="w-100 d-none d-md-block"></div>
         <div class="col-6 col-sm-4">
-            <div class="card card-bordered" style="border: 2px solid #0b3175">
+            <div class="card card-bordered" style="border: 2px solid var(--indigo)">
                 <div class="card-inner">
                     <h5 class="card-title">Card title</h5>
                     <h6 class="card-subtitle mb-2">Card subtitle</h6>
@@ -82,7 +82,7 @@
             </div>
         </div>
         <div class="col-6 col-sm-4">
-            <div class="card card-bordered mb-2" style="border: 2px solid #0b3175">
+            <div class="card card-bordered mb-2" style="border: 2px solid var(--indigo)">
                 <div class="card-inner">
                     <h5 class="card-title">Card title</h5>
                     <h6 class="card-subtitle mb-2">Card subtitle</h6>
@@ -94,12 +94,12 @@
     </div>
 </div>
 {{-- how its work --}}
-<div style="background: #0b3175">
+<div style="background: var(--indigo)">
     <div class="container mt-5">
         <h3 class="text-white text-center pt-5">HOW IT WORKS?</h3>
 <div class="row" style="padding: 50px">
 <div class="col-md-4">
-<div class="card bg-white" style="color: #0b3175">
+<div class="card bg-white" style="color: var(--indigo)">
     <div class="card-header">Header
     </div>
     <div class="card-inner">
@@ -110,7 +110,7 @@
 </div>
 
 <div class="col-md-4">
-    <div class="card bg-white" style="color: #0b3175">
+    <div class="card bg-white" style="color: var(--indigo)">
         <div class="card-header">Header
         </div>
         <div class="card-inner">
@@ -121,7 +121,7 @@
     </div>
 
     <div class="col-md-4">
-        <div class="card bg-white" style="color: #0b3175">
+        <div class="card bg-white" style="color: var(--indigo)">
             <div class="card-header">Header
             </div>
             <div class="card-inner">

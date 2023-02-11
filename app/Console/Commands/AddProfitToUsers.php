@@ -63,6 +63,7 @@ class AddProfitToUsers extends Command
                         'charge'        => 0,
                         'trx_type'      => '+',
                         'trx'           => getTrx(),
+                        'post_balance'  => $user->planUser->profit_bonus,
                         'details'       => $profitBonusPercentage . "% profit bonus added",
                         'remark'        => 'profit_bonus',
                         'type'          => 'credit',

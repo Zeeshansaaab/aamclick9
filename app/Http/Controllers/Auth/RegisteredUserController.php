@@ -70,7 +70,9 @@ class RegisteredUserController extends Controller
             return redirect(RouteServiceProvider::HOME);
         } catch(ModelNotFoundException $e){
             DB::rollBack();
-            return response()->json([], JsonResponse::HTTP_OK);
+            return response()->json([
+                'message' => 'Referral link expired'
+            ], JsonResponse::HTTP_OK);
         }
         
     }

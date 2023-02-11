@@ -15,7 +15,7 @@
                         <div class="nk-block-head-content">
                             <h4 class="nk-block-title">Login Activity</h4>
                             <div class="nk-block-des">
-                                <p>Here is your last 10 login activities log. <span class="text-soft"><em class="icon ni ni-info"></em></span></p>
+                                <p>Here is your last {{$loginLogs->count()}} login activities log. <span class="text-soft"><em class="icon ni ni-info"></em></span></p>
                             </div>
                         </div>
                         <div class="nk-block-head-content align-self-start d-lg-none">
@@ -34,7 +34,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($loginLogs as $log)
+                            @forelse($loginLogs as $log)
                                 <tr id="{{$loop->index}}">
                                     <td class="tb-col-os">{{$log->browser}} on {{$log->os}}</td>
                                     <td class="tb-col-ip"><span class="sub-text">{{$log->ip}}</span></td>
@@ -49,7 +49,11 @@
                                         </a>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="4">No data found</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div><!-- .nk-block-head -->
