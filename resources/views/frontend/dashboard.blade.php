@@ -1,7 +1,5 @@
 
 @php
-    $user = auth()->user()->load(['planUser.plan', 'referrals']);
-    $transactions = auth()->user()->transactions()->orderByDesc('id')->limit(4)->get();
     $cur_text = cur_text();
 @endphp
 <x-app-layout>

@@ -13,8 +13,12 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        $user = auth()->user()->load(['planUser.plan', 'referrals']);
+        $transactions = auth()->user()->transactions()->orderByDesc('id')->limit(4)->get();
         return view('frontend.dashboard', [
-            'last_login'         => auth()->user()->loginLogs()->latest()->first()->updated_at
+            'last_login'   => auth()->user()->loginLogs()->latest()->first()->updated_at,
+            'user'         => $user,
+            'transactions' => $transactions
         ]);
     }
 
