@@ -57,6 +57,9 @@ NioApp.coms.docReady.push(function(){
         const backendModal = _self.data('backend-modal');
         const action = _self.data('action');
         const method = _self.data('method');
+        const tr = _self.data('tr');;
+        const btnHtml = _self.html();
+        _self.html(spinner);
         await ajax(action, method, function(response){
             if(backendModal){
                 $('body').append(response);
@@ -68,11 +71,11 @@ NioApp.coms.docReady.push(function(){
                 })
             }
             if(method == "DELETE"){
-                $(e.target).closest('tr').remove();
+                $(tr).remove();
             }
             if(response.message) NioApp.Toast(response.message, 'success');
             $('.custom-file-label').html('');
-            $('#spinner').remove()
+            _self.html(btnHtml);
         })
     });
     
