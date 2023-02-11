@@ -1,3 +1,6 @@
+@props([
+  'header' => true
+])
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -17,6 +20,7 @@
             <!-- main @s -->
             <div class="nk-main ">
                 <div class="nk-wrap-nosidebar">
+                    @if($header)
                     <div class="nk-header nk-header-fluid nk-header-fixed is-light">
                         <div class="container-fluid">
                             <div class="nk-header-wrap" style="height: 60px;">
@@ -70,6 +74,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                     <div class="nk-content nk-content-fluid">
                         <div class="nk-content-body">
                             <div class="nk-block">

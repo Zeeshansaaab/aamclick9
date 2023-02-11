@@ -16,9 +16,9 @@ class ProfileUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'           => ['required_without:address', 'string', 'max:255'],
+            'name'           => ['required_without:address', 'string', 'max:255', 'unique:users,name,'. auth()->user()->id .',id'],
             'country_code'   => ['required_without:address', 'min:2', 'max:2'],
-            'mobile'         => ['required_without:address', 'regex:/[0-9]{10}/'],
+            'mobile'         => ['required_without:address', 'regex:/[0-9]{10}/', 'unique:users,mobile,'. auth()->user()->id .',id'],
         ];
     }
 

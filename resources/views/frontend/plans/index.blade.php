@@ -28,13 +28,9 @@
                             </div>
                             <div class="card-text">
                                 <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-12 text-center">
                                         <span class="h6 fw-500">{{ $plan->min_profit_percent }} to {{ $plan->max_profit_percent }} %</span>
                                         <span class="sub-text">Estimated profit</span>
-                                    </div>
-                                    <div class="col-6">
-                                        <span class="h6 fw-500">{{ $plan->validity }}</span>
-                                        <span class="sub-text">Amount return</span>
                                     </div>
                                 </div>
                             </div>
