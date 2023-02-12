@@ -1,13 +1,7 @@
 <?php
 
-use App\Models\User;
-use App\Enums\Status;
 use App\Jobs\ScrapperJob;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\ProfileController;
 
 /*
@@ -21,10 +15,10 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-Route::get('crons', function () {
-    Artisan::call('schedule:work');
-    return "PHP ARTISAN Schedule:work";
-});
+// Route::get('crons', function () {
+//     Artisan::call('schedule:work');
+//     return "PHP ARTISAN Schedule:work";
+// });
 
 Route::get('/', function () {
     // return redirect()->route('dashboard');
@@ -34,16 +28,19 @@ Route::get('/', function () {
 Route::get('/scrape', function () {
     ScrapperJob::dispatch();
 });
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
    
-    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/login-activity', [ProfileController::class, 'loginLogs'])->name('profile.login-logs');
+    Route::delete('/profile/login-activity/{log}', [ProfileController::class, 'destroyLoginLogs'])->name('profile.destroy.login-logs');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('dashboard', [App\Http\Controllers\FrontEnd\DashboardController::class, 'index'])->name('dashboard');
     Route::get('dashboard/chart', [App\Http\Controllers\FrontEnd\DashboardController::class, 'charts'])->name('dashboard.chart');
     //Referrals
-    Route::get('referrals', [App\Http\Controllers\FrontEnd\UserController::class, 'referrals'])->name('referrals');
-    Route::get('referrals/table', [App\Http\Controllers\FrontEnd\UserController::class, 'loadReferralTable'])->name('referrals.table');
+    Route::get('referrals/{level}', [App\Http\Controllers\FrontEnd\UserController::class, 'referrals'])->name('referrals');
+    Route::get('referrals/table/{level}', [App\Http\Controllers\FrontEnd\UserController::class, 'loadReferralTable'])->name('referrals.table');
     
     Route::prefix('reports')->name('reports.')->group(function () {
         //Transactions

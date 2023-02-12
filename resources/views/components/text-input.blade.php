@@ -6,10 +6,12 @@
         <em class="passcode-icon icon-show icon ni ni-eye"></em>
         <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
     </a>
-    <input type="password" class="form-control form-control-lg" id="{{ $id }}" placeholder="Enter your passcode" {{ $attributes }}>
+    <input type="password" class="form-control form-control-lg" id="{{ $id }}" 
+    @if($disabled) disabled @endif
+    placeholder="Enter your passcode" {{ $attributes }}>
 </div>
 @elseif ($type == 'checkbox')
-    <input type="checkbox" class="custom-control-input" id="checkbox" {{ $attributes }}>
+    <input type="checkbox" class="custom-control-input" id="checkbox"  @if($disabled) disabled @endif {{ $attributes }}>
 @else
-<input type="{{ $type }}" {!! $attributes->merge(['class' => 'form-control form-control-lg']) !!}>
+<input type="{{ $type }}"  @if($disabled) disabled @endif {!! $attributes->merge(['class' => 'form-control form-control-lg']) !!}>
 @endif

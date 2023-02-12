@@ -1,8 +1,8 @@
-@props(['title', 'links' => []])
+@props(['title', 'links' => [], 'icon'])
 <li class="nk-menu-item has-sub">
     <a href="#" class="nk-menu-link nk-menu-toggle" >
         <span class="nk-menu-icon">
-            <em class="icon ni ni-files"></em>
+            <em class="icon ni {{$icon}}"></em>
         </span>
         <span class="nk-menu-text">{{ $title }}</span>
     </a>

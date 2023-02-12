@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link rel="icon" type="image/x-icon" href="/favicon.ico">
-        <title>{{ $title }} | {{ config('app.name', 'Laravel') }}</title>
+        <title>{{ isset($title) ? $title : '' }} | {{ config('app.name', 'Laravel') }}</title>
 
         <!-- Styles -->
         {{-- <link rel="stylesheet" href="{{ mix('css/theme.css') }}" /> --}}
@@ -57,7 +57,7 @@
         {{ isset($scripts) ? $scripts : ''}}
         
         <script>
-            var limit = 5;
+            var limit = 2;
             $(document).on('click', '.notification-dropdown-trigger, .view-all, .markAllasread', function(){
                 let count = parseInt("{{auth()->user()->unreadNotifications->count()}}");
                 var is_all = false;

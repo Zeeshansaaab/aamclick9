@@ -32,7 +32,7 @@
                             <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                                 <div class="user-card">
                                     <div class="user-avatar">
-                                        <span>AB</span>
+                                        <span>{{nameAronnym(auth()->user()->name)}}</span>
                                     </div>
                                     <div class="user-info">
                                         <span class="lead-text">{{ auth()->user()->name }}</span>
@@ -42,9 +42,8 @@
                             </div>
                             <div class="dropdown-inner">
                                 <ul class="link-list">
-                                    {{-- <li><a href="html/crypto/profile.html"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
-                                    <li><a href="html/crypto/profile-security.html"><em class="icon ni ni-setting-alt"></em><span>Account Setting</span></a></li>
-                                    <li><a href="html/crypto/profile-activity.html"><em class="icon ni ni-activity-alt"></em><span>Login Activity</span></a></li> --}}
+                                    <li><a href="{{route('profile.show')}}"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
+                                    <li><a href="{{route('profile.login-logs')}}"><em class="icon ni ni-activity-alt"></em><span>Login Activity</span></a></li>
                                     <li><a class="dark-switch" href="#"><em class="icon ni ni-moon"></em><span>Dark Mode</span></a></li>
                                 </ul>
                             </div>
@@ -57,7 +56,6 @@
                                                 <em class="icon ni ni-signout">
                                             </em><span>Sign out</span></a></a>
                                           </form>
-                                        
                                     </li>
                                 </ul>
                             </div>

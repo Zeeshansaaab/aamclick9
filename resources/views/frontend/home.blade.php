@@ -1,15 +1,15 @@
 <x-guest-layout>
     {{-- slider --}}
-    <div id="carouselExFade" class="carousel slide carousel-fade" data-ride="carousel">
+    <div id="carouselExFade" class="carousel slide carousel-fade" data-ride="carousel" style="margin-top: 50px;">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="{{ getFile('images/slides/slide1.jpeg') }}" class="d-block w-100" alt="carousel">
+                <img src="{{ 'images/slides/slide1.jpeg' }}" class="d-block w-100" alt="carousel">
             </div>
             <div class="carousel-item">
-                <img src="{{ getFile('images/slides/slide2.jpeg') }}" class="d-block w-100" alt="carousel">
+                <img src="{{ 'images/slides/slide2.jpeg' }}" class="d-block w-100" alt="carousel">
             </div>
             <div class="carousel-item">
-                <img src="{{ getFile('images/slides/slide3.jpeg') }}" class="d-block w-100" alt="carousel">
+                <img src="{{ 'images/slides/slide3.jpeg' }}" class="d-block w-100" alt="carousel">
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExFade" role="button" data-slide="prev">

@@ -1,7 +1,5 @@
 
 @php
-    $user = auth()->user()->load(['planUser.plan', 'referrals']);
-    $transactions = auth()->user()->transactions()->orderByDesc('id')->limit(4)->get();
     $cur_text = cur_text();
 @endphp
 <x-app-layout>
@@ -15,10 +13,12 @@
         <div class="nk-block-between-md g-4">
             <div class="nk-block-head">
                 <div class="nk-block-head-sub"><span>Welcome!</span></div>
-                <div class="nk-block-head-content">
-                    <h2 class="nk-block-title fw-normal">{{ $user->name }}</h2>
+                <a href="{{route('profile.show')}}" class="nk-block-head-content">
+                    <h2 class="nk-block-title fw-normal">{{ $user->name }}
+                        <span class="badge badge-primary">{{$user->planUser->plan->name}}</span>
+                    </h2>
                     <div class="nk-block-des"><p></p></div>
-                </div>
+                </a>
             </div><!-- .nk-block-head-content -->
             <div class="nk-block-head-content">
                 <ul class="nk-block-tools gx-3">
@@ -48,30 +48,20 @@
                                         <div class="nk-wg7-title">
                                             Total Deposit in {{ $cur_text }}
                                         </div>
-                                        <div class="number-lg amount">
+                                        <a href="{{ route('reports.payments', ['deposit', 'default']) }}" class="text-white number-lg amount">
                                             {{ currency($user->planUser->balance, true) }} 
-                                        </div>
+                                        </a>
                                     </div>
                                     <div class="nk-wg7-stats-group">
-                                        <div class="nk-wg7-stats w-70">
+                                        <a href="{{route('reports.transactions')}}?keyword=profit_bonus" class="nk-wg7-stats w-100 text-white">
                                             <div class="nk-wg7-title">Profit Balance</div>
                                             <div class="number-lg">{{ currency($user->planUser->profit_bonus, true) }}</div>
-                                        </div>
-                                        <div class="nk-wg7-stats w-50">
-                                            <div class="nk-wg7-title">
-                                                Plan
-                                            </div>
-                                            <div class="number">
-                                                @if($user->planUser->plan)
-                                                {{ $user->planUser->plan->name }}
-                                                @endif
-                                            </div>
-                                        </div>
+                                        </a>
                                     </div>
                                     <div class="nk-wg7-foot">
                                         <span class="nk-wg7-note">Last login at
-                                            <span>{{formatDate($last_login)}}</span></span
-                                        >
+                                            <span>{{formatDateTime($last_login)}}</span>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -369,7 +359,7 @@
             @if(count($transactions) > 0)
             <div class="card-head">
                 <div class="card-title mb-0">
-                    <h5 class="title">Recent Transactions</h5>
+                    <h5 class="title">Profit Bonus</h5>
                 </div>
             </div>
             <div class="tranx-list card card-bordered">
