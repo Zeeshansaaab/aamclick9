@@ -249,7 +249,11 @@
         </div>
     </div>
     </div>
-    <div class=" container-fluid">
+    <div class="container">
+        
+        <!-- celander start -->
+        <x-homepage.calender />
+        <!-- celander end -->
         <div class="row margin-max-top margin-max-rbl">
             <div class="col-md-6">
                 <h2 class="font-weight-bold text-center">
@@ -270,164 +274,160 @@
         <!-- table Starts -->
         <h2 class="font-weight-bold text-center mt-5 mb-5">
             PRICES </h2>
-        <div class="container">
-            <table class="table margin-max-top border-color">
-                <thead class="bg-site text-light">
-                    <tr class="">
-                        <th class="py-3">Symbol</th>
-                        <th class="py-3">Name</th>
-                        <th class="py-3">USD</th>
-                        <th class="py-3">Change 24h</th>
-                        <th class="py-3">Change 7D</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="border-color">
-                        <th class="py-2">USD</th>
-                        <td class="py-2">Dollar</td>
-                        <td class="py-2">180.00</td>
-                        <td class="py-2">0.00</td>
-                        <td class="py-2">0.00</td>
-                    </tr>
-                    <tr class="border-color">
-                        <th class="py-2">AAM</th>
-                        <td class="py-2">AAM TOKKEN</td>
-                        <td class="py-2">0.00</td>
-                        <td class="py-2">0.00</td>
-                        <td class="py-2">0.00</td>
-                    </tr>
-                    <tr class="border-color">
-                        <th class="py-2">USDT</th>
-                        <td class="py-2">USDT</td>
-                        <td class="py-2">208.00</td>
-                        <td class="py-2">0.00</td>
-                        <td class="py-2">0.00</td>
-                    </tr>
-                </tbody>
-            </table>
-
-        </div>
+        <table class="table margin-max-top border-color">
+            <thead class="bg-site text-light">
+                <tr class="">
+                    <th class="py-3">Symbol</th>
+                    <th class="py-3">Name</th>
+                    <th class="py-3">USD</th>
+                    <th class="py-3">Change 24h</th>
+                    <th class="py-3">Change 7D</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="border-color">
+                    <th class="py-2">USD</th>
+                    <td class="py-2">Dollar</td>
+                    <td class="py-2">180.00</td>
+                    <td class="py-2">0.00</td>
+                    <td class="py-2">0.00</td>
+                </tr>
+                <tr class="border-color">
+                    <th class="py-2">AAM</th>
+                    <td class="py-2">AAM TOKKEN</td>
+                    <td class="py-2">0.00</td>
+                    <td class="py-2">0.00</td>
+                    <td class="py-2">0.00</td>
+                </tr>
+                <tr class="border-color">
+                    <th class="py-2">USDT</th>
+                    <td class="py-2">USDT</td>
+                    <td class="py-2">208.00</td>
+                    <td class="py-2">0.00</td>
+                    <td class="py-2">0.00</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <!-- table end -->
-    <!-- celander start -->
-    <!-- celander end -->
     <!-- plans starts -->
     <section class="section section-pricing margin-top-max" id="pricing">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-7">
-                            <div class="section-head text-center">
-                                <h2 class="font-weight-bold margin-max-top">OUR MEMBERSHIP PLANS</h2>
-                                <p>Continually network virtual strategic theme areas vis-a-vis ubiquitous potentialities. Holisticly negotiate focused e-tailers without premium solutions.</p>
-                            </div><!-- .section-head -->
-                        </div>
-                    </div><!-- .row -->
-                    <div class="row justify-content-center justify-content-lg-between align-items-center g-gs margin-max-top">
-                        <div class="col-xl-3 col-sm-6">
-                            <div class="pricing pricing-s2 card card-shadow round-md">
-                                <div class="card-inner card-inner-lg">
-                                    <h2 class="site-text-color text-center d-inline">FREE Details</h2> 
-                                    <div class="row mt-3">
-                                            <div class="col-6">
-                                        <h6 class="text-center">Min Deposit</h6>
-                                        <span class="my-1 text-center">0.00 USD</span>
-                                            </div>
-                                            <div class="col-6">
-                                        <h6 class="text-center">Max Deposit</h6>
-                                        <span class="my-1 text-center">49.00 USD</span>
-                                        </div>
-                                     </div>
-                                    <hr class="hr border-light">
-                                    <ul class="pricing-feature text-center">
-                                        <li><h6>Estimated Profit</h6></li>
-                                        <li class="my-1">6.00 to 16.00 %</li>
-                                        <li><h6>Amount Return</h6></li>
-                                        <li>0</li>
-                                        <li></li>
-                                        
-                                        <li><h5>Deposit Commission</h5></li>
-                                        <li><h6>Level 1</h6></li>
-                                        <li class="my-1">1.0000000 %</li>
-                                        <li><h6>Level 2</h6></li>
-                                        <li class="my-1">1.0000000 %</li>
-                                        <li><h5>Profit Bonus</h5></li>
-                                        <li><h6>Level 1</h6></li>
-                                        <li class="my-1">1.0000000 %</li>
-
-
-
-
-
-
-                                    </ul>
-                                    <div class="pricing-action">
-                                        <a href="#" class="btn btn-outline-primary btn-lg btn-round"><span>Purchase Now</span></a>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div class="section-head text-center">
+                        <h2 class="font-weight-bold margin-max-top">OUR MEMBERSHIP PLANS</h2>
+                        <p>Continually network virtual strategic theme areas vis-a-vis ubiquitous potentialities. Holisticly negotiate focused e-tailers without premium solutions.</p>
+                    </div><!-- .section-head -->
+                </div>
+            </div><!-- .row -->
+            <div class="row justify-content-center justify-content-lg-between align-items-center g-gs margin-max-top">
+                <div class="col-xl-3 col-sm-6">
+                    <div class="pricing pricing-s2 card card-shadow round-md">
+                        <div class="card-inner card-inner-lg">
+                            <h2 class="site-text-color text-center d-inline">FREE Details</h2> 
+                            <div class="row mt-3">
+                                    <div class="col-6">
+                                <h6 class="text-center">Min Deposit</h6>
+                                <span class="my-1 text-center">0.00 USD</span>
                                     </div>
-                                </div><!-- card-inner -->
-                            </div><!-- .pricing .card -->
-                        </div><!-- .col -->
-                        <div class="col-xl-3 col-sm-6">
-                            <div class="pricing pricing-s2 card card-shadow round-md">
-                                <div class="card-inner card-inner-lg">
-                                    <div class="pricing-badge">Popular</div>
-                                    <h2 class="pricing-anount text-purple">$35.00</h2>
-                                    <h5 class="pricing-title">Premium Account</h5>
-                                    <span class="sub-title">Only for first month</span>
-                                    <hr class="hr border-light">
-                                    <ul class="pricing-feature list list-nostyle">
-                                        <li>Limited Acess Library</li>
-                                        <li>Hotline Support 24/7</li>
-                                        <li>Additional Features</li>
-                                        <li>eCommerce Store</li>
-                                    </ul>
-                                    <div class="pricing-action">
-                                        <a href="#" class="btn btn-primary btn-lg btn-round"><span>Purchase Now</span></a>
-                                    </div>
-                                </div><!-- card-inner -->
-                            </div><!-- .pricing .card -->
-                        </div><!-- .col -->
-                        <div class="col-xl-3 col-sm-6">
-                            <div class="pricing pricing-s2 card card-shadow round-md">
-                                <div class="card-inner card-inner-lg">
-                                    <h2 class="pricing-anount text-purple">$24.00</h2>
-                                    <h5 class="pricing-title">Standard Account</h5>
-                                    <span class="sub-title">Only for first month</span>
-                                    <hr class="hr border-light">
-                                    <ul class="pricing-feature list list-nostyle">
-                                        <li>Limited Acess Library</li>
-                                        <li>Hotline Support 24/7</li>
-                                        <li>Additional Features</li>
-                                        <li>eCommerce Store</li>
-                                    </ul>
-                                    <div class="pricing-action">
-                                        <a href="#" class="btn btn-outline-primary btn-lg btn-round"><span>Purchase Now</span></a>
-                                    </div>
-                                </div><!-- card-inner -->
-                            </div><!-- .pricing .card -->
-                        </div><!-- .col -->
-                        <div class="col-xl-3 col-sm-6">
-                            <div class="pricing pricing-s2 card card-shadow round-md">
-                                <div class="card-inner card-inner-lg">
-                                    <h2 class="pricing-anount text-purple">$29.00</h2>
-                                    <h5 class="pricing-title">Starter Account</h5>
-                                    <span class="sub-title">Only for first month</span>
-                                    <hr class="hr border-light">
-                                    <ul class="pricing-feature list list-nostyle">
-                                        <li>Limited Acess Library</li>
-                                        <li>Hotline Support 24/7</li>
-                                        <li>Additional Features</li>
-                                        <li>eCommerce Store</li>
-                                    </ul>
-                                    <div class="pricing-action">
-                                        <a href="#" class="btn btn-outline-primary btn-lg btn-round"><span>Purchase Now</span></a>
-                                    </div>
-                                </div><!-- card-inner -->
-                            </div><!-- .pricing .card -->
-                        </div><!-- .col -->
-                    </div><!-- .row -->
-                </div><!-- .container -->
-            </section>
+                                    <div class="col-6">
+                                <h6 class="text-center">Max Deposit</h6>
+                                <span class="my-1 text-center">49.00 USD</span>
+                                </div>
+                                </div>
+                            <hr class="hr border-light">
+                            <ul class="pricing-feature text-center">
+                                <li><h6>Estimated Profit</h6></li>
+                                <li class="my-1">6.00 to 16.00 %</li>
+                                <li><h6>Amount Return</h6></li>
+                                <li>0</li>
+                                <li></li>
+                                
+                                <li><h5>Deposit Commission</h5></li>
+                                <li><h6>Level 1</h6></li>
+                                <li class="my-1">1.0000000 %</li>
+                                <li><h6>Level 2</h6></li>
+                                <li class="my-1">1.0000000 %</li>
+                                <li><h5>Profit Bonus</h5></li>
+                                <li><h6>Level 1</h6></li>
+                                <li class="my-1">1.0000000 %</li>
+
+
+
+
+
+
+                            </ul>
+                            <div class="pricing-action">
+                                <a href="#" class="btn btn-outline-primary btn-lg btn-round"><span>Purchase Now</span></a>
+                            </div>
+                        </div><!-- card-inner -->
+                    </div><!-- .pricing .card -->
+                </div><!-- .col -->
+                <div class="col-xl-3 col-sm-6">
+                    <div class="pricing pricing-s2 card card-shadow round-md">
+                        <div class="card-inner card-inner-lg">
+                            <div class="pricing-badge">Popular</div>
+                            <h2 class="pricing-anount text-purple">$35.00</h2>
+                            <h5 class="pricing-title">Premium Account</h5>
+                            <span class="sub-title">Only for first month</span>
+                            <hr class="hr border-light">
+                            <ul class="pricing-feature list list-nostyle">
+                                <li>Limited Acess Library</li>
+                                <li>Hotline Support 24/7</li>
+                                <li>Additional Features</li>
+                                <li>eCommerce Store</li>
+                            </ul>
+                            <div class="pricing-action">
+                                <a href="#" class="btn btn-primary btn-lg btn-round"><span>Purchase Now</span></a>
+                            </div>
+                        </div><!-- card-inner -->
+                    </div><!-- .pricing .card -->
+                </div><!-- .col -->
+                <div class="col-xl-3 col-sm-6">
+                    <div class="pricing pricing-s2 card card-shadow round-md">
+                        <div class="card-inner card-inner-lg">
+                            <h2 class="pricing-anount text-purple">$24.00</h2>
+                            <h5 class="pricing-title">Standard Account</h5>
+                            <span class="sub-title">Only for first month</span>
+                            <hr class="hr border-light">
+                            <ul class="pricing-feature list list-nostyle">
+                                <li>Limited Acess Library</li>
+                                <li>Hotline Support 24/7</li>
+                                <li>Additional Features</li>
+                                <li>eCommerce Store</li>
+                            </ul>
+                            <div class="pricing-action">
+                                <a href="#" class="btn btn-outline-primary btn-lg btn-round"><span>Purchase Now</span></a>
+                            </div>
+                        </div><!-- card-inner -->
+                    </div><!-- .pricing .card -->
+                </div><!-- .col -->
+                <div class="col-xl-3 col-sm-6">
+                    <div class="pricing pricing-s2 card card-shadow round-md">
+                        <div class="card-inner card-inner-lg">
+                            <h2 class="pricing-anount text-purple">$29.00</h2>
+                            <h5 class="pricing-title">Starter Account</h5>
+                            <span class="sub-title">Only for first month</span>
+                            <hr class="hr border-light">
+                            <ul class="pricing-feature list list-nostyle">
+                                <li>Limited Acess Library</li>
+                                <li>Hotline Support 24/7</li>
+                                <li>Additional Features</li>
+                                <li>eCommerce Store</li>
+                            </ul>
+                            <div class="pricing-action">
+                                <a href="#" class="btn btn-outline-primary btn-lg btn-round"><span>Purchase Now</span></a>
+                            </div>
+                        </div><!-- card-inner -->
+                    </div><!-- .pricing .card -->
+                </div><!-- .col -->
+            </div><!-- .row -->
+        </div><!-- .container -->
+    </section>
     <!-- plans end -->
-
-
+    <x-slot name="scripts">
+        <script>NioApp.coms.docReady.push(NioApp.Calendar(@json($events)));</script>
+    </x-slot>
 </x-guest-layout>
