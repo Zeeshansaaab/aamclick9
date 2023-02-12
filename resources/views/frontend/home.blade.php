@@ -1,6 +1,6 @@
 <x-guest-layout>
 {{-- slider --}}
-<div id="carouselExFade" class="carousel slide carousel-fade" data-ride="carousel">
+<div id="carouselExFade" class="carousel slide carousel-fade" data-ride="carousel" style="margin-top: 50px;">
     <div class="carousel-inner">
         <div class="carousel-item active">
             <img src="{{ 'images/slides/slide1.jpeg' }}" class="d-block w-100" alt="carousel">
