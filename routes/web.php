@@ -3,6 +3,7 @@
 use App\Jobs\ScrapperJob;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Models\Event;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +22,8 @@ use App\Http\Controllers\ProfileController;
 // });
 
 Route::get('/', function () {
-    // return redirect()->route('dashboard');
-    return view('frontend.home');
+    $events = Event::all()->toArray();
+    return view('frontend.home', compact('events'));
 })->name('home');
 
 Route::get('/scrape', function () {

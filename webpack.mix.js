@@ -19,6 +19,12 @@ mix.scripts([
     'resources/theme/js/sweetalert.js'
 ], 'public/js/theme.js');
     
+
+mix.scripts([
+    'resources/theme/js/fullcalendar.js',
+    'resources/theme/js/calendar.js',
+], 'public/js/calendar.js');
+    
 // mix.sass('resources/theme/css/dashlite.css', 'public/css/theme.css')
 
 mix.styles([

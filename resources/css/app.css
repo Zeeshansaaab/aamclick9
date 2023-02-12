@@ -33,6 +33,36 @@
     content:"*";
     color:red;
 }
+.site-text-color{
+    color: #0b3175;
+}
+.border-color{
+    border-color: #0b3175!important;
+    border: 1px solid #0b3175;
+}
+.bg-site{
+    background-color: #0b3175;
+}
+.margin-max-top{
+    margin-top: 100px;
+}
+.margin-max-rbl{
+    margin-right: 30px;
+}
+.padding-max{
+    padding: 15px;
+}
+.line-space{
+        line-height: 2.2;
+      }
+      .v-line {
+        border-left: 6px solid green;
+        height: 500px;
+      }
+
+
+
+
 .navbar-nav li{
     font-weight: 500;
     padding-left: 15px;
