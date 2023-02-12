@@ -25,7 +25,7 @@
                             </ul><!-- .btn-toolbar -->
                         </div><!-- .card-tools -->
                     </div><!-- .card-title-group -->
-                    <x-search-input url="{{ route('referrals.table') }}" placeholder="Search by name"/>
+                    <x-search-input url="{{ route('referrals.table', $level) }}" placeholder="Search by name"/>
                 </div><!-- .card-inner -->
                 <div id="table"></div>
             </div><!-- .card-inner-group -->
@@ -35,7 +35,7 @@
     <x-slot name="scripts">
         <script>
             NioApp.coms.docReady.push(function(){ 
-                ajax("{{ route('referrals.table') }}", 'GET', function(response){
+                ajax("{{ route('referrals.table', [$level]) }}", 'GET', function(response){
                     $('#table').html(response)
                 })
             })

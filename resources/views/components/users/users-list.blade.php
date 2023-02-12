@@ -19,13 +19,11 @@
                         </span>
                     </span>
                 </th>
-                <th class="tb-tnx-id"><span class="">Level</span></th>
-
             </tr>
         </thead>
         <tbody>
             @foreach($users as $user)
-                <x-users.user-item :user="$user" :index="$loop->index + 1" :level="1"></x-users.user-item>
+                <x-users.user-item :user="$user" :index="$loop->index + 1"></x-users.user-item>
             @endforeach
         </tbody>
     </table>

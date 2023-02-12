@@ -39,8 +39,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', [App\Http\Controllers\FrontEnd\DashboardController::class, 'index'])->name('dashboard');
     Route::get('dashboard/chart', [App\Http\Controllers\FrontEnd\DashboardController::class, 'charts'])->name('dashboard.chart');
     //Referrals
-    Route::get('referrals', [App\Http\Controllers\FrontEnd\UserController::class, 'referrals'])->name('referrals');
-    Route::get('referrals/table', [App\Http\Controllers\FrontEnd\UserController::class, 'loadReferralTable'])->name('referrals.table');
+    Route::get('referrals/{level}', [App\Http\Controllers\FrontEnd\UserController::class, 'referrals'])->name('referrals');
+    Route::get('referrals/table/{level}', [App\Http\Controllers\FrontEnd\UserController::class, 'loadReferralTable'])->name('referrals.table');
     
     Route::prefix('reports')->name('reports.')->group(function () {
         //Transactions

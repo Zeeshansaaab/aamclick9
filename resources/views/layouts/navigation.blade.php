@@ -41,13 +41,17 @@
                         <li class="nk-menu-heading mt-2">
                             <h6 class="overline-title">Referrals</h6>
                         </li>
-                        <x-nav-link
-                            title="Your Refferrals"
-                            link="{{ route('referrals') }}"
-                            icon="icon ni ni-users-fill
-                            "
+                        <x-dropdown
+                            title="Referrals"
+                            icon="ni-users-fill"
+                            :links="[
+                                'Level 1 Referrals' => 'referrals, 1', 
+                                'Level 2 Referrals' => 'referrals, 2', 
+                                'Level 3 Referrals' => 'referrals, 3',
+                                'Level 4 Referrals' => 'referrals, 4',
+                            ]"
                         />
-                        <li class="nk-menu-heading mt-2">
+                        <li class="nk-menu-heading p-4">
                             <h6 class="overline-title">Payments</h6>
                         </li>
                         <x-nav-link 
@@ -76,6 +80,7 @@
 
                         <x-dropdown
                             title="Reports"
+                            icon="ni-files"
                             :links="[
                                 'Deposit History'      => 'reports.payments, deposited,default', 
                                 'Withdraw History'     => 'reports.payments, withdrawal,default', 

@@ -1,7 +1,6 @@
 @props([
     'user',
-    'index',
-    'level',
+    'index'
 ])
 <tr class="tb-tnx-item">
     <td class="tb-tnx-id">
@@ -16,12 +15,4 @@
             <span class="date">{{currency($user->planUser->referral_income)}}</span>
         </div>
     </td>
-    <td class="tb-tnx-id">
-        <a href="#"><span>{{$level}}</span></a>
-    </td>
 </tr>
-@if($user->team->count() > 0)
-    @foreach ($user->team as $user)
-        <x-users.user-item :user="$user" index="<em class='icon ni ni-curve-down-right'></em>" :level=$level+1/>
-    @endforeach
-@endif
