@@ -49,7 +49,7 @@
                                             Total Deposit in {{ $cur_text }}
                                         </div>
                                         <a href="{{ route('reports.payments', ['deposit', 'default']) }}" class="text-white number-lg amount">
-                                            {{ currency($user->planUser->balance, true) }} 
+                                            {{ currency($user->planUser->balance, true) }}
                                         </a>
                                     </div>
                                     <div class="nk-wg7-stats-group">
@@ -82,7 +82,7 @@
                                         User ID
                                     </div>
                                     <div class="amount" style="font-size: 1.5rem;">
-                                        {{ $user->uuid }} 
+                                        {{ $user->uuid }}
                                     </div>
                                 </div>
                             </div>
@@ -254,6 +254,30 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-sm-4">
+                            <div class="card bg-light">
+                                <div class="nk-wgw sm">
+                                    <a class="nk-wgw-inner"
+                                        href="#"
+                                    ><div class="nk-wgw-name">
+                                            <div class="nk-wgw-icon">
+                                                <em
+                                                    class="icon ni ni-sign-eth"
+                                                ></em>
+                                            </div>
+                                            <h5 class="nk-wgw-title title">
+                                                Reward
+                                            </h5>
+                                        </div>
+                                        <div class="nk-wgw-balance">
+                                            <div class="amount">
+                                                {{ currency($rewardBonus) }}
+                                            </div>
+                                        </div></a
+                                    >
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="nk-block nk-block-md">
@@ -318,43 +342,40 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="card bg-light">
-                                <div class="nk-wgw sm">
-                                    <a
-                                        class="nk-wgw-inner"
-                                        href="#"
-                                        ><div class="nk-wgw-name">
-                                            <div class="nk-wgw-icon">
-                                                <em
-                                                    class="icon ni ni-sign-eth"
-                                                ></em>
-                                            </div>
-                                            <h5 class="nk-wgw-title title">
-                                                Coming soon
-                                            </h5>
-                                        </div>
-                                        <div class="nk-wgw-balance">
-                                            <div class="amount">
-                                               -
-                                            </div>
-                                        </div></a
-                                    >
+                        @if($rewardBonus >= $rewardPlan->price)
+                            <div class="col-sm-4">
+                                <div class="card bg-success">
+                                    <div class="nk-wgw sm">
+                                        <form class="nk-wgw-inner text-center" action="{{route('claim-reward')}}" method="post" data-form="ajax-form" data-redirect-url="{{route('dashboard')}}">
+                                            <input type="hidden" name="amount" value="{{$rewardBonus}}"/>
+                                            <button
+                                                class="btn"
+                                                href="#"
+                                                >
+                                                <div class="nk-wgw-balance">
+                                                    <div class="amount fw-bold">
+                                                       Click here <br/>
+                                                        Claim reward
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     {{-- Dashboard cards end --}}
 {{-- Transactions and chart --}}
 @if(count($transactions) > 0)
 <div class="nk-block nk-block-lg">
     <div class="row gy-gs">
-        
+
         <div class="col-md-6">
             @if(count($transactions) > 0)
             <div class="card-head">
@@ -543,7 +564,7 @@
                         barPercentage : .5,
                         categoryPercentage : .7
                     });
-                } 
+                }
                 var chart = new Chart(selectCanvas, {
                     type: 'bar',
                     data: {
@@ -596,7 +617,7 @@
                 });
             })
         }
-        
+
 
         function accountSummary(selector, set_data){
             var $selector = (selector) ? $(selector) : $('.chart-account-summary');
@@ -622,7 +643,7 @@
                         pointHitRadius: 4,
                         data: _get_data.datasets[i].data,
                     });
-                } 
+                }
                 var chart = new Chart(selectCanvas, {
                     type: 'line',
                     data: {
@@ -665,7 +686,7 @@
                                     fontColor:'#9eaecf',
                                     padding: 10
                                 },
-                                gridLines: { 
+                                gridLines: {
                                     color: NioApp.hexRGB("#526484",.2),
                                     tickMarkLength:0,
                                     zeroLineColor: NioApp.hexRGB("#526484",.2)
@@ -693,7 +714,7 @@
         }
 
         // init accountSummary
-        NioApp.coms.docReady.push(function(){ 
+        NioApp.coms.docReady.push(function(){
             ajax("{{ route('dashboard.chart') }}", 'GET', function(response){
                 // {{-- Ref bar chart --}}
                 var refBarChart = {
@@ -716,12 +737,12 @@
                     }]
                 };
 
-                accountSummary('.chart-account-summary', summaryBalance); 
+                accountSummary('.chart-account-summary', summaryBalance);
                 console.log(refBarChart)
-                referStats('.chart-refer-stats', refBarChart); 
+                referStats('.chart-refer-stats', refBarChart);
             })
 
-            
+
         });
     </script>
 </x-slot>

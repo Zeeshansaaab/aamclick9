@@ -52,6 +52,10 @@ class Plan extends Model
     {
         $query->whereType('committee');
     }
+    public function scopeReward($query)
+    {
+        $query->whereType('reward');
+    }
     public function scopeParent($query)
     {
         $query->whereNull('parent_id');

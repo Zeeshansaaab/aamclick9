@@ -1,15 +1,12 @@
 <?php
 
-use App\Models\Plan;
 use App\Enums\Status;
 use App\Models\Setting;
-use App\Models\PlanLevel;
 use App\Models\CommissionRecord;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Cache;
 use Intervention\Image\Facades\Image;
 use App\Notifications\NotificationManager;
+
 function getRealIP()
 {
     $ip = $_SERVER["REMOTE_ADDR"];
@@ -60,7 +57,7 @@ function getSettings($group = null)
     if(!$settings){
         $settings = Setting::all();
     }
-    
+
     if($group){
         $setting =  $settings->where('group', $group)->values();
     }
@@ -127,7 +124,7 @@ function currency($currency, $noSymbol = false)
 function getUserId(){
     $user = \App\Models\User::select('uuid')->orderby('id','DESC')->first();
     if($user){
-        $id = explode('AAM',$user->uuid)[1]; 
+        $id = explode('AAM',$user->uuid)[1];
         if( $id > 99999){
             return "AAM" . $id + 1;
         }
@@ -196,5 +193,23 @@ function levelCommission($user, $amount, $commissionType)
         $level++;
         $user = $referer;
     }
+}
+
+function createTransaction($user, $amount, $details, $remark, $redirect_url = '', $type="credit"){
+    $transaction = $user->transactions()->create([
+        'amount'        => $amount,
+        'charge'        => 0,
+        'trx_type'      => $type == "credit" ? '+' : '-',
+        'trx'           => getTrx(),
+        'details'       => $details,
+        'remark'        => $remark,
+        'type'          => $type,
+        'status'        => Status::Pending
+    ]);
+    \Illuminate\Support\Facades\Notification::send($user, new NotificationManager([
+        'title'         => ucFirst($remark) . " Amount " . currency($transaction->amount) . " is $type",
+        'description'   => ucFirst($remark) . " Amount " . currency($transaction->amount) . " is $type",
+        'redirect_url'  => $redirect_url . "&keyword=$transaction->trx"
+    ]));
 }
 ?>

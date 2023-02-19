@@ -55,8 +55,22 @@ class PlanSeeder extends Seeder
             'total_members'         => 10,
             'starting_date'         => Carbon::now()->addMonth(1),
             'status'                => 'active',
+            ],[
+            'name'                  => '2000 dollar',
+            'description'           => 'Invest as entry level',
+            'price'                 => 2000,
+            'max_price'             => 0,
+            'min_profit_percent'    => 0,
+            'max_profit_percent'    => 0,
+            'amount_return'         => 0,
+            'validity'              => '',
+            'parent_id'             => null,
+            'type'                  => 'reward',
+            'total_members'         => 0,
+            'starting_date'         => null,
+            'status'                => 'active',
             ]
-    ];
+        ];
 
         foreach($plans as $plan){
             Plan::create($plan);

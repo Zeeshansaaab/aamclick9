@@ -45,8 +45,8 @@
                             title="Referrals"
                             icon="ni-users-fill"
                             :links="[
-                                'Level 1 Referrals' => 'referrals, 1', 
-                                'Level 2 Referrals' => 'referrals, 2', 
+                                'Level 1 Referrals' => 'referrals, 1',
+                                'Level 2 Referrals' => 'referrals, 2',
                                 'Level 3 Referrals' => 'referrals, 3',
                                 'Level 4 Referrals' => 'referrals, 4',
                             ]"
@@ -54,10 +54,10 @@
                         <li class="nk-menu-heading p-4">
                             <h6 class="overline-title">Payments</h6>
                         </li>
-                        <x-nav-link 
-                            title="Deposit Now" 
-                            link="{{ route('payment', 'deposit') }}" 
-                            icon="icon ni ni-wallet-fill" 
+                        <x-nav-link
+                            title="Deposit Now"
+                            link="{{ route('payment', 'deposit') }}"
+                            icon="icon ni ni-wallet-fill"
                         />
                         <x-nav-link
                             title="Withdraw"
@@ -82,12 +82,13 @@
                             title="Reports"
                             icon="ni-files"
                             :links="[
-                                'Deposit History'      => 'reports.payments, deposited,default', 
-                                'Withdraw History'     => 'reports.payments, withdrawal,default', 
+                                'Deposit History'      => 'reports.payments, deposited,default',
+                                'Withdraw History'     => 'reports.payments, withdrawal,default',
                                 'Committee History'    => 'reports.committee',
                                 'Installment History'  => 'reports.installments',
                                 'Transactions'         => 'reports.transactions',
-                                'Commission'           => 'reports.commissions',
+                                'Reward'               => 'reports.transactions, reward=1&&remark=reward',
+                                'Commission'           => 'reports.commissions'
                             ]"
                         />
 

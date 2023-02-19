@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\Status;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -145,5 +146,15 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function loginLogs(){
         return $this->hasMany(LoginLog::class);
+    }
+
+    public function rewardBalance(){
+        $referrals_deposit_sum =  DB::table('users')
+        ->selectRaw("`users`.id, `users`.uuid, `users`.ref_by, `users`.email, `users`.status, `users`.deleted_at,
+        (SUM((select sum(`plan_users`.`balance`) from `plan_users` where `users`.`id` = `plan_users`.`user_id`))) as referrals_deposit_sum")
+            ->whereRaw("`users`.`ref_by` = $this->id and `users`.`ref_by` is not null and `status` = 'active' and `users`.`deleted_at` is null")
+            ->first();
+        $withdrawnedReward = auth()->user()->transactions()->where('remark', 'reward')->sum('amount');
+        return $referrals_deposit_sum->referrals_deposit_sum - $withdrawnedReward;
     }
 }

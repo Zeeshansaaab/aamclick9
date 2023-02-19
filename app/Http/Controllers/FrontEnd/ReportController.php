@@ -15,11 +15,15 @@ class ReportController extends Controller
     public function loadTransactionsTable()
     {
         $limit = \config()->get('settings.pagination_limit');
-        $transactions = auth()->user()->transactions()->active()->when(request()->keyword, function ($query) {
+        $transactions = auth()->user()->transactions()->when(\request()->reward != 1, function ($query){
+            $query->active();
+        })->when(\request()->remark, function ($query){
+            $query->where('remark', request()->remark);
+        })->when(request()->keyword, function ($query) {
             $query->where('trx', 'LIKE', '%' . request()->keyword . '%')
-            ->orWhere('remark', 'LIKE', '%' . request()->keyword . '%')
             ->orWhere('details', 'LIKE', '%' . request()->keyword . '%')
-            ->orWhere('type', 'LIKE', '%' . request()->keyword . '%');
+            ->orWhere('amount', 'LIKE', '%' . request()->keyword . '%');
+//            ->orWhere('type',    'LIKE', '%' . request()->keyword . '%');
         })->orderBy('id', 'desc')->paginate($limit);
         return Blade::render('<x-transaction-list :transactions="$transactions"/>', ['transactions' => $transactions]);
     }

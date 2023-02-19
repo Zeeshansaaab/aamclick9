@@ -30,7 +30,7 @@ Route::get('/scrape', function () {
     ScrapperJob::dispatch();
 });
 Route::middleware(['auth'])->group(function () {
-   
+
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/login-activity', [ProfileController::class, 'loginLogs'])->name('profile.login-logs');
     Route::delete('/profile/login-activity/{log}', [ProfileController::class, 'destroyLoginLogs'])->name('profile.destroy.login-logs');
@@ -39,10 +39,11 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('dashboard', [App\Http\Controllers\FrontEnd\DashboardController::class, 'index'])->name('dashboard');
     Route::get('dashboard/chart', [App\Http\Controllers\FrontEnd\DashboardController::class, 'charts'])->name('dashboard.chart');
+    Route::post('claim-reward', [App\Http\Controllers\FrontEnd\DashboardController::class, 'claimReward'])->name('claim-reward');
     //Referrals
     Route::get('referrals/{level}', [App\Http\Controllers\FrontEnd\UserController::class, 'referrals'])->name('referrals');
     Route::get('referrals/table/{level}', [App\Http\Controllers\FrontEnd\UserController::class, 'loadReferralTable'])->name('referrals.table');
-    
+
     Route::prefix('reports')->name('reports.')->group(function () {
         //Transactions
         Route::get('transactions', [App\Http\Controllers\FrontEnd\ReportController::class, 'transactions'])->name('transactions');

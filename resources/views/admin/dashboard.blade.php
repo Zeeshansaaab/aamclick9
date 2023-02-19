@@ -49,7 +49,7 @@ $cur_text = cur_text();
                                         Total Deposit in {{ $cur_text }}
                                     </div>
                                     <div class="number-lg amount">
-                                        {{ currency($user->planUser->balance, true) }} 
+                                        {{ currency($user->planUser->balance, true) }}
                                     </div>
                                 </div>
                                 <div class="nk-wg7-stats-group">
@@ -70,8 +70,8 @@ $cur_text = cur_text();
                                 </div>
                                 <div class="nk-wg7-foot">
                                     <span class="nk-wg7-note">Last login at
-                                        <span>19 Nov, 2019</span></span
-                                    >
+                                        <span>19 Nov, 2019</span>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -92,7 +92,7 @@ $cur_text = cur_text();
                                     User ID
                                 </div>
                                 <div class="amount" style="font-size: 1.5rem;">
-                                    {{ $user->uuid }} 
+                                    {{ $user->uuid }}
                                 </div>
                             </div>
                         </div>
@@ -207,7 +207,7 @@ $cur_text = cur_text();
                     </div>
                 </div>
                 <div class="row g-2">
-                    
+
                 </div>
             </div>
             <div class="nk-block nk-block-md">
@@ -229,7 +229,7 @@ $cur_text = cur_text();
 @if(count($transactions) > 0)
 <div class="nk-block nk-block-lg">
 <div class="row gy-gs">
-    
+
     <div class="col-md-6">
         @if(count($transactions) > 0)
         <div class="card-head">
@@ -421,7 +421,7 @@ $cur_text = cur_text();
                     barPercentage : .5,
                     categoryPercentage : .7
                 });
-            } 
+            }
             var chart = new Chart(selectCanvas, {
                 type: 'bar',
                 data: {
@@ -474,7 +474,7 @@ $cur_text = cur_text();
             });
         })
     }
-    
+
 
     function accountSummary(selector, set_data){
         var $selector = (selector) ? $(selector) : $('.chart-account-summary');
@@ -500,7 +500,7 @@ $cur_text = cur_text();
                     pointHitRadius: 4,
                     data: _get_data.datasets[i].data,
                 });
-            } 
+            }
             var chart = new Chart(selectCanvas, {
                 type: 'line',
                 data: {
@@ -543,7 +543,7 @@ $cur_text = cur_text();
                                 fontColor:'#9eaecf',
                                 padding: 10
                             },
-                            gridLines: { 
+                            gridLines: {
                                 color: NioApp.hexRGB("#526484",.2),
                                 tickMarkLength:0,
                                 zeroLineColor: NioApp.hexRGB("#526484",.2)
@@ -571,7 +571,7 @@ $cur_text = cur_text();
     }
 
     // init accountSummary
-    NioApp.coms.docReady.push(function(){ 
+    NioApp.coms.docReady.push(function(){
         ajax("{{ route('dashboard.chart') }}", 'GET', function(response){
             // {{-- Ref bar chart --}}
             var refBarChart = {
@@ -594,12 +594,12 @@ $cur_text = cur_text();
                 }]
             };
 
-            accountSummary('.chart-account-summary', summaryBalance); 
+            accountSummary('.chart-account-summary', summaryBalance);
             console.log(refBarChart)
-            referStats('.chart-refer-stats', refBarChart); 
+            referStats('.chart-refer-stats', refBarChart);
         })
 
-        
+
     });
 </script>
 </x-slot>
