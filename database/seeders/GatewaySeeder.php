@@ -30,10 +30,12 @@ class GatewaySeeder extends Seeder
                     [
                         'label' => 'Account Holder Name',
                         'type' => 'text',
+                        'name' => 'account_holder_name',
                     ],
                     [
                         'label' => 'Account Holder Number',
                         'type' => 'text',
+                        'name' => 'account_holder_number',
                     ]
                 ]),
                 'type'                  => 'both',
@@ -52,10 +54,12 @@ class GatewaySeeder extends Seeder
                     [
                         'label' => 'Account Holder Name',
                         'type' => 'text',
+                        'name' => 'account_holder_name',
                     ],
                     [
                         'label' => 'Account Holder Number',
                         'type' => 'text',
+                        'name' => 'account_holder_number',
                     ]
                 ]),
                 'type'                  => 'both',

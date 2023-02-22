@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('installments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('name', 25);
-            $table->string('phone', 25);
-            $table->string('email');
+            $table->string('name', 25)->index();
+            $table->string('phone', 25)->index();
+            $table->string('email')->index();
             $table->string('address', 25);
             $table->decimal('amount', 18, 8)->default(0);
             $table->string('image', 150);

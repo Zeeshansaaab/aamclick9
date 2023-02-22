@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title')->index();
             $table->dateTime('start')->default(Carbon::now());
             $table->dateTime('end')->nullable();
             $table->string('description');

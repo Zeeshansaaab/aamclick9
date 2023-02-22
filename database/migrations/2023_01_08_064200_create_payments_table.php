@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('transaction_id')->constrained()->onDelete('cascade');
             $table->foreignId('plan_id')->nullable()->constrained()->onDelete('cascade');
             $table->enum('type', ['credit', 'debit']);
-            $table->enum('deposit_type', ['default', 'committee'])->nullable()->default('default');
+            $table->enum('deposit_type', ['default', 'committee', 'umrah'])->nullable()->default('default');
             $table->json('parameters')->nullable();
             $table->timestamps();
         });

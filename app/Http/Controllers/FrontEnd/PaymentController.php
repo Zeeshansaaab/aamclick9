@@ -44,7 +44,7 @@ class PaymentController extends Controller
                 ], JsonResponse::HTTP_FORBIDDEN);
             }
         }
-        $type = $request->type;
+        $type = $request->type;        
         return Blade::render('<x-deposit-confirm :amount="$amount" :gateway="$gateway" :committees="$committees" :type="$type"/>', ['amount' => $amount, 'gateway' => $gateway, 'committees' => $committees, 'type' => $type]);
     }
     public function depositConfirmed(Request $request)
@@ -62,7 +62,7 @@ class PaymentController extends Controller
             DB::beginTransaction();
 
             $gateway = Gateway::findOrFail($request->method_id);
-            $payment = $this->createPayment($request, $gateway, '+', Session::get('deposit-amount'));
+            $this->createPayment($request, $gateway, '+', Session::get('deposit-amount'));
 
             DB::commit();
             return response()->json([

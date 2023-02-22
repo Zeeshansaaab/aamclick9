@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\FrontEnd;
 
-use App\Enums\Status;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use App\Models\Plan;
+use App\Enums\Status;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class DashboardController extends Controller
 {

@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('plans', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 40);
+            $table->string('name', 40)->index();
             $table->uuid('uuid');
             $table->foreignId('parent_id')->nullable()->constrained('plans')->onDelete('cascade');
             $table->string('description')->nullable();
-            $table->decimal('price', 28, 8)->default(0);
+            $table->decimal('price', 28, 8)->default(0)->index();
             $table->decimal('min_price', 28, 8)->default(0);
             $table->decimal('max_price', 28, 8)->default(0);
             $table->decimal('amount_return')->default(0);

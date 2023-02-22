@@ -56,6 +56,14 @@ class Plan extends Model
     {
         $query->whereType('reward');
     }
+    public function scopeUmrah($query)
+    {
+        $query->whereType('umrah');
+    }
+    public function scopeActive($query)
+    {
+        $query->whereStatus('active');
+    }
     public function scopeParent($query)
     {
         $query->whereNull('parent_id');

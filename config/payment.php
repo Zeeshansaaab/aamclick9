@@ -7,7 +7,8 @@ return [
             "referral_deposit"=> "Profit Bonus"
         ],
         'deposit'       => [
-            'default' => "Default", 
-            'committee' => "Committee"
+            'default'   => "Default", 
+            'committee' => "Committee",
+            'umrah'     => "Umrah",
         ]
 ];

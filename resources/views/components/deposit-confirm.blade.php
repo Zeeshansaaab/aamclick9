@@ -48,18 +48,17 @@
                             </div>
                             @php
                                 $parameters = is_array($gateway->gateway_parameters) ? $gateway->gateway_parameters : json_decode($gateway->gateway_parameters, true);
-                                
                             @endphp
                             @foreach ($parameters as $input)
                                 <div class="form-group">
-                                    <x-input-label class="text-capitalize" for="{{ $input['label'] }}" value="{{ $input['name'] }}"/>
+                                    <x-input-label class="text-capitalize" for="{{ $input['name'] }}" value="{{ $input['label'] }}"/>
                                     <div class="form-control-wrap">
                                         <x-text-input 
-                                            id="{{ $input['label'] }}" 
+                                            id="{{ $input['name'] }}" 
                                             class="form-control text-capitalize" 
                                             type="{{ $input['type'] }}" 
-                                            placeholder="{{ $input['name'] }}" 
-                                            name="parameters[{{ $input['label']  }}]"
+                                            placeholder="{{ $input['label'] }}" 
+                                            name="parameters[{{ $input['name']  }}]"
                                             required 
                                         />
                                     </div>

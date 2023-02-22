@@ -32,7 +32,7 @@
                             <select class="form-select" name="deposit_type" required>
                                 <option disabled selected value="">Select Type</option>
                                 @foreach ($types as $key => $value)
-                                    <option value="{{ $key }}">{{ $value }}</option>
+                                    <option @if(request()->query('deposit_type') == $key) selected @endif value="{{ $key }}">{{ $value }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -44,7 +44,7 @@
                         <label class="form-label" for="buysell-amount">Amount to Deposit</label>
                     </div>
                     <div class="form-control-group">
-                        <input type="text" class="form-control form-control-lg form-control-number" id="buysell-amount" name="amount" placeholder="0.055960" required>
+                        <input type="number" step="0.1" class="form-control form-control-lg form-control-number" id="buysell-amount" name="amount" value="{{request()->query('amount')}}" placeholder="0.055960" required>
                         <div class="form-dropdown">
                             <div class="text">{{ $cur_text }}</div>
                         </div>

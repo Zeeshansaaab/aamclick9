@@ -54,10 +54,11 @@ class UserSeeder extends Seeder
                 $user->transactions()->create([
                     'amount'        => $amount,
                     'post_balance'  => $balance,
-                    'remark'        => $type == 'credit' ? 'Money Deposited' : 'Money Withdarawned',
+                    'remark'        => $type,
                     'trx'           => getTrx(),
                     'trx_type'      => $type == 'credit' ? '+' : '-',
                     'type'          => $type,
+                    'details'       => $type == 'credit' ? 'Money Deposited' : 'Money Withdarawned',
                     'created_at'    => $date,
                     'updated_at'    => $date
                 ]);

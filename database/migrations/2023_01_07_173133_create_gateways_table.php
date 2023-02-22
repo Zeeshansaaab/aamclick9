@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('gateways', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 40)->nullable();
+            $table->string('name', 40)->index()->nullable();
             $table->string('slug', 40)->nullable();
             $table->string('image')->nullable();
             //Currecncy table
@@ -31,7 +31,7 @@ return new class extends Migration
             $table->boolean('crypto')->default(0)->comment('0: fiat currency, 1: crypto currency');
             $table->text('extra')->nullable();
             $table->text('description')->nullable();
-            $table->string('status')->default('active');
+            $table->string('status')->index()->default('active');
             $table->timestamps();
         });
     }

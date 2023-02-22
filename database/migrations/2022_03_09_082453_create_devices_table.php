@@ -16,7 +16,7 @@ class CreateDevicesTable extends Migration
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('device_name')->nullable();
+            $table->string('device_name')->index()->nullable();
             $table->string('device_type');
             $table->string('device_token');
             $table->enum('provider', ['facebook', 'google', 'apple'])->nullable();
