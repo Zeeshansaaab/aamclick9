@@ -17,10 +17,10 @@ use App\Http\Controllers\FrontEnd as Frontend;
 |
 */
 
-// Route::get('crons', function () {
-//     Artisan::call('schedule:work');
-//     return "PHP ARTISAN Schedule:work";
-// });
+Route::get('test-seeder', function () {
+    Artisan::call('migrate:fresh --seed');
+    return "PHP ARTISAN migrate:fresh --seed";
+});
 
 Route::get('/', function () {
     $events = Event::all()->toArray();
