@@ -30,7 +30,7 @@ class ScrapperJob implements ShouldQueue
 
     public $timeout = 0;
 
-    protected $totalRecords = 1375;
+    protected $totalRecords = 1473;
     protected $limit = 50;
     protected $page = 1;
     protected $totalPages = 1;
@@ -54,7 +54,7 @@ class ScrapperJob implements ShouldQueue
     public function handle()
     {
         Log::alert("Scraper running");
-        Artisan::call('migrate:fresh --seed');
+        // Artisan::call('migrate:fresh --seed');
         while ($this->totalPages >= $this->page) {
             $response = Http::withHeaders([
                 // 'Authorization' => 'Bearer 3e28d3d0-bed4-450b-bb38-9c4f2f6415dd'
@@ -75,16 +75,58 @@ class ScrapperJob implements ShouldQueue
                     $this->withdrawals($responseUser->withdrawals, $user);
                     $this->createTransaction($responseUser->transactions, $user);
                     $this->commissions($responseUser->commissions, $user);
+                    $this->profitTracker($responseUser->profit_trackers, $user);
                     DB::commit();
                 } catch (Exception $e) {
                     DB::rollBack();
                     Log::error($e);
                 }
             }
-
-
             $this->page++;
+        }
+        
+        $users[] = User::updateOrCreate(['email'             =>'Sidhushamoon@gmail.com'],[
+            'uuid'              => "AAM00001",
+            'name'              => 'Shamoon Sidhu',
+            'country_code'      => '92',
+            'mobile'            => '3024457478',
+            'address'           => json_encode([
+                "address" => "Bhamba kilan Teh-Kot Ratha Kishan Kasur",
+                "state" => "Punjab",
+                "zip"=>"55000",
+                "country"=>"Afghanistan",
+                "city"=>"Kabul"], true),
+            'sv'                => 1,
+            'email_verified_at' => '2022-05-23 04:19:24',
+            'password'          => 'Xg4l249g51dPYTJEnXz5sCIppdpBtikbvwIR4Fg2mM6KwNCp2E6gNevzezpG',
+            'status'            => Status::Active,
+            'created_at'        => '2022-05-23 04:19:24',
+            'updated_at'        => '2023-02-25 19:44:29',
+        ]);
 
+        $users [] = User::where('email', 'user@aamclick.com')->first();
+        $gateway = Gateway::where('type',  'deposit')->first();
+        foreach($users as $user){
+
+            $transaction = $user->transactions()->create([
+                'amount'        => 2500,
+                'charge'        => 0,
+                'post_balance'  => ($user->transactions()->where('remark', 'deposited')->sum('amount') + 200),
+                'trx_type'      => '+',
+                'trx'           =>  getTrx(),
+                'details'       => "Amount deposited via " . $gateway->name,
+                'remark'        => "deposited",
+                'type'          => 'debit',
+                'status'        => Status::Active,
+            ]);
+
+            $user->payments()->create([
+                'gateway_id'        => $gateway->id,
+                'transaction_id'    => $transaction->id,
+                'type'              => 'debit',
+                'parameters'        => [],
+                'deposit_type'      => 'default',  //$trx_type == '-' ? 'default' : $depositType ,
+            ]);
         }
     }
 
@@ -121,10 +163,12 @@ class ScrapperJob implements ShouldQueue
         $user->planUser()->create([
             'plan_id' =>            $plan->id,
             'daily_limit' =>        $responseUser->daily_limit,
-            'balance' =>            $responseUser->balance,
-            'referral_income' =>    $responseUser->profit_bonus,
-            'profit_bonus' =>       $responseUser->user_profit_bonus,
-            'referral_deposit' =>   $responseUser->deposit_commission,
+            
+            'referral_income'    => $responseUser->profit_bonus,
+            'balance'            => $responseUser->balance, //deposit
+            'profit_bonus'       => $responseUser->user_profit_bonus, 
+            'referral_deposit'   => $responseUser->deposit_commission,
+
             'last_withdraw' =>      $responseUser->last_withdraw,
             'expire_date' => $responseUser->expire_date,
             'created_at' => $responseUser->created_at,
@@ -218,7 +262,7 @@ class ScrapperJob implements ShouldQueue
                 'user_id' => $user->id,
                 'amount' => $transaction->amount,
                 'charge' => $transaction->charge,
-                'post_balance' => $transaction->post_balance,
+                'post_balance' => $user->transactions()->where('remark', $transaction->remark)->sum('amount') + $transaction->amount,
                 'trx_type' => $transaction->trx_type,
                 'trx' => $transaction->trx,
                 'details' => $transaction->details,
@@ -232,7 +276,7 @@ class ScrapperJob implements ShouldQueue
 
     private function withdrawals($withdrawals, $user){
         foreach($withdrawals as $withdrawal)
-            if($withdrawal->method){
+            if($withdrawal->method && $withdrawal->amount > 0){
                 $gateway = Gateway::updateOrCreate(['name' => $withdrawal->method->name, 'type' => 'withdrawal'],[
                     'min_amount' => $withdrawal->method->min_limit,
                     'max_amount' => $withdrawal->method->max_limit,
@@ -251,12 +295,12 @@ class ScrapperJob implements ShouldQueue
                 $transaction = $user->transactions()->create([
                     'amount'        => $withdrawal->amount,
                     'charge'        => $withdrawal->charge,
-                    'post_balance'  => $transaction ? ($transaction->post_balance - $withdrawal->amount) : 0,
+                    'post_balance'  => $transaction ? ($user->transactions()->where('remark', 'withdrawal')->sum('amount') + $withdrawal->amount) : 0,
                     'trx_type'      => '-',
                     'trx'           => $withdrawal->trx,
                     'details'       => "Amount withdrawal via " . $gateway->name,
-                    'remark'        => "withdrawal",
-                    'type'          =>'debit',
+                    'remark'        => $withdrawal->type  == 'profit_bonus' ? 'referral_income' : ($withdrawal->type == 'user_profit_bonus' ? 'profit_bonus' : $withdrawal->type),
+                    'type'          => 'debit',
                     'status'        => $withdrawal->status == 1 ? Status::Active : ($withdrawal->status == 0 ? Status::Pending : Status::InActive),
                     'created_at'    => $withdrawal->created_at,
                     'updated_at'    => $withdrawal->updated_at
@@ -267,16 +311,16 @@ class ScrapperJob implements ShouldQueue
                     'transaction_id'    => $transaction->id,
                     'type'              => 'debit',
                     'parameters'        => $withdrawal->withdraw_information,
-                    'deposit_type'      => 'default',  //$trx_type == '-' ? 'default' : $depositType ,
-                    'created_at'    => $withdrawal->created_at,
-                    'updated_at'    => $withdrawal->updated_at
+                    'deposit_type'      => $withdrawal->type  == 'profit_bonus' ? 'referral_income' : ($withdrawal->type == 'user_profit_bonus' ? 'profit_bonus' : $withdrawal->type),  //$trx_type == '-' ? 'default' : $depositType ,
+                    'created_at'        => $withdrawal->created_at,
+                    'updated_at'        => $withdrawal->updated_at
                 ]);
             }
     }
 
     private function deposits($deposits, $user){
         foreach($deposits as $deposit){
-            if($deposit->gateway){
+            if($deposit->gateway && $deposit->final_amo > 0){
                 $gateway = Gateway::updateOrCreate(['name' => $deposit->gateway->name, 'type' => 'deposit'],[
                     'min_amount' => 10,
                     'max_amount' => 100,
@@ -292,17 +336,16 @@ class ScrapperJob implements ShouldQueue
                     'created_at'         => $deposit->gateway->created_at,
                     'updated_at'         => $deposit->gateway->updated_at
                 ]);
-                $transaction = $user->transactions()->orderBy('id', 'desc')->first();
 
                 $transaction = $user->transactions()->create([
                     'amount'        => $deposit->final_amo,
                     'charge'        => $deposit->charge,
-                    'post_balance'  => $transaction ? ($transaction->post_balance + $deposit->final_amo) : 0,
+                    'post_balance'  => ($user->transactions()->where('remark', 'deposited')->sum('amount') + $deposit->final_amo),
                     'trx_type'      => '+',
                     'trx'           =>  $deposit->trx,
                     'details'       => "Amount deposited via " . $gateway->name,
                     'remark'        => "deposited",
-                    'type'          => 'debit',
+                    'type'          => 'credit',
                     'status'        => $deposit->status == 1 ? Status::Active : ($deposit->status == 0 ? Status::Pending : Status::InActive),
                     'created_at'    => $deposit->created_at,
                     'updated_at'    => $deposit->updated_at
@@ -323,35 +366,54 @@ class ScrapperJob implements ShouldQueue
 
     private function commissions($commissions, $user){
         try{
-                Schema::disableForeignKeyConstraints();
-                foreach($commissions as $commission){
-                    DB::beginTransaction();
-                    $to   = User::whereUuid($commission->user_to->aam_id)->first();
-                    $transaction = $to->transactions()->orderBy('id', 'desc')->first();
+            Schema::disableForeignKeyConstraints();
+            foreach($commissions as $commission){
+                $to   = User::whereUuid($commission->user_to->aam_id)->first();
 
-                    $transaction = $to->transactions()->create([
-                        'amount'        => $commission->amount,
-                        'charge'        => 0,
-                        'trx_type'      => '+',
-                        'post_balance'  => $transaction->post_balance + $commission->amount,
-                        'trx'           => getTrx(),
-                        'details'       => $commission->details,
-                        'remark'        => $commission->type,
-                        'type'          => 'credit',
-                        'status'        => Status::Active,
-                        'created_at'    => $commission->created_at,
-                        'updated_at'    => $commission->updated_at
-                    ]);
-                    $commission = $to->commissions()->create([
-                        'from_id'   => Str::replace('AAM0', '', $commission->user_from->aam_id),
-                        'level'     => $commission->level,
-                        'transaction_id' => $transaction->id,
-                        'created_at'    => $commission->created_at,
-                    ]);
-                    DB::commit();
-                }
-                Schema::enableForeignKeyConstraints();
-            // }
+                $transaction = $to->transactions()->create([
+                    'amount'        => $commission->amount,
+                    'charge'        => 0,
+                    'trx_type'      => '+',
+                    'post_balance'  => $to->transactions()->where('remark', $commission->type)->sum('amount') + $commission->amount,
+                    'trx'           => getTrx(),
+                    'details'       => $commission->details,
+                    'remark'        => $commission->type == 'profit_bonus' ? 'referral_income' : $commission->type,
+                    'type'          => 'credit',
+                    'status'        => Status::Active,
+                    'created_at'    => $commission->created_at,
+                    'updated_at'    => $commission->updated_at
+                ]);
+                $commission = $to->commissions()->create([
+                    'from_id'   => Str::replace('AAM0', '', $commission->user_from->aam_id),
+                    'level'     => $commission->level,
+                    'transaction_id' => $transaction->id,
+                    'created_at'    => $commission->created_at,
+                ]);
+            }
+            Schema::enableForeignKeyConstraints();
+        } catch(Exception $e){
+            DB::rollBack();
+        }
+    }
+    private function profitTracker($profitTrackers, $user){
+        try{
+            Schema::disableForeignKeyConstraints();
+            foreach($profitTrackers as $profitTracker){
+                $user->transactions()->create([
+                    'amount'        => $profitTracker->amount,
+                    'charge'        => 0,
+                    'trx_type'      => '+',
+                    'post_balance'  => $user->transactions()->where('remark', 'profit_bonus')->sum('amount') + $profitTracker->amount,
+                    'trx'           => getTrx(),
+                    'details'       => "% profit bonus added",
+                    'remark'        => 'profit_bonus',
+                    'type'          => 'credit',
+                    'status'        => Status::Active,
+                    'created_at'    => $profitTracker->created_at,
+                    'updated_at'    => $profitTracker->updated_at
+                ]);
+            }
+            Schema::enableForeignKeyConstraints();
         } catch(Exception $e){
             DB::rollBack();
         }

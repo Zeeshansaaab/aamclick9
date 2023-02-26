@@ -16,7 +16,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $user = auth()->user()->load(['planUser.plan', 'referrals']);
+        $user = auth()->user()->load(['planUser.plan', 'referrals', 'transactions']);
         $transactions = auth()->user()->transactions()->where('remark', 'profit_bonus')->orderByDesc('id')->limit(4)->get();
 
         $rewardPlan = Cache::remember('reward_plan', 3600 *24, function (){

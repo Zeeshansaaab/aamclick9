@@ -148,6 +148,29 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(LoginLog::class);
     }
 
+    public function withdrawalAmount(){
+        return $this->transactions()->active()->whereHas('withdrawals')->sum('amount');
+    }
+    public function depositAmount(){
+        return $this->transactions()->active()->whereHas('deposit')->sum('amount');
+    }
+    public function depositCommission(){
+        return ($this->transactions()->active()->where('remark', 'deposit_commission')->whereType('credit')->sum('amount') - $this->transactions()->active()->where('remark', 'deposit_commission')->whereType('debit')->sum('amount'));
+    }
+    public function referralIncome(){
+        return $this->transactions()->active()->where('remark', 'referral_income')->whereType('credit')->sum('amount') - 
+               $this->transactions()->active()->where('remark', 'referral_income')->whereType('debit')->sum('amount');
+    }
+    public function profitBonus(){
+        return $this->transactions()->active()->where('remark', 'profit_bonus')->whereType('credit')->sum('amount') - $this->transactions()->active()->where('remark', 'profit_bonus')->whereType('debit')->sum('amount');
+    }
+    public function registrationBonus(){
+        return $this->transactions()->active()->where('remark', 'registration_bonus')->sum('amount');
+    }
+    // public function referralCommission(){
+    //     return $this->transactions()->active()->where('remark', 'referral_commission')->sum('amount');
+    // }
+
     public function rewardBalance(){
         $referrals_deposit_sum =  DB::table('users')
         ->selectRaw("`users`.id, `users`.uuid, `users`.ref_by, `users`.email, `users`.status, `users`.deleted_at,

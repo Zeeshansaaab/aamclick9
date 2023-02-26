@@ -6,6 +6,8 @@ use App\Jobs\ScrapperJob;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FrontEnd as Frontend;
+use App\Jobs\AdjustBalanceJob;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,19 +19,20 @@ use App\Http\Controllers\FrontEnd as Frontend;
 |
 */
 
-Route::get('test-seeder', function () {
-    Artisan::call('migrate:fresh --seed');
-    return "PHP ARTISAN migrate:fresh --seed";
-});
+// Route::get('test-seeder', function () {
+//     // Artisan::call('migrate:fresh --seed');
+//     // return "PHP ARTISAN migrate:fresh --seed";
+//     AdjustBalanceJob::dispatch();
+// });
 
 Route::get('/', function () {
     $events = Event::all()->toArray();
     return view('frontend.home', compact('events'));
 })->name('home');
 
-Route::get('/scrape', function () {
-    ScrapperJob::dispatch();
-});
+// Route::get('/scrape', function () {
+//     ScrapperJob::dispatch();
+// });
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/login-activity', [ProfileController::class, 'loginLogs'])->name('profile.login-logs');
@@ -70,6 +73,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('committees/get-committee-number', [Frontend\CommitteeController::class, 'getCommitteeNumber'])->name('committees.get-committee-number');
     Route::get('plans', [Frontend\PlanController::class, 'index'])->name('plans.index');
     Route::resource('umrah', Frontend\UmrahController::class)->only('index');
+    Route::resource('reward', Frontend\RewardController::class)->only('index');
 
 });
 

@@ -49,13 +49,13 @@
                                             Total Deposit in {{ $cur_text }}
                                         </div>
                                         <a href="{{ route('reports.payments', ['deposit', 'default']) }}" class="text-white number-lg amount">
-                                            {{ currency($user->planUser->balance, true) }}
+                                            {{ currency($user->depositAmount(), true) }}
                                         </a>
                                     </div>
                                     <div class="nk-wg7-stats-group">
                                         <a href="{{route('reports.transactions')}}?keyword=profit_bonus" class="nk-wg7-stats w-100 text-white">
                                             <div class="nk-wg7-title">Profit Balance</div>
-                                            <div class="number-lg">{{ currency($user->planUser->profit_bonus, true) }}</div>
+                                            <div class="number-lg">{{ currency($user->profitBonus(), true) }}</div>
                                         </a>
                                     </div>
                                     <div class="nk-wg7-foot">
@@ -120,7 +120,7 @@
                                         </div>
                                         <div class="nk-wgw-balance">
                                             <div class="amount">
-                                                {{ currency($user->planUser->referral_income, true) }}<span
+                                                {{ currency($user->referralIncome(), true) }}<span
                                                     class="currency currency-nio"
                                                     >{{ $cur_text }}</span
                                                 >
@@ -215,7 +215,7 @@
                                         </div>
                                         <div class="nk-wgw-balance">
                                             <div class="amount">
-                                                0<span
+                                                {{currency(auth()->user()->transactions()->whereType('debit')->where('remark', 'profit_bonus')->sum('amount'))}}<span
                                                     class="currency currency-nio"
                                                     >{{ $cur_text }}</span
                                                 >
@@ -238,12 +238,12 @@
                                                 ></em>
                                             </div>
                                             <h5 class="nk-wgw-title title">
-                                                Profit Withdraw
+                                                Total Withdraw
                                             </h5>
                                         </div>
                                         <div class="nk-wgw-balance">
                                             <div class="amount">
-                                                {{currency(auth()->user()->transactions()->whereType('debit')->sum('amount'), true)}}
+                                                {{currency(auth()->user()->withdrawalAmount(), true)}}
                                                 <span
                                                     class="currency currency-btc"
                                                     >{{ $cur_text }}</span
@@ -302,7 +302,7 @@
                                                 ></em>
                                             </div>
                                             <h5 class="nk-wgw-title title">
-                                               Committee
+                                               Committees
                                             </h5>
                                         </div>
                                         <div class="nk-wgw-balance">

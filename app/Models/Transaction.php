@@ -42,4 +42,14 @@ class Transaction extends Model
     {
         $query->whereStatus('active');
     }
+
+    public function withdrawals(){
+        return $this->hasMany(Payment::class)->where('type', 'debit');
+    }
+    public function deposit(){
+        return $this->hasMany(Payment::class)->where('type', 'credit');
+    }
+    public function commissions(){
+        return $this->hasMany(CommissionLog::class);
+    }
 }

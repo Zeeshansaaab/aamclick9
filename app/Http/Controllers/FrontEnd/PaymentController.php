@@ -145,6 +145,7 @@ class PaymentController extends Controller
             $charge = $gateway->fixed_charge + ($amount * $gateway->percent_charge / 100);
             $afterCharge = ($amount) - $charge;
             $finalAmount = $afterCharge * $gateway->currency_value;
+            
             $transation = auth()->user()->transactions()->create([
                 'amount'        => $finalAmount,
                 'charge'        => $charge,

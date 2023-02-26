@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\FrontEnd;
 
 use App\Models\Plan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class UmrahController extends Controller
+class RewardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class UmrahController extends Controller
     public function index()
     {
         $limit = \config()->get('settings.pagination_limit');
-        $plans = Plan::umrah()->active()->paginate($limit);
+        $plans = Plan::reward()->active()->paginate($limit);
         return view('frontend.umrah.index', compact('plans'));
     }
 

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('address', 25);
             $table->decimal('amount', 18, 8)->default(0);
             $table->string('image', 150);
-            $table->enum('status', ['active', 'inactive', 'pending']);
+            $table->enum('status', ['active', 'inactive', 'pending'])->default('pending');
             $table->timestamps();
         });
     }

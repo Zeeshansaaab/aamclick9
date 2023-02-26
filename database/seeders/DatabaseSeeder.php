@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\User;
+use App\Enums\Status;
+use App\Models\Gateway;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
@@ -21,9 +23,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             SettingSeeder::class,
-             PlanSeeder::class,
-             GatewaySeeder::class,
-             UserSeeder::class,
+            PlanSeeder::class,
+            //  GatewaySeeder::class,
+            //  UserSeeder::class,
         ]);
     }
 }

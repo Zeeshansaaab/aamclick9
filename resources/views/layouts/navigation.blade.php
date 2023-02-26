@@ -43,6 +43,11 @@
                             link="{{ route('umrah.index') }}"
                             icon="icon ni ni-folders-fill"
                         />
+                        <x-nav-link
+                            title="Reward Packages"
+                            link="{{ route('reward.index') }}"
+                            icon="icon ni ni-folders-fill"
+                        />
                         <li class="nk-menu-heading mt-2">
                             <h6 class="overline-title">Referrals</h6>
                         </li>
