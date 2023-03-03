@@ -61,7 +61,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'updated_at',
         'email_verified_at',
         'ref_by',
-
     ];
 
     /**
@@ -81,8 +80,8 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'status' => Status::class,
-        'address' => 'object'
+        'status'            => Status::class,
+        'address'           => 'object'
     ];
 
     public function planUser()
@@ -168,9 +167,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function registrationBonus(){
         return $this->transactions()->active()->where('remark', 'registration_bonus')->sum('amount');
     }
-    // public function referralCommission(){
-    //     return $this->transactions()->active()->where('remark', 'referral_commission')->sum('amount');
-    // }
 
     public function rewardBalance(){
         $referrals_deposit_sum =  DB::table('users')

@@ -90,12 +90,12 @@ class ScrapperJob implements ShouldQueue
             'name'              => 'Shamoon Sidhu',
             'country_code'      => '92',
             'mobile'            => '3024457478',
-            'address'           => json_encode([
+            'address'           => [
                 "address" => "Bhamba kilan Teh-Kot Ratha Kishan Kasur",
                 "state" => "Punjab",
                 "zip"=>"55000",
                 "country"=>"Afghanistan",
-                "city"=>"Kabul"], true),
+                "city"=>"Kabul"],
             'sv'                => 1,
             'email_verified_at' => '2022-05-23 04:19:24',
             'password'          => 'Xg4l249g51dPYTJEnXz5sCIppdpBtikbvwIR4Fg2mM6KwNCp2E6gNevzezpG',
