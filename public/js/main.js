@@ -57,7 +57,8 @@ NioApp.coms.docReady.push(function(){
         const backendModal = _self.data('backend-modal');
         const action = _self.data('action');
         const method = _self.data('method');
-        const tr = _self.data('tr');;
+        const tr = _self.data('tr');
+        const div_id = _self.data('div-id');
         const btnHtml = _self.html();
         _self.html(spinner);
         await ajax(action, method, function(response){
@@ -70,9 +71,7 @@ NioApp.coms.docReady.push(function(){
                     modal.remove()
                 })
             }
-            if(method == "DELETE"){
-                $(tr).remove();
-            }
+            if(div_id) $(div_id).html(response.view);
             if(response.message) NioApp.Toast(response.message, 'success');
             $('.custom-file-label').html('');
             _self.html(btnHtml);

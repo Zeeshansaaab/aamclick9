@@ -19,8 +19,7 @@
                     <a class="nk-news-item" href="https://aamclick.com">
                         <div class="nk-news-icon"><em class="icon ni ni-card-view"></em></div>
                         <div class="nk-news-text">
-                            <p style="width: 100%;">AAMClick updated version <span>All the data is updated till <b>26 Feb, 2023 11:00 am PKT</b></span>
-                            </p><em class="icon ni ni-external"></em>
+                            
                         </div>
                     </a>
                 </div>

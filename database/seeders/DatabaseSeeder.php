@@ -25,7 +25,10 @@ class DatabaseSeeder extends Seeder
             SettingSeeder::class,
             PlanSeeder::class,
             //  GatewaySeeder::class,
-            //  UserSeeder::class,
+             UserSeeder::class,
+            PermissionSeeder::class,
+            RoleSeeder::class,
+            AdminSeeder::class,
         ]);
     }
 }

@@ -30,12 +30,14 @@ Route::get('/', function () {
     return view('frontend.home', compact('events'));
 })->name('home');
 
-// Route::get('/scrape', function () {
-//     ScrapperJob::dispatch();
-// });
+Route::get('/scrape', function () {
+    ScrapperJob::dispatch();
+});
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/login-activity', [ProfileController::class, 'loginLogs'])->name('profile.login-logs');
+    Route::get('/profile/login-activity/item', [ProfileController::class, 'loginLogsItems'])->name('profile.login-logs.item');
     Route::delete('/profile/login-activity/{log}', [ProfileController::class, 'destroyLoginLogs'])->name('profile.destroy.login-logs');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

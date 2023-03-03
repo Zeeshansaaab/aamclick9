@@ -172,7 +172,7 @@ function levelCommission($user, $amount, $commissionType)
                     'post_balance'  => $referer->planLevel->$commissionType,
                     'trx'           => getTrx(),
                     'details'       => $commissionLevel->percent . "% profit bonus added",
-                    'remark'        => 'referral_commission',
+                    'remark'        => 'referral_income',
                     'type'          => 'credit',
                     'status'        =>  Status::Active
                 ]);
@@ -184,8 +184,8 @@ function levelCommission($user, $amount, $commissionType)
                 ]);
 
                 $referer->notify(new NotificationManager([
-                    'title'         => 'REFERRAL COMMISSION',
-                    'description'   => currency($commission) . " amount is added for level $level referral commission",
+                    'title'         => 'REFERRAL INCOME',
+                    'description'   => currency($commission) . " amount is added for level $level referral income",
                     'redirect_url'  => route('reports.commissions')
                 ]));
             }

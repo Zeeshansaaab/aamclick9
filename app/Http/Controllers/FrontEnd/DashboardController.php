@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\FrontEnd;
 
+use Exception;
 use Carbon\Carbon;
 use App\Models\Plan;
 use App\Enums\Status;

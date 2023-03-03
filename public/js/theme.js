@@ -588,6 +588,7 @@
 
 
   NioApp.ModeSwitch = function () {
+    var isDarkMode = localStorage.getItem('dark-mode')
     var toggle = $('.dark-switch');
 
     if ($body.hasClass('dark-mode')) {
@@ -595,10 +596,18 @@
     } else {
       toggle.removeClass('active');
     }
-
+    if(isDarkMode == 'true'){
+      toggle.addClass('active');
+      $body.addClass('dark-mode');
+    }
     toggle.on('click', function (e) {
       e.preventDefault();
       $(this).toggleClass('active');
+      if($(this).hasClass('active')){
+        localStorage.setItem('dark-mode', true)
+      } else{
+        localStorage.setItem('dark-mode', false)
+      }
       $body.toggleClass('dark-mode');
     });
   }; // Knob @v1.0

@@ -75,7 +75,11 @@ class ProfileController extends Controller
     
     public function loginLogs()
     {
-        return view('frontend.user.login-activity', [
+        return view('frontend.user.login-activity');
+    }
+    public function loginLogsItems()
+    {
+        return view('frontend.user.notification', [
             'loginLogs'  => auth()->user()->loginLogs()->limit(10)->latest()->get(),
         ]);
     }
@@ -83,7 +87,10 @@ class ProfileController extends Controller
     {
         $log->delete();
         return response()->json([
-            'message' => "Activity Deleted Successfully"
+            'message' => "Activity Deleted Successfully",
+            'view' => view('frontend.user.notification', [
+                'loginLogs'  => auth()->user()->loginLogs()->limit(10)->latest()->get(),
+            ])->render()
         ], JsonResponse::HTTP_OK);
     }
 }

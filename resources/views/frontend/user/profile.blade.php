@@ -67,7 +67,9 @@
                         <div class="data-item" data-action="{{route('profile.edit', [$user->uuid])}}" data-method="get" data-act="modal-form" data-backend-modal="profile-edit" data-tab-target="#address">
                             <div class="data-col">
                                 <span class="data-label">Address</span>
-                                <span class="data-value text-capitalize">{{$user->address->address}},<br>{{$user->address->state}}, {{$user->address->country}}</span>
+                                @if($user->address)
+                                    <span class="data-value text-capitalize">{{$user->address->address}},<br>{{$user->address->state}}, {{$user->address->country}}</span>
+                                @endif
                             </div>
                             <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
                         </div><!-- data-item -->

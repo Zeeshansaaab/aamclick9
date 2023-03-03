@@ -15,7 +15,7 @@
                         <div class="nk-block-head-content">
                             <h4 class="nk-block-title">Login Activity</h4>
                             <div class="nk-block-des">
-                                <p>Here is your last {{$loginLogs->count()}} login activities log. <span class="text-soft"><em class="icon ni ni-info"></em></span></p>
+                                <p>Here is your login activities log. <span class="text-soft"><em class="icon ni ni-info"></em></span></p>
                             </div>
                         </div>
                         <div class="nk-block-head-content align-self-start d-lg-none">
@@ -27,33 +27,15 @@
                     <table class="table table-ulogs">
                         <thead class="thead-light">
                             <tr>
+                                <td class="tb-col-os" style="background-color: #f5f6fa;"><span class="overline-title">#</span></td>
                                 <th class="tb-col-os"><span class="overline-title">Browser <span class="d-sm-none">/ IP</span></span></th>
                                 <th class="tb-col-ip"><span class="overline-title">IP</span></th>
                                 <th class="tb-col-time"><span class="overline-title">Time</span></th>
                                 <th class="tb-col-action"><span class="overline-title">&nbsp;</span></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @forelse($loginLogs as $log)
-                                <tr id="{{$loop->index}}">
-                                    <td class="tb-col-os">{{$log->browser}} on {{$log->os}}</td>
-                                    <td class="tb-col-ip"><span class="sub-text">{{$log->ip}}</span></td>
-                                    <td class="tb-col-time"><span class="sub-text">{{formatDateTime($log->created_at)}}</span></td>
-                                    <td class="tb-col-action">
-                                        <a data-act="modal-form" 
-                                        data-action="{{route('profile.destroy.login-logs', $log->id)}}" 
-                                        data-method="DELETE" href="javascript:void(0)" 
-                                        data-tr="#{{$loop->index}}"
-                                        class="link-cross mr-sm-n1">
-                                            <em class="icon ni ni-cross"></em>
-                                        </a>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="4">No data found</td>
-                                </tr>
-                            @endforelse
+                        <tbody id="notification_tbody">
+                            
                         </tbody>
                     </table>
                 </div><!-- .nk-block-head -->
@@ -61,4 +43,14 @@
             <x-users.profile-sidebar :user="auth()->user()"/>
         </div><!-- .card-aside-wrap -->
     </div>
+    <x-slot name="scripts">
+        <script>
+            NioApp.coms.docReady.push(function(){
+                axios.get('{{route('profile.login-logs.item')}}')
+                .then((response) => {
+                    $('#notification_tbody').html(response.data)
+                })
+            })
+        </script>
+    </x-slot>
 </x-app-layout>

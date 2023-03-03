@@ -143,7 +143,7 @@ class ScrapperJob implements ShouldQueue
                     'email'             => $responseUser->email == 'Sidhushamoon@gmail.com' ? 'user@aamclick.com' : $responseUser->email,
                     'country_code'      => substr($responseUser->mobile, 0, 4),
                     'mobile'            => substr($responseUser->mobile, 4, 7),
-                    'address'           => json_encode($responseUser->address),
+                    'address'           => $responseUser->address,
                     'status'            => $responseUser->status == 1 ? 'active' : 'inactive',
                     'sv'                => $responseUser->sv,
                     'email_verified_at' => $responseUser->created_at,

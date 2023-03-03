@@ -30,7 +30,7 @@ class NotificationManager extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database', 'mail'];
     }
 
     /**
@@ -42,8 +42,8 @@ class NotificationManager extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
+                    ->line($this->notification['description'])
+                    ->action('Notification Action', $this->notification['redirect_url'])
                     ->line('Thank you for using our application!');
     }
 
